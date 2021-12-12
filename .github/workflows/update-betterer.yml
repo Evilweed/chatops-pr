@@ -15,68 +15,56 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - name: Checkout Pull Request
-        run: hub pr checkout ${{ github.event.issue.number }}
-#      - name: checkout
-#        env:
-#          PR_BRANCH: ${{ github.event.pull_request.head.ref }}
-#        run: |
-#          git checkout $PR_BRANCH
-      - name: is checkouted?
         run: |
-          git branch --show-current
-          git log
-#      - name: Use Node.js
-#        uses: actions/setup-node@v1
+          hub pr checkout ${{ github.event.issue.number }}
+      - name: Use Node.js
+        uses: actions/setup-node@v1
+        with:
+          node-version: 16.3
+      - name: Install dependencies
+        run: yarn --frozen-lockfile --non-interactive --no-progress
+#      - name: Typecheck
+#        uses: computerjazz/typescript-error-reporter-action@v1.0.11
 #        with:
-#          node-version: 16.3
-#      - name: Install dependencies
-#        run: yarn --frozen-lockfile --non-interactive --no-progress
-##      - name: Typecheck
-##        uses: computerjazz/typescript-error-reporter-action@v1.0.11
-##        with:
-##          project: tsconfig-strict.json
-##          repo_token: "${{ secrets.GITHUB_TOKEN }}"
-#      - name: Update Betterer
-#        id: run_betterer_update
-#        run: echo "::set-output name=betterer-output::$(CI=0 yarn betterer --update)\n"
-#      - name: setup git config
-#        run: |
-#          # setup the username and email. I tend to use 'GitHub Actions Bot' with no email by default
-#          git config user.name "GitHub Actions Bot"
-#          git config user.email "<>"
-#      - name: commit
-#        env:
-#          PR_BRANCH: ${{ github.event.pull_request.head.ref }}
-#        run: |
-#          # Stage the file, commit and push
-#          git checkout $PR_BRANCH
-#          git add .betterer.results
-#          git commit -m "Updated Betterer results file"
-#          git push
-#      - name: Add comment
-#        uses: actions/github-script@v4
-#        with:
-#          script: |
-#            const {owner, repo} = context.issue
-#            github.reactions.createForIssueComment({
-#              owner,
-#              repo,
-#              comment_id: context.payload.comment.id,
-#              content: "+1",
-#            });
-#      - name: Add comment
-#        uses: actions/github-script@v4
-#        env:
-#          BETTERER_OUTPUT: ${{ join(steps.run_betterer_update.outputs.*, '\n') }}
-#        with:
-#          script: |
-#            const output = process.env.BETTERER_OUTPUT
-#            github.issues.createComment({
-#              issue_number: context.issue.number,
-#              owner: context.repo.owner,
-#              repo: context.repo.repo,
-#              body: `✅ @${context.payload.comment.user.login}: I've updated betterer results file! \n![giphy-3](${context.payload.comment.user.avatar_url}) \n \`\`\`\n${output}\n\`\`\`\n`,
-#            });
+#          project: tsconfig-strict.json
+#          repo_token: "${{ secrets.GITHUB_TOKEN }}"
+      - name: Update Betterer
+        id: run_betterer_update
+        run: echo "::set-output name=betterer-output::$(CI=0 yarn betterer --update)\n"
+      - name: setup git config
+        run: |
+          # setup the username and email. I tend to use 'GitHub Actions Bot' with no email by default
+          git config user.name "GitHub Actions Bot"
+          git config user.email "<>"
+      - name: commit
+        run: |
+          git add .betterer.results
+          git commit -m "Updated Betterer results file"
+          git push
+      - name: Add comment
+        uses: actions/github-script@v4
+        with:
+          script: |
+            const {owner, repo} = context.issue
+            github.reactions.createForIssueComment({
+              owner,
+              repo,
+              comment_id: context.payload.comment.id,
+              content: "+1",
+            });
+      - name: Add comment
+        uses: actions/github-script@v4
+        env:
+          BETTERER_OUTPUT: ${{ join(steps.run_betterer_update.outputs.*, '\n') }}
+        with:
+          script: |
+            const output = process.env.BETTERER_OUTPUT
+            github.issues.createComment({
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body: `✅ @${context.payload.comment.user.login}: I've updated betterer results file! \n![giphy-3](${context.payload.comment.user.avatar_url}) \n \`\`\`\n${output}\n\`\`\`\n`,
+            });
 
 
 
