@@ -1,4 +1,4 @@
-name: [ChatOps] Update betterer
+name: Update betterer
 
 on:
   issue_comment:
@@ -8,7 +8,7 @@ on:
 jobs:
   update-betterer:
     runs-on: ubuntu-latest
-    if: ${{ github.event.issue.pull_request && github.event.comment.body == 'cmd:betterer:update'}}
+    if: ${{ github.event.issue.pull_request && github.event.comment.body == 'cmd:betterer:update' }}
     steps:
       - name: Like pizza
         uses: actions/github-script@v4
@@ -20,14 +20,4 @@ jobs:
               repo,
               comment_id: context.payload.comment.id,
               content: "+1",
-            });
-      - name: Message failure
-        uses: actions/github-script@v4
-        with:
-          script: |
-            github.issues.createComment({
-              issue_number: context.issue.number,
-              owner: context.repo.owner,
-              repo: context.repo.repo,
-              body: 'Updated bettere! ✅',
             });
