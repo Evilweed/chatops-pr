@@ -25,7 +25,7 @@ jobs:
 #          project: tsconfig-strict.json
 #          repo_token: "${{ secrets.GITHUB_TOKEN }}"
       - name: Incremental code quality check
-        run: yarn betterer --update
+        run: CI=0 yarn betterer --update
       - name: setup git config
         run: |
           # setup the username and email. I tend to use 'GitHub Actions Bot' with no email by default
@@ -73,3 +73,4 @@ jobs:
 # user.avatar_url  - https://avatars.githubusercontent.com/u/5477821?v=4
 # user.login  - Evilweed
 #asd
+#asdsd
