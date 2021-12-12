@@ -12,7 +12,7 @@ function asdasddsadad(sdf) {
 }
 
 function asdasddsadad(sdhjgjf) {
-    console.log(sdf)
+    console.log(sdhjgjf)
 }
 
 
