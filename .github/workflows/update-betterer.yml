@@ -11,24 +11,20 @@ jobs:
     if: ${{ github.event.comment.body == 'a' }}
     env:
       FORCE_COLOR: '1'
+      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
     steps:
       - uses: actions/checkout@v2
-        with:
-          ref: ${{ github.event.pull_request.head.ref }}
-      - name: checkout
-        env:
-          DATA: ${{ github.event.pull_request }}
-        run: |
-          echo "$DATA"
+      - name: Checkout Pull Request
+        run: hub pr checkout ${{ github.event.issue.number }}
 #      - name: checkout
 #        env:
 #          PR_BRANCH: ${{ github.event.pull_request.head.ref }}
 #        run: |
 #          git checkout $PR_BRANCH
-#      - name: is checkouted?
-#        run: |
-#          git branch --show-current
-#          git log
+      - name: is checkouted?
+        run: |
+          git branch --show-current
+          git log
 #      - name: Use Node.js
 #        uses: actions/setup-node@v1
 #        with:
