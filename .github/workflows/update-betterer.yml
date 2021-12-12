@@ -31,7 +31,7 @@ jobs:
       - name: Update Betterer
         id: run_betterer_update
         run: |
-          CI=0 yarn betterer --update 2>&1 | sed -r "s/\x1B\[(([0-9]{1,2})?(;)?([0-9]{1,2})?)?[m,K,H,f,J]//g" | betterer-log.txt
+          CI=0 yarn betterer --update | sed -r "s/\x1B\[(([0-9]{1,2})?(;)?([0-9]{1,2})?)?[m,K,H,f,J]//g" | tee betterer-log.txt
           output="$(cat betterer-log.txt)"
           echo "::set-output name=betterer-output::$output"
       - name: setup git config
@@ -92,4 +92,4 @@ jobs:
 #asldj
 #asd
 #asd
-#asdlkjasd
+#asdlkjasdaa
