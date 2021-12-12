@@ -71,7 +71,11 @@ jobs:
             const diff = `${process.env.BETTERER_DIFF}`.replace(/\\n/g, '\n');
             console.log(output)
             multilineOutput = output.replace(/\\n/g, '\n');
-            multilineDiff = diff.replace(/\\n/g, '\n').split('\n').filter(line => line.startsWith('・ ')).join('\n');
+            multilineDiff = diff.replace(/\\n/g, '\n').split('\n').filter(line => {
+              console.log(line)
+              console.log(line.substr(1))
+              return line.substr(1) === "\u30FB"
+            }).join('\n');
             console.log(multilineOutput)
             github.issues.createComment({
               issue_number: context.issue.number,
