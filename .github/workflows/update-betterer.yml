@@ -6,7 +6,7 @@ on:
       - created
 
 jobs:
-  update-betterer:
+  update-betterer-aa:
     runs-on: ubuntu-latest
 #    if: ${{ github.event.comment.body == 'cmd:betterer:update' }}
     steps:
