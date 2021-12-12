@@ -30,6 +30,7 @@ jobs:
             let shouldPrint = false
             const result = `${process.env.BETTERER_RESULT}`
             console.log(`result ${result}`)
+            console.log(`context ${JSON.stringify(context, null, 2)}`)
             const errorMessage = `❌ Shiet, Betterer reports more issues with TypeScript!`
             const instructions = `\n\nPlease fix those issues to make our code better.`
             const updateInstructions = `\n\nIf however, you think you can't fix those issues right now, add comment with \`betterer:update\` and bot will do that for you!`
@@ -43,4 +44,4 @@ jobs:
             }
 #      - name: Incremental code quality check
 #        run: yarn betterer ci
-#hgf
+#hgfdf
