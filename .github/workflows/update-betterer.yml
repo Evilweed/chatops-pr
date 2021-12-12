@@ -55,10 +55,11 @@ jobs:
       - name: Add comment
         uses: actions/github-script@v4
         env:
-          BETTERER_OUTPUT: ${{ join(steps.run_betterer_update.outputs.*, '\n') }}
+          BETTERER_OUTPUT: ${{ steps.run_betterer_update.outputs.betterer-output }}
         with:
           script: |
             const output = process.env.BETTERER_OUTPUT
+            console.log(output)
             github.issues.createComment({
               issue_number: context.issue.number,
               owner: context.repo.owner,
