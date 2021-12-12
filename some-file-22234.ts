@@ -6,3 +6,7 @@ function asd(sdf) {
 function fdlkgj(sdf) {
     console.log(sdf)
 }
+
+function asdasddsadad(sdf) {
+    console.log(sdf)
+}
