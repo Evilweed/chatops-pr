@@ -33,6 +33,7 @@ jobs:
         run: |
           CI=0 yarn betterer --update | sed -r "s/\x1B\[(([0-9]{1,2})?(;)?([0-9]{1,2})?)?[m,K,H,f,J]//g" | tee betterer-log.txt
           output="$(cat betterer-log.txt)"
+          output="${output//$'\n'/\\n}"
           echo "::set-output name=betterer-output::$output"
       - name: setup git config
         run: |
@@ -61,7 +62,7 @@ jobs:
           BETTERER_OUTPUT: ${{ steps.run_betterer_update.outputs.betterer-output }}
         with:
           script: |
-            const output = process.env.BETTERER_OUTPUT
+            const output = `${process.env.BETTERER_OUTPUT}`.replaceAll('\\n', '\n')
             console.log(output)
             github.issues.createComment({
               issue_number: context.issue.number,
