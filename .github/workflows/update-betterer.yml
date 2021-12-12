@@ -29,6 +29,18 @@ jobs:
               issue_number: context.issue.number,
               owner: context.repo.owner,
               repo: context.repo.repo,
-              body: `✅ Updated betterer file! ${context.payload.comment}`,
+              body: `${context.payload.comment.user.login}  ![giphy-3](${context.payload.comment.user.avatar_url})`,
+            });
+      - name: Add comment
+        uses: actions/github-script@v4
+        with:
+          script: |
+            github.issues.createComment({
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body: `✅ Updated betterer file! \`\`\`${JSON.stringify(context.payload,null,2)}\`\`\``,
             });
 # aasddsa
+# user.avatar_url  - https://avatars.githubusercontent.com/u/5477821?v=4
+# user.login  - Evilweed
