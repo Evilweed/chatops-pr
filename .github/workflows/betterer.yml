@@ -18,7 +18,6 @@ jobs:
       - name: Incremental code quality check
         id: run_betterer
         run: |
-          set -o pipefail
           yarn betterer ci | sed -r "s/\x1B\[(([0-9]{1,2})?(;)?([0-9]{1,2})?)?[m,K,H,f,J]//g" | tee betterer-log.txt
           result="${PIPESTATUS[0]}"
           echo "::set-output name=result::$result"
