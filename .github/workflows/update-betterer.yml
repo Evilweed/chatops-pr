@@ -9,8 +9,35 @@ jobs:
   update-betterer-aa:
     runs-on: ubuntu-latest
     if: ${{ github.event.comment.body == 'a' }}
+    env:
+      FORCE_COLOR: '1'
     steps:
-      - name: Like pizza
+      - uses: actions/checkout@v2
+      - name: Use Node.js
+        uses: actions/setup-node@v1
+        with:
+          node-version: 16.3
+      - name: Install dependencies
+        run: yarn --frozen-lockfile --non-interactive --no-progress
+#      - name: Typecheck
+#        uses: computerjazz/typescript-error-reporter-action@v1.0.11
+#        with:
+#          project: tsconfig-strict.json
+#          repo_token: "${{ secrets.GITHUB_TOKEN }}"
+      - name: Incremental code quality check
+        run: yarn betterer --update
+      - name: setup git config
+        run: |
+          # setup the username and email. I tend to use 'GitHub Actions Bot' with no email by default
+          git config user.name "GitHub Actions Bot"
+          git config user.email "<>"
+      - name: commit
+        run: |
+          # Stage the file, commit and push
+          git add .betterer.results
+          git commit -m "Updated Betterer results file"
+          git push
+      - name: Add comment
         uses: actions/github-script@v4
         with:
           script: |
@@ -29,18 +56,18 @@ jobs:
               issue_number: context.issue.number,
               owner: context.repo.owner,
               repo: context.repo.repo,
-              body: `${context.payload.comment.user.login}  ![giphy-3](${context.payload.comment.user.avatar_url})`,
+              body: `✅ @${context.payload.comment.user.login}: I've updated betterer results file!  ![giphy-3](${context.payload.comment.user.avatar_url})`,
             });
-      - name: Add comment
-        uses: actions/github-script@v4
-        with:
-          script: |
-            github.issues.createComment({
-              issue_number: context.issue.number,
-              owner: context.repo.owner,
-              repo: context.repo.repo,
-              body: `✅ Updated betterer file! \`\`\`${JSON.stringify(context.payload,null,2)}\`\`\``,
-            });
+#      - name: Add comment
+#        uses: actions/github-script@v4
+#        with:
+#          script: |
+#            github.issues.createComment({
+#              issue_number: context.issue.number,
+#              owner: context.repo.owner,
+#              repo: context.repo.repo,
+#              body: `✅ Updated betterer file! \`\`\`${JSON.stringify(context.payload,null,2)}\`\`\``,
+#            });
 # sdfsdfgs
 # aasddsa
 # user.avatar_url  - https://avatars.githubusercontent.com/u/5477821?v=4
