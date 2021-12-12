@@ -14,7 +14,7 @@ jobs:
     steps:
       - uses: actions/checkout@v2
         with:
-          ref: ${{ github.event.pull_request.head.sha }}
+          ref: ${{ github.event.pull_request.head.ref }}
       - name: Use Node.js
         uses: actions/setup-node@v1
         with:
@@ -27,15 +27,18 @@ jobs:
 #          project: tsconfig-strict.json
 #          repo_token: "${{ secrets.GITHUB_TOKEN }}"
       - name: Incremental code quality check
-        run: CI=0 yarn betterer --update
+        run: echo "::set-output name=betterer-output::$(CI=0 yarn betterer --update)\n"
       - name: setup git config
         run: |
           # setup the username and email. I tend to use 'GitHub Actions Bot' with no email by default
           git config user.name "GitHub Actions Bot"
           git config user.email "<>"
       - name: commit
+        env:
+          PR_BRANCH: ${{ github.event.pull_request.head.ref }}
         run: |
           # Stage the file, commit and push
+          git checkout $PR_BRANCH
           git add .betterer.results
           git commit -m "Updated Betterer results file"
           git push
@@ -52,13 +55,21 @@ jobs:
             });
       - name: Add comment
         uses: actions/github-script@v4
+        env:
+          BETTERER_OUTPUT: ${{join(steps.run_tests.outputs.*, '\n')}}
         with:
           script: |
             github.issues.createComment({
               issue_number: context.issue.number,
               owner: context.repo.owner,
               repo: context.repo.repo,
-              body: `✅ @${context.payload.comment.user.login}: I've updated betterer results file!  ![giphy-3](${context.payload.comment.user.avatar_url})`,
+              body: `
+                ✅ @${context.payload.comment.user.login}: I've updated betterer results file!  
+                ![giphy-3](${context.payload.comment.user.avatar_url})
+                \`\`\`
+                ${process.env.BETTERER_OUTPUT}
+                \`\`\`
+              `,
             });
 #      - name: Add comment
 #        uses: actions/github-script@v4
@@ -77,3 +88,4 @@ jobs:
 #asd
 #asdsd
 #asdasd
+#asldjkhsdf
