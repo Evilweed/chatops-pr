@@ -35,7 +35,7 @@ jobs:
           output="$(cat betterer-log.txt)"
           output="${output//$'\n'/\\n}"
           output_diff="$(git diff HEAD^:./ -- .betterer.results)"
-          output_diff="${output//$'\n'/\\n}"
+          output_diff="${output_diff//$'\n'/\\n}"
           echo "::set-output name=betterer-output::$output"
           echo "::set-output name=betterer-output-diff::$output_diff"
       - name: setup git config
