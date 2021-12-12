@@ -16,5 +16,9 @@ function fdasadslkssdfgj(sdfsdfds, fdgfdg) {
 }
 
 function asdasdasasddsasddfsdad(sdf,sdfdsfdfs,dgfgdgf) {
-    console.log(sdfsdfds)
+    console.log(sdfdsfdfs)
+}
+
+function asdasdasasddsasasasdddfsdad(sd2f,sdfds2fdfs,dgf2gdgf) {
+    console.log(sdfds2fdfs)
 }
