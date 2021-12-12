@@ -34,7 +34,10 @@ jobs:
           CI=0 yarn betterer --update | sed -r "s/\x1B\[(([0-9]{1,2})?(;)?([0-9]{1,2})?)?[m,K,H,f,J]//g" | tee betterer-log.txt
           output="$(cat betterer-log.txt)"
           output="${output//$'\n'/\\n}"
+          output_diff="$(git diff HEAD^:./ -- .betterer.results)"
+          output_diff="${output//$'\n'/\\n}"
           echo "::set-output name=betterer-output::$output"
+          echo "::set-output name=betterer-output-diff::$output_diff"
       - name: setup git config
         run: |
           # setup the username and email. I tend to use 'GitHub Actions Bot' with no email by default
@@ -60,17 +63,20 @@ jobs:
         uses: actions/github-script@v4
         env:
           BETTERER_OUTPUT: ${{ steps.run_betterer_update.outputs.betterer-output }}
+          BETTERER_DIFF: ${{ steps.run_betterer_update.outputs.betterer-output-diff }}
         with:
           script: |
             const output = `${process.env.BETTERER_OUTPUT}`.replace(/\\n/g, '\n');
+            const diff = `${process.env.BETTERER_DIFF}`.replace(/\\n/g, '\n');
             console.log(output)
             multilineOutput = output.replace(/\\n/g, '\n');
+            multilineDiff = diff.replace(/\\n/g, '\n');
             console.log(multilineOutput)
             github.issues.createComment({
               issue_number: context.issue.number,
               owner: context.repo.owner,
               repo: context.repo.repo,
-              body: `✅ @${context.payload.comment.user.login}: I've updated betterer results file! \n![giphy-3](${context.payload.comment.user.avatar_url}) \n \`\`\`\n${multilineOutput}\n\`\`\`\n`,
+              body: `✅ @${context.payload.comment.user.login}: I've updated betterer results file! \n![giphy-3](${context.payload.comment.user.avatar_url}) \n \`\`\`\n${multilineOutput}\n\`\`\`\n\`\`\`\n${multilineDiff}\n\`\`\`\n`,
             });
 
 

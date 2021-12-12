@@ -5,16 +5,15 @@
 //
 exports[`stricter typescript compilation`] = {
   value: `{
-    "some-file-2.ts:1224027611": [
+    "some-file-2.ts:2768366": [
       [0, 9, 3, "Duplicate function implementation.", "193410419"],
       [0, 13, 3, "Parameter \'sdf\' implicitly has an \'any\' type.", "193433428"],
-      [5, 9, 6, "Duplicate function implementation.", "1350127085"],
+      [6, 9, 6, "Duplicate function implementation.", "1350127085"],
       [5, 16, 3, "Parameter \'sdf\' implicitly has an \'any\' type.", "193433428"]
     ],
     "some-file-3.ts:1224027611": [
       [0, 9, 3, "Duplicate function implementation.", "193410419"],
       [0, 13, 3, "Parameter \'sdf\' implicitly has an \'any\' type.", "193433428"],
-      [5, 9, 6, "Duplicate function implementation.", "1350127085"],
       [5, 16, 3, "Parameter \'sdf\' implicitly has an \'any\' type.", "193433428"]
     ],
     "some-file-4.ts:1224027611": [
