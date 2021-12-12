@@ -35,9 +35,10 @@ jobs:
           output="$(cat betterer-log.txt)"
           output="${output//$'\n'/\\n}"
           output_diff="$(git diff HEAD^:./ -- .betterer.results)"
-          output_diff="${output//$'\n'/\\n}"
+          output_diff="${output_diff//$'\n'/\\n}"
           echo "::set-output name=betterer-output::$output"
           echo "::set-output name=betterer-output-diff::$output_diff"
+          git diff HEAD^:./ -- .betterer.results
       - name: setup git config
         run: |
           # setup the username and email. I tend to use 'GitHub Actions Bot' with no email by default
@@ -70,7 +71,7 @@ jobs:
             const diff = `${process.env.BETTERER_DIFF}`.replace(/\\n/g, '\n');
             console.log(output)
             multilineOutput = output.replace(/\\n/g, '\n');
-            multilineDiff = diff.replace(/\\n/g, '\n');
+            multilineDiff = diff.replace(/\\n/g, '\n').split('\n').filter(line => line.startsWith('・ ')).join('\n');
             console.log(multilineOutput)
             github.issues.createComment({
               issue_number: context.issue.number,
