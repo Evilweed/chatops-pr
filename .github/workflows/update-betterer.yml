@@ -62,13 +62,15 @@ jobs:
           BETTERER_OUTPUT: ${{ steps.run_betterer_update.outputs.betterer-output }}
         with:
           script: |
-            const output = `${process.env.BETTERER_OUTPUT}`.replaceAll('\\n', '\n')
+            const output = `${process.env.BETTERER_OUTPUT}`.replace(/\\n/g, '\n');
             console.log(output)
+            multilineOutput = output.replace(/\\n/g, '\n');
+            console.log(multilineOutput)
             github.issues.createComment({
               issue_number: context.issue.number,
               owner: context.repo.owner,
               repo: context.repo.repo,
-              body: `✅ @${context.payload.comment.user.login}: I've updated betterer results file! \n![giphy-3](${context.payload.comment.user.avatar_url}) \n \`\`\`\n${output}\n\`\`\`\n`,
+              body: `✅ @${context.payload.comment.user.login}: I've updated betterer results file! \n![giphy-3](${context.payload.comment.user.avatar_url}) \n \`\`\`\n${multilineOutput}\n\`\`\`\n`,
             });
 
 
@@ -93,4 +95,4 @@ jobs:
 #asldj
 #asd
 #asd
-#asdlkjasdaa
+#asdlkjasdaaads
