@@ -1,0 +1,12 @@
+// BETTERER RESULTS V2.
+exports[`stricter typescript compilation`] = {
+  value: `{
+    "base-classes-from-framework/utils/browser.utils.ts:98732290": [
+      [47, 34, 2, "Parameter \'fn\' implicitly has an \'any\' type.", "5860941"],
+      [47, 38, 3, "Parameter \'arg\' implicitly has an \'any\' type.", "193410193"]
+    ],
+    "specs/__playground-test/playground.spec.ts:3774951115": [
+      [10, 21, 5, "Parameter \'dadsa\' implicitly has an \'any\' type.", "163978390"]
+    ]
+  }`
+};

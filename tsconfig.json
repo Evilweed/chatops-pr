@@ -1,0 +1,14 @@
+{
+  "compilerOptions": {
+    "baseUrl": ".",
+    "esModuleInterop": true,
+    "outDir": "build/",
+    "sourceMap": true,
+    "inlineSourceMap": false,
+    "module": "commonjs",
+    "target": "esnext",
+    "moduleResolution": "node",
+  },
+  "exclude": ["node_modules", "build", ".betterer.ts"],
+  "include": ["./**/*.ts"],
+}
