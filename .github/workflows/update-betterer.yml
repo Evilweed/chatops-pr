@@ -14,7 +14,7 @@ jobs:
     steps:
       - uses: actions/checkout@v2
         with:
-          ref: ${{ github.event.pull_request.head.sha }}
+          ref: ${{ github.event.pull_request.head.ref }}
       - name: Use Node.js
         uses: actions/setup-node@v1
         with:
@@ -34,8 +34,11 @@ jobs:
           git config user.name "GitHub Actions Bot"
           git config user.email "<>"
       - name: commit
+        env:
+          PR_BRANCH: ${{ github.event.pull_request.head.ref }}
         run: |
           # Stage the file, commit and push
+          git checkout $PR_BRANCH
           git add .betterer.results
           git commit -m "Updated Betterer results file"
           git push
