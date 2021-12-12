@@ -30,7 +30,11 @@ jobs:
 #          repo_token: "${{ secrets.GITHUB_TOKEN }}"
       - name: Update Betterer
         id: run_betterer_update
-        run: echo "::set-output name=betterer-output::$(CI=0 yarn betterer --update)\n"
+        run: |
+          CI=0 yarn betterer --update > betterer-log.txt
+          output="$(cat betterer-log.txt)"
+          output="${output//$'\n'/\\n}"
+          echo "::set-output name=betterer-output::$output"
       - name: setup git config
         run: |
           # setup the username and email. I tend to use 'GitHub Actions Bot' with no email by default
@@ -55,10 +59,11 @@ jobs:
       - name: Add comment
         uses: actions/github-script@v4
         env:
-          BETTERER_OUTPUT: ${{ join(steps.run_betterer_update.outputs.*, '\n') }}
+          BETTERER_OUTPUT: ${{ steps.run_betterer_update.outputs.betterer-output }}
         with:
           script: |
             const output = process.env.BETTERER_OUTPUT
+            console.log(output)
             github.issues.createComment({
               issue_number: context.issue.number,
               owner: context.repo.owner,
@@ -88,3 +93,4 @@ jobs:
 #asldj
 #asd
 #asd
+#asdlkj
