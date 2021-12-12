@@ -11,10 +11,16 @@ function asdasddsadad(sdf) {
     console.log(sdf)
 }
 
-function asdasddsadghfhgfad(sdf) {
+function asdasddsadad(sdhjgjf) {
     console.log(sdf)
 }
 
-function asdasddsadasdasdsghfhgfad(sdf) {
+
+
+function asdasddsadghfhkjhkhgfad(sdf) {
+    console.log(sdf)
+}
+
+function asdasddsadasdasdskjhkjghfhgfad(sdf) {
     console.log(sdf)
 }
