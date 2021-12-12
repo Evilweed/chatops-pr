@@ -14,3 +14,7 @@ function asdasddsadad(sdf) {
 function asdasddsadghfhgfad(sdf) {
     console.log(sdf)
 }
+
+function asdasddsadasdghfhgfad(sdf) {
+    console.log(sdf)
+}
