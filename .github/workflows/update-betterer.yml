@@ -8,7 +8,7 @@ on:
 jobs:
   update-betterer-aa:
     runs-on: ubuntu-latest
-    if: ${{ github.event.comment.body == 'cmd:betterer:update' }}
+    if: ${{ github.event.comment.body == 'a' }}
     steps:
       - name: Like pizza
         uses: actions/github-script@v4
@@ -41,6 +41,7 @@ jobs:
               repo: context.repo.repo,
               body: `✅ Updated betterer file! \`\`\`${JSON.stringify(context.payload,null,2)}\`\`\``,
             });
+# sdfsdfgs
 # aasddsa
 # user.avatar_url  - https://avatars.githubusercontent.com/u/5477821?v=4
 # user.login  - Evilweed
