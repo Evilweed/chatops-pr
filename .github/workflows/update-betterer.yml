@@ -30,7 +30,11 @@ jobs:
 #          repo_token: "${{ secrets.GITHUB_TOKEN }}"
       - name: Update Betterer
         id: run_betterer_update
-        run: echo "::set-output name=betterer-output::$(CI=0 yarn betterer --update)\n"
+        run: |
+          CI=0 yarn betterer --update > betterer-log.txt
+          output="$(cat betterer-log.txt)"
+          output="${output//$'\n'/\\n}"
+          echo "::set-output name=betterer-output::$output"
       - name: setup git config
         run: |
           # setup the username and email. I tend to use 'GitHub Actions Bot' with no email by default
