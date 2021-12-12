@@ -10,3 +10,7 @@ function fdlkgj(sdf) {
 function asdasddsadad(sdf) {
     console.log(sdf)
 }
+
+function asdasddsadghfhgfad(sdf) {
+    console.log(sdf)
+}
