@@ -19,6 +19,9 @@ jobs:
         id: run_betterer
         run: |
           set -e
+          RED='\033[0;31m'
+          YELLOW='\033[0;33m'
+          NO_COLOR='\033[0m'
           EXIT_CODE=0
           yarn betterer ci || EXIT_CODE=$?
           error_message="Error: ❌ Shiet, Betterer reports more issues with TypeScript!\n"
@@ -26,9 +29,9 @@ jobs:
           how_to_update_betterer_message="If you do not have the capacity to fix the issues. Please add \"betterer:update\" comment to this PR, and CI bot will update the file containing all TypeScript issues and commit it to this PR."
           echo "::set-output name=result::$result"
           if [ "$EXIT_CODE" = "0" ]; then
-            echo -e "Info: Typescript check is ok!"
+            echo -e "$YELLOWInfo: Typescript check is ok!$NO_COLOR"
           else
-            echo -e "$error_message $what_to_do_message $how_to_update_betterer_message"
+            echo -e "$RED$error_message $what_to_do_message $how_to_update_betterer_message$NO_COLOR"
             exit 1
           fi
 
