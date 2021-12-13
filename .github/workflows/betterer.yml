@@ -33,12 +33,12 @@ jobs:
             echo -e "\n\n\n${YELLOW}Info: Typescript check is ok!${NO_COLOR}\n\n\n${separator}"
           else
             echo -e "${separator}\n\n\n"
-            echo -e "${RED} _    _  _             _                          ___${NO_COLOR}"
-            echo -e "${RED}| |  | || |           | |                        |__ \${NO_COLOR}"
-            echo -e "${RED}| |  | || |__    __ _ | |_   _ __    ___ __      __ ) |${NO_COLOR}"
-            echo -e "${RED}| |/\| || '_ \  / _` || __| | '_ \  / _ \\ \ /\ / // /${NO_COLOR}"
-            echo -e "${RED}\  /\  /| | | || (_| || |_  | | | || (_) |\ V  V /|_|${NO_COLOR}"
-            echo -e "${RED} \/  \/ |_| |_| \__,_| \__| |_| |_| \___/  \_/\_/ (_)${NO_COLOR}"
+            echo -e "${RED} _    _  _             _                          ___${NO_CODE}"
+            echo -e "${RED}| |  | || |           | |                        |__ \\${NO_CODE}"
+            echo -e "${RED}| |  | || |__    __ _ | |_   _ __    ___ __      __ ) |${NO_CODE}"
+            echo -e "${RED}| |\/\\| || '_ \\  \/ _` || __| | '_ \\  \/ _ \\\\ \\ \/\\ \/ \/\/ \/${NO_CODE}"
+            echo -e "${RED}\\  \/\\  \/| | | || (_| || |_  | | | || (_) |\\ V  V \/|_|${NO_CODE}"
+            echo -e "${RED}\\\/  \\\/ |_| |_| \\__,_| \\__| |_| |_| \\___\/  \\_\/\\_\/ (_)${NO_CODE}"
             echo -e "\n\n\n${error_message}${what_to_do_message}${how_to_update_betterer_message}\n\n\n${separator}"
             exit 1
           fi
