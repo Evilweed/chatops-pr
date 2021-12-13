@@ -18,16 +18,17 @@ jobs:
       - name: Incremental code quality check
         id: run_betterer
         run: |
-          yarn betterer ci | sed -r "s/\x1B\[(([0-9]{1,2})?(;)?([0-9]{1,2})?)?[m,K,H,f,J]//g" | tee betterer-log.txt
-          result="${PIPESTATUS[0]}"
+          set -e
+          EXIT_CODE=0
+          yarn betterer ci || EXIT_CODE=$?
           error_message="Error: ❌ Shiet, Betterer reports more issues with TypeScript!\n"
           what_to_do_message="Please fix the mentioned TypeScript issues.\n"
           how_to_update_betterer_message="If you do not have the capacity to fix the issues. Please add \"betterer:update\" comment to this PR, and CI bot will update the file containing all TypeScript issues and commit it to this PR."
           echo "::set-output name=result::$result"
-          if [ "$result" = "0" ]; then
-            echo "Info: Typescript check is ok!"
+          if [ "$EXIT_CODE" = "0" ]; then
+            echo -e "Info: Typescript check is ok!"
           else
-            echo "$error_message $what_to_do_message $how_to_update_betterer_message"
+            echo -e "$error_message $what_to_do_message $how_to_update_betterer_message"
             exit 1
           fi
 
