@@ -25,9 +25,9 @@ jobs:
           EXIT_CODE=0
           yarn betterer ci || EXIT_CODE=$?
           separator="-------------------------------------------------------\n\n\n"
-          error_message="$REDError: ❌ Shiet, Betterer reports more issues with TypeScript!$NO_COLOR\n\n"
-          what_to_do_message="$REDPlease fix the mentioned TypeScript issues.$NO_COLOR\n\n"
-          how_to_update_betterer_message="$REDIf you do not have the capacity to fix the issues. Please add \"betterer:update\" comment to this PR, and CI bot will update the file containing all TypeScript issues and commit it to this PR.$NO_COLOR"
+          error_message="${RED}Error: ❌ Shiet, Betterer reports more issues with TypeScript!${NO_COLOR}\n\n"
+          what_to_do_message="${RED}Please fix the mentioned TypeScript issues.${NO_COLOR}\n\n"
+          how_to_update_betterer_message="${RED}If you do not have the capacity to fix the issues. Please add \"betterer:update\" comment to this PR, and CI bot will update the file containing all TypeScript issues and commit it to this PR.${NO_COLOR}"
           echo "::set-output name=result::$result"
           if [ "$EXIT_CODE" = "0" ]; then
             echo -e "$YELLOWInfo: Typescript check is ok!$NO_COLOR"
