@@ -11,7 +11,7 @@ export default {
             strictFunctionTypes: true,
             strictPropertyInitialization: false,
             useDefineForClassFields: false,
-        }).include('./some-file-22234.ts'),
+        }).include('./some-file-*.ts'),
     // 'no raw console.log': () =>
     //     tsquery('CallExpression > PropertyAccessExpression[expression.name="console"][name.name="log"]').include(
     //         './**/*.ts'
