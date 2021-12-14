@@ -6,7 +6,6 @@
 exports[`stricter typescript compilation`] = {
   value: `{
     "some-file-22234.ts:1392065547": [
-      [0, 25, 3, "Parameter \'sdf\' implicitly has an \'any\' type.", "193433428"],
       [4, 30, 3, "Parameter \'sdf\' implicitly has an \'any\' type.", "193433428"]
     ]
   }`
