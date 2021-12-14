@@ -1,0 +1,13 @@
+// BETTERER RESULTS V2.
+// 
+// If this file contains merge conflicts, use `betterer merge` to automatically resolve them:
+// https://phenomnomnominal.github.io/betterer/docs/results-file/#merge
+//
+exports[`stricter typescript compilation`] = {
+  value: `{
+    "some-file-22234.ts:1392065547": [
+      [0, 25, 3, "Parameter \'sdf\' implicitly has an \'any\' type.", "193433428"],
+      [4, 30, 3, "Parameter \'sdf\' implicitly has an \'any\' type.", "193433428"]
+    ]
+  }`
+};

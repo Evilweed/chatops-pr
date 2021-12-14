@@ -48,7 +48,7 @@ function createReporter() {
             })
         },
         suiteEnd(suiteSummary) {
-            console.log(JSON.stringify(suiteSummary, null, 2))
+            // console.log(JSON.stringify(suiteSummary, null, 2))
             let currentProblemTestName
             const changesSummaryList = {
                 fixed: [],
@@ -56,8 +56,8 @@ function createReporter() {
                 existing: [],
             }
             if (suiteSummary) {
-                if (suiteSummary.runs && suiteSummary.runs.length > 0) {
-                    suiteSummary.runs.forEach((run) => {
+                if (suiteSummary.runSummaries && suiteSummary.runSummaries.length > 0) {
+                    suiteSummary.runSummaries.forEach((run) => {
                         if (run.diff) {
                             const { diff } = run.diff
                             for (const [filePath, changeSummary] of Object.entries(diff)) {

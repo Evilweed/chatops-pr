@@ -1,7 +1,11 @@
-function asaaasddsdsd(sdf) {
+function asaaasddsasddsd(sdf) {
     console.log(sdf)
 }
 
-function fdasaasddslkssdfgj(sdfsdfds, fdgfdg) {
-    console.log(sdfsdfds)
+function asaaasddasasdsasddsd(sdf) {
+    console.log(sdf)
+}
+
+function asaaasddasadsasdsasddsd(sdf) {
+    console.log(sdf)
 }
