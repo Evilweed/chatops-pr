@@ -22,3 +22,11 @@ function asdasdasasddsasddfsdad(sdf,sdfdsfdfs,dgfgdgf) {
 function asdasdasasddsasasasdddfsdad(sd2f,sdfds2fdfs,dgf2gdgf) {
     console.log(sdfds2fdfs)
 }
+
+function asdasdasasddsasddfsasdasddad(sdf,sdfdsfdfs,dgfgdgf) {
+    console.log(sdfdsfdfs)
+}
+
+function asdasdasasddsasasasddasdasdfsdad(sd2f,sdfds2fdfs,dgf2gdgf) {
+    console.log(sdfds2fdfs)
+}

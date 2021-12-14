@@ -43,7 +43,7 @@ jobs:
         id: run_betterer_update
         run: |
           set -o pipefail
-          CI=0 yarn betterer --update --reporter ./custom-betterer-teporter.js | sed -r "s/\x1B\[(([0-9]{1,2})?(;)?([0-9]{1,2})?)?[m,K,H,f,J]//g" | tee betterer-log.txt
+          CI=0 yarn betterer --update --reporter ./custom-betterer-reporter.js | sed -r "s/\x1B\[(([0-9]{1,2})?(;)?([0-9]{1,2})?)?[m,K,H,f,J]//g" | tee betterer-log.txt
           result=$?
           output="$(cat betterer-log.txt)"
           output="${output//$'\n'/\\n}"
@@ -109,4 +109,4 @@ jobs:
 #asldj
 #asd
 #asd
-#asdlkjasasddaaadsasd
+#asdlkjasasddaaadsasd asd
