@@ -23,7 +23,7 @@ jobs:
           YELLOW='\033[0;33m'
           NO_COLOR='\033[0m'
           EXIT_CODE=0
-          CI=0 yarn betterer --reporter ./custom-betterer-reporter.js || EXIT_CODE=$?
+          CI=0 yarn run betterer --reporter ./custom-betterer-reporter.js || EXIT_CODE=$?
           separator="-------------------------------------------------------"  
           error_message="${RED}Error: ❌ Shiet, Betterer reports more issues with TypeScript!${NO_COLOR}\n\n"
           what_to_do_message="${RED}Please fix the mentioned TypeScript issues.${NO_COLOR}\n\n"
