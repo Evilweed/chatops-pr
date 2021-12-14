@@ -77,7 +77,7 @@ jobs:
             newErrors = multilineOutput.split('\n').filter(line => {
               console.log(`line[0] === "・": ${line[0] === "・"}`)
               console.log(`line[0] === "\u30FB": ${line[0] === "\u30FB"}`)
-              return line[0] === "\u30FB" || line[0] === "・"
+              return line[0] === "\u30FB" || line[0] === "・" || true
             }).join('\n');
             console.log(multilineOutput)
             github.issues.createComment({
