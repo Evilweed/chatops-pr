@@ -23,22 +23,22 @@ jobs:
           YELLOW='\033[0;33m'
           NO_COLOR='\033[0m'
           EXIT_CODE=0
-          CI=0 yarn betterer || EXIT_CODE=$?
+          CI=0 yarn betterer --reporter ./custom-betterer-teporter.js || EXIT_CODE=$?
           separator="-------------------------------------------------------"  
           error_message="${RED}Error: ❌ Shiet, Betterer reports more issues with TypeScript!${NO_COLOR}\n\n"
           what_to_do_message="${RED}Please fix the mentioned TypeScript issues.${NO_COLOR}\n\n"
           how_to_update_betterer_message="${RED}If you do not have the capacity to fix the issues. Please add \"betterer:update\" comment to this PR, and CI bot will update the file containing all TypeScript issues and commit it to this PR.${NO_COLOR}"
           echo "::set-output name=result::$result"
           if [ "$EXIT_CODE" = "0" ]; then
-            echo -e "\n\n${YELLOW}Info: Typescript check is ok!${NO_COLOR}\n\n\n${separator}"
+            echo -e "\n\n${YELLOW}Info: Betterer check is ok!${NO_COLOR}\n\n\n${separator}"
           else
             echo -e "${separator}\n\n"
-            echo -e "${RED}██████╗ ███████╗ █████╗ ██████╗     ███╗   ███╗███████╗${NO_COLOR}"
-            echo -e "${RED}██╔══██╗██╔════╝██╔══██╗██╔══██╗    ████╗ ████║██╔════╝${NO_COLOR}"
-            echo -e "${RED}██████╔╝█████╗  ███████║██║  ██║    ██╔████╔██║█████╗  ${NO_COLOR}"
-            echo -e "${RED}██╔══██╗██╔══╝  ██╔══██║██║  ██║    ██║╚██╔╝██║██╔══╝  ${NO_COLOR}"
-            echo -e "${RED}██║  ██║███████╗██║  ██║██████╔╝    ██║ ╚═╝ ██║███████╗${NO_COLOR}"
-            echo -e "${RED}╚═╝  ╚═╝╚══════╝╚═╝  ╚═╝╚═════╝     ╚═╝     ╚═╝╚══════╝${NO_COLOR}"
-            echo -e "\n\n${error_message}${what_to_do_message}${how_to_update_betterer_message}\n\n\n${separator}"
             exit 1
           fi
+#            echo -e "${RED}██████╗ ███████╗ █████╗ ██████╗     ███╗   ███╗███████╗${NO_COLOR}"
+#            echo -e "${RED}██╔══██╗██╔════╝██╔══██╗██╔══██╗    ████╗ ████║██╔════╝${NO_COLOR}"
+#            echo -e "${RED}██████╔╝█████╗  ███████║██║  ██║    ██╔████╔██║█████╗  ${NO_COLOR}"
+#            echo -e "${RED}██╔══██╗██╔══╝  ██╔══██║██║  ██║    ██║╚██╔╝██║██╔══╝  ${NO_COLOR}"
+#            echo -e "${RED}██║  ██║███████╗██║  ██║██████╔╝    ██║ ╚═╝ ██║███████╗${NO_COLOR}"
+#            echo -e "${RED}╚═╝  ╚═╝╚══════╝╚═╝  ╚═╝╚═════╝     ╚═╝     ╚═╝╚══════╝${NO_COLOR}"
+#            echo -e "\n\n${error_message}${what_to_do_message}${how_to_update_betterer_message}\n\n\n${separator}"
