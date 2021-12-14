@@ -43,12 +43,12 @@ function createReporter() {
             new Promise((resolve) => resolve())
         },
         suiteStart(suite) {
-            // ;(0, tasks_1.reset)()
             return new Promise((resolve) => {
                 resolve()
             })
         },
         suiteEnd(suiteSummary) {
+            console.log(JSON.stringify(suiteSummary, null, 2))
             let currentProblemTestName
             const changesSummaryList = {
                 fixed: [],
