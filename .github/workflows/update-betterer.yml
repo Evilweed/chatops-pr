@@ -128,11 +128,15 @@ jobs:
               `@${context.payload.comment.user.login} adds issues to our codebase! 🤕`
             const summaryMessage = `| ![Thank you!](https://avatars.githubusercontent.com/u/${context.payload.comment.user.id}?s=40&v=4) | ${quickSummary} |\n| ------------- | ------------- |\n| **CHANGE TYPE** | **AMOUNT** |\n| ✅ Fixed issues | \`${fixedIssuesCount}\` |\n| 🔥 New issues | \`${newIssuesCount}\` |`
             const botMessage = `**🤖 BOT:** Betterer results file was updated as requested by @${context.payload.comment.user.login}\n\n`
+            const nothingToReportMessage = `Seems like there are no changes, sooo... Carry on!`
+            const fullMessage = fixedIssuesCount || newIssuesCount ? 
+              `${botMessage}${summaryMessage}${gifMessage}` :
+              `${botMessage}${nothingToReportMessage}`
             github.issues.createComment({
               issue_number: context.issue.number,
               owner: context.repo.owner,
               repo: context.repo.repo,
-              body: `${botMessage}${summaryMessage}${gifMessage}`,
+              body: `${fullMessage}`,
             })
 
 
