@@ -109,13 +109,13 @@ jobs:
               issue_number: context.issue.number,
               owner: context.repo.owner,
               repo: context.repo.repo,
-              body: `**🤖 BOT:** Betterer results file was updated as requested by \`@${context.payload.comment.user.login}\`\n\`\`\`\nSUMMARY OF CHANGES\n\n${newErrors}\n\`\`\`\${appraisalMessage}`,
+              body: `**🤖 BOT:** Betterer results file was updated as requested by \`@${context.payload.comment.user.login}\`\n\`\`\`\nSUMMARY OF CHANGES\n\n${newErrors}\n\`\`\`${appraisalMessage}`,
             })
             github.issues.createComment({
               issue_number: context.issue.number,
               owner: context.repo.owner,
               repo: context.repo.repo,
-              body: `\`\`\`${context.payload.comment.user}\`\`\``,
+              body: `\`\`\`${JSON.stringify(context.payload.comment.user)}\`\`\``,
             })
 
 
