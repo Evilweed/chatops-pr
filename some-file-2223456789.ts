@@ -9,6 +9,10 @@ function asaadsdasdsadasdasdssd(sdf) {
 function asaadsfdsfsdfdssdsd(sdf) {
     console.log(sdf)
 }
+
+function asaadsasdasadsfdsfsdfdssdsd(sdf) {
+    console.log(sdf)
+}
 //
 // function asaadsddfgdfasdasdssd(sdf) {
 //     console.log(sdf)
