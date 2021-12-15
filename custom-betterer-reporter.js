@@ -1,28 +1,41 @@
 'use strict'
-Object.defineProperty(exports, '__esModule', { value: true })
+Object.defineProperty(exports, '__esModule', {value: true})
 exports.reporter = void 0
 
-function brightLog(string) {
-    console.log(`\x1b[1m%s\x1b[0m`, string)
+function good(message) {
+    return `\x1b[32m\-\x1b[0m ${message}`
 }
 
-function greenLog(string) {
-    console.log(`\x1b[32m%s\x1b[0m`, string)
+function bad(message) {
+    return `\x1b[31m\+\x1b[0m ${message}`
 }
 
-function brightGreenLog(string) {
-    console.log(`\x1b[1m\x1b[32m%s\x1b[0m`, string)
+function log(message) {
+    console.log(message)
 }
 
-function redLog(string) {
-    console.log(`\x1b[31m%s\x1b[0m`, string)
+function bright(message) {
+    return `\x1b[1m${message}\x1b[0m`
 }
 
-function brightRedLog(string) {
-    console.log(`\x1b[1m\x1b[31m%s\x1b[0m`, string)
+function green(message) {
+    return `\x1b[32m${message}\x1b[0m`
+}
+
+function brightGreen(message) {
+    return `\x1b[1m\x1b[32m${message}\x1b[0m`
+}
+
+function red(message) {
+    return `\x1b[31m${message}\x1b[0m`
+}
+
+function brightRed(message) {
+    return `\x1b[1m\x1b[31m${message}\x1b[0m`
 }
 
 exports.reporter = createReporter()
+
 function createReporter() {
     const RENDER_OPTIONS = {
         debug: process.env.NODE_ENV === 'test',
@@ -59,7 +72,7 @@ function createReporter() {
                 if (suiteSummary.runSummaries && suiteSummary.runSummaries.length > 0) {
                     suiteSummary.runSummaries.forEach((run) => {
                         if (run.diff) {
-                            const { diff } = run.diff
+                            const {diff} = run.diff
                             for (const [filePath, changeSummary] of Object.entries(diff)) {
                                 for (const [reportType, changes] of Object.entries(changeSummary)) {
                                     if (changes && changes.length > 0) {
@@ -81,53 +94,66 @@ function createReporter() {
                     })
                 }
             }
+            const hasFixed = changesSummaryList.fixed.length
+            const hasNew = changesSummaryList.new.length
 
             const fixedIssuesCount = changesSummaryList.fixed.length || '0'
-            brightLog(`\n✅ Fixed issues (${fixedIssuesCount}):\n`)
+            log(" ")
+            log(bright(`✅ Fixed issues ( ${fixedIssuesCount} )`))
+            log("")
 
             changesSummaryList.fixed.forEach((problem, index) => {
                 if (problem.testName !== currentProblemTestName) {
                     currentProblemTestName = problem.testName
                 }
-                brightGreenLog(`    ${index + 1}: ${problem.errorMessage}`)
-                greenLog(`          ${problem.filePath}:${problem.lineNumber}\n`)
+                log(brightGreen(`    ${index + 1}: ${problem.errorMessage}`))
+                log(green(`          ${problem.filePath}:${problem.lineNumber}`))
+                log("")
             })
 
             currentProblemTestName = null
 
             const newIssuesCount = changesSummaryList.new.length || '0'
-            brightLog(`🔥 New issues (${newIssuesCount}):\n`)
+            log(bright(`🔥 New issues ( ${newIssuesCount} )`))
+            log("")
 
             changesSummaryList.new.forEach((problem, index) => {
                 if (problem.testName !== currentProblemTestName) {
                     currentProblemTestName = problem.testName
                 }
-                brightRedLog(`    ${index + 1}: ${problem.errorMessage}`)
-                redLog(`          ${problem.filePath}:${problem.lineNumber}\n`)
+                log(brightRed(`    ${index + 1}: ${problem.errorMessage}`))
+                log(red(`          ${problem.filePath}:${problem.lineNumber}`))
+                log("")
             })
-            changesSummaryList.fixed.length && brightGreenLog(`You have fixed ${fixedIssuesCount} issues!`)
 
-            if (changesSummaryList.new.length) {
-                brightRedLog(`You have added ${newIssuesCount} issues!\n`)
-                brightLog(`\nREAD THIS CAREFULLY: `)
-                redLog(
+
+            if( hasFixed || hasNew )
+                log(bright(`RESULTS`))
+
+            hasFixed && log(good(brightGreen(`✅ You have fixed \`${fixedIssuesCount}\` issues!`)))
+
+            if (hasFixed) {
+                log(bad(brightRed(`🔥 You have added \`${newIssuesCount}\` issues!\n\n`)))
+                log(bright(`READ THIS CAREFULLY `))
+                log(red(
                     `We are trying to migrate to strict TypeScript to dramatically reduce amount of issues we ship with our code. To achieve this goal we need to keep our better every day. Please take this into account and try to fix the TypeScript issues you have added now.`
-                )
+                ))
 
-                brightRedLog(`\nCase: You can fix issues`)
-                redLog(`Use the list above, and go back to code and fix the detected issues.`)
-                brightRedLog(`\nCase: You don't have time to fix issues`)
-                redLog(
+                log(brightRed(`\nCase: You can fix issues`))
+                log(red(`Use the list above, and go back to code and fix the detected issues.`))
+                log(brightRed(`\nCase: You don't have time to fix issues`))
+                log(red(
                     `If however you do not have time right now to fix those issues, you can regenerate "betterer.results" file to include your newly introduced errors, and make Betterer check green.`
-                )
-                redLog(
+                ))
+                log(red(
                     `To do that, add "betterer:update" comment in your Pull Request, and CI bot will update the results file, commit it to your PR, and notify you. \n`
-                )
+                ))
             }
 
             return new Promise((resolve) => resolve())
         },
     }
+
     function renderError(error) {
         console.error(JSON.stringify(error, null, 2))
     }
