@@ -5,12 +5,9 @@
 //
 exports[`stricter typescript compilation`] = {
   value: `{
-    "some-file-22234.ts:2298854936": [
-      [1, 33, 3, "Parameter \'sdf\' implicitly has an \'any\' type.", "193433428"]
-    ],
-    "some-file-2223456789.ts:2073744412": [
-      [0, 19, 3, "Parameter \'sdf\' implicitly has an \'any\' type.", "193433428"],
-      [4, 26, 3, "Parameter \'sdf\' implicitly has an \'any\' type.", "193433428"]
+    "some-file-22234.ts:3790746743": [
+      [1, 33, 3, "Parameter \'sdf\' implicitly has an \'any\' type.", "193433428"],
+      [5, 41, 3, "Parameter \'sdf\' implicitly has an \'any\' type.", "193433428"]
     ]
   }`
 };
