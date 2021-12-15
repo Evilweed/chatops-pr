@@ -30,3 +30,11 @@ function asaadhkjkhjsdsd(sdf) {
 function asaadsdajlkjkjklsdasdssd(sdf) {
     console.log(sdf)
 }
+
+function asaadhasdasdsaadskjkhjsdsd(sdf) {
+    console.log(sdf)
+}
+
+function asaadsdajsdfdsfsdffsdfsdlkjkjklsdasdssd(sdf) {
+    console.log(sdf)
+}
