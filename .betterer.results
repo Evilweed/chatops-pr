@@ -8,12 +8,9 @@ exports[`stricter typescript compilation`] = {
     "some-file-22234.ts:2298854936": [
       [1, 33, 3, "Parameter \'sdf\' implicitly has an \'any\' type.", "193433428"]
     ],
-    "some-file-222342.ts:53787406": [
-      [0, 22, 3, "Parameter \'sdf\' implicitly has an \'any\' type.", "193433428"],
-      [4, 29, 3, "Parameter \'sdf\' implicitly has an \'any\' type.", "193433428"]
-    ],
-    "some-file-2223456789.ts:269568000": [
-      [0, 19, 3, "Parameter \'sdf\' implicitly has an \'any\' type.", "193433428"]
+    "some-file-2223456789.ts:2073744412": [
+      [0, 19, 3, "Parameter \'sdf\' implicitly has an \'any\' type.", "193433428"],
+      [4, 26, 3, "Parameter \'sdf\' implicitly has an \'any\' type.", "193433428"]
     ]
   }`
 };
