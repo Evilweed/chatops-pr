@@ -8,7 +8,7 @@ on:
 jobs:
   update-betterer-aa:
     runs-on: ubuntu-latest
-    if: ${{ github.event.comment.body == 'a' }}
+    if: ${{ github.event.comment.body == 'betterer:update' }}
     env:
       FORCE_COLOR: '1'
       GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
