@@ -74,17 +74,20 @@ jobs:
             const output = `${process.env.BETTERER_OUTPUT}`.replace(/\\n/g, '\n');
             console.log(output)
             multilineOutput = output.replace(/\\n/g, '\n');
-            newErrors = multilineOutput.split('\n').filter(line => {
-              console.log(`line[0] === "・": ${line[0] === "・"}`)
-              console.log(`line[0] === "\u30FB": ${line[0] === "\u30FB"}`)
-              return line[0] === "\u30FB" || line[0] === "・"
-            }).join('\n');
+            newErrors = multilineOutput
+              .split('\n')
+              .filter(line => {
+                return line[0] === "+" || line[0] === "-"
+              }).filter(line => {
+                return line.substring(1)
+              })
+            .join('\n');
             console.log(multilineOutput)
             github.issues.createComment({
               issue_number: context.issue.number,
               owner: context.repo.owner,
               repo: context.repo.repo,
-              body: `✅ @${context.payload.comment.user.login}: I've updated betterer results file! \n![giphy-3](${context.payload.comment.user.avatar_url}) \n\`\`\`\n${newErrors}\n\`\`\`\n`,
+              body: `####🤖 I've updated betterer results file!\nTask was requested by \`@${context.payload.comment.user.login}\`#### SUMMARY\n\`\`\`\n${newErrors}\n\`\`\`\n:  \n![giphy-3](${context.payload.comment.user.avatar_url})`,
             });
 
 
