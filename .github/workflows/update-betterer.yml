@@ -74,7 +74,8 @@ jobs:
             let newIssuesCount
             function getNumber(text) {
               const numbers = text.match(/\d/g)
-              return Number(numbers.join(""))
+              const numberOrUndefined = Number(numbers.join(""))
+              return numberOrUndefined || 0
             }
             const positiveGifs = [
               "https://i.giphy.com/media/5GoVLqeAOo6PK/giphy.webp",
