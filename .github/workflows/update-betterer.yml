@@ -105,17 +105,13 @@ jobs:
             // ![avatar](${context.payload.comment.user.avatar_url})
             const appraisalMessage = fixedIssuesCount > newIssuesCount ? 
               `\n\n@${context.payload.comment.user.login} you are awesome! You have fixed more issues than you have added!\n![Thank you!](${randomPositiveGif})` : ""
+            const summaryMessage = `| ![Thank you!](https://avatars.githubusercontent.com/u/${context.payload.comment.user.id}?s=40&v=4) | @${context.payload.comment.user.login} is improving our codebase! 🙌 |\n| ------------- | ------------- |\n| **CHANGE TYPE** | **AMOUNT** |\n| ✅ Fixed issues | \`${fixedIssuesCount}\` |\n| 🔥 New issues | \`${newIssuesCount}\` |`
+            const botMessage = `**🤖 BOT:** Betterer results file was updated as requested by @${context.payload.comment.user.login}\n\n`
             github.issues.createComment({
               issue_number: context.issue.number,
               owner: context.repo.owner,
               repo: context.repo.repo,
-              body: `**🤖 BOT:** Betterer results file was updated as requested by \`@${context.payload.comment.user.login}\`\n\`\`\`\nSUMMARY OF CHANGES\n\n${newErrors}\n\`\`\`${appraisalMessage}`,
-            })
-            github.issues.createComment({
-              issue_number: context.issue.number,
-              owner: context.repo.owner,
-              repo: context.repo.repo,
-              body: `\`\`\`${JSON.stringify(context.payload.comment.user)}\`\`\``,
+              body: `$botMessage}\n${summaryMessage}${appraisalMessage}`,
             })
 
 
