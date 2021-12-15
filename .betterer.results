@@ -8,17 +8,18 @@ exports[`stricter typescript compilation`] = {
     "some-file-22234.ts:2298854936": [
       [1, 33, 3, "Parameter \'sdf\' implicitly has an \'any\' type.", "193433428"]
     ],
-    "some-file-222342.ts:2412842236": [
-      [0, 22, 3, "Parameter \'sdf\' implicitly has an \'any\' type.", "193433428"],
-      [3, 25, 3, "Parameter \'sdf\' implicitly has an \'any\' type.", "193433428"],
-      [8, 31, 3, "Parameter \'sdf\' implicitly has an \'any\' type.", "193433428"]
+    "some-file-222342.ts:1840589628": [
+      [0, 22, 3, "Parameter \'sdf\' implicitly has an \'any\' type.", "193433428"]
     ],
-    "some-file-2223456789.ts:3215671492": [
+    "some-file-2223456789.ts:1448755153": [
       [0, 19, 3, "Parameter \'sdf\' implicitly has an \'any\' type.", "193433428"],
       [4, 21, 3, "Parameter \'sdf\' implicitly has an \'any\' type.", "193433428"],
       [8, 27, 3, "Parameter \'sdf\' implicitly has an \'any\' type.", "193433428"],
       [12, 25, 8, "Parameter \'sdfsdfds\' implicitly has an \'any\' type.", "2861425586"],
-      [12, 35, 6, "Parameter \'fdgfdg\' implicitly has an \'any\' type.", "1349677989"]
+      [12, 35, 6, "Parameter \'fdgfdg\' implicitly has an \'any\' type.", "1349677989"],
+      [16, 33, 3, "Parameter \'sdf\' implicitly has an \'any\' type.", "193433428"],
+      [20, 30, 8, "Parameter \'sdfsdfds\' implicitly has an \'any\' type.", "2861425586"],
+      [20, 40, 6, "Parameter \'fdgfdg\' implicitly has an \'any\' type.", "1349677989"]
     ]
   }`
 };
