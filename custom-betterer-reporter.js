@@ -132,7 +132,7 @@ function createReporter() {
 
             hasFixed && log(good(brightGreen(`✅ You have fixed \`${fixedIssuesCount}\` issues!`)))
 
-            if (hasFixed) {
+            if (hasNew) {
                 log(bad(brightRed(`🔥 You have added \`${newIssuesCount}\` issues!\n\n`)))
                 log(bright(`READ THIS CAREFULLY `))
                 log(red(
