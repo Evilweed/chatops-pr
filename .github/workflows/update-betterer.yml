@@ -13,7 +13,7 @@ jobs:
       FORCE_COLOR: '1'
       GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
     steps:
-      - name: Add comment
+      - name: Add reaction to comment
         uses: actions/github-script@v4
         with:
           script: |
@@ -48,18 +48,18 @@ jobs:
           echo "::set-output name=betterer-output-diff::$output_diff"
           echo "::set-output name=betterer-result::$result"
           git diff HEAD^:./ -- .betterer.results
-      - name: setup git config
+      - name: Setup git config
         run: |
           # setup the username and email. I tend to use 'GitHub Actions Bot' with no email by default
           git config user.name "GitHub Actions Bot"
           git config user.email "<>"
-      - name: commit
+      - name: Commit updated file
         continue-on-error: true
         run: |
           git add .betterer.results
           git commit -m "Updated Betterer results file"
           git push
-      - name: Add comment
+      - name: Add summary comment
         uses: actions/github-script@v4
         env:
           BETTERER_OUTPUT: ${{ steps.run_betterer_update.outputs.betterer-output }}
@@ -135,27 +135,3 @@ jobs:
               repo: context.repo.repo,
               body: `${fullMessage}`,
             })
-
-
-
-#      - name: Add comment
-#        uses: actions/github-script@v4
-#        with:
-#          script: |
-#            github.issues.createComment({
-#              issue_number: context.issue.number,
-#              owner: context.repo.owner,
-#              repo: context.repo.repo,
-#              body: `✅ Updated betterer file! \`\`\`${JSON.stringify(context.payload,null,2)}\`\`\``,
-#            });
-# sdfsdfgs
-# aasddsa
-# user.avatar_url  - https://avatars.githubusercontent.com/u/5477821?v=4
-# user.login  - Evilweed
-#asd
-#asdsd
-#asd
-#asldj
-#asd
-#asd
-#asdlkjasasddaaadsasd asd
