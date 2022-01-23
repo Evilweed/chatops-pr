@@ -18,10 +18,7 @@ jobs:
       - name: Incremental code quality check
         uses: Evilweed/betterer-github-action@v1.0.0
         with:
-          args: |
-            --config /github/workspace/.betterer \
-            --results /github/workspace/.betterer.results \
-            --reporter /build/custom-simple-reporter.js
+          args: --config /github/workspace/.betterer --results /github/workspace/.betterer.results --reporter /build/custom-simple-reporter.js
 #      - name: Incremental code quality check
 #        id: run_betterer
 #        run: |
