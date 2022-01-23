@@ -16,6 +16,13 @@ jobs:
       - name: Install dependencies
         run: yarn --frozen-lockfile --non-interactive --no-progress
       - name: Incremental code quality check
-        id: run_betterer
-        run: |
-          CI=0 yarn run betterer --reporter ./custom-betterer-reporter.js
+        uses: Evilweed/betterer-github-action@v1.0.0
+        with:
+          args: |
+            --config /github/workspace/.betterer \
+            --results /github/workspace/.betterer.results \
+            --reporter /build/custom-simple-reporter.js
+#      - name: Incremental code quality check
+#        id: run_betterer
+#        run: |
+#          CI=0 yarn run betterer --reporter ./custom-betterer-reporter.js
