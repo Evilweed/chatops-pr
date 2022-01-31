@@ -31,26 +31,27 @@ exports[`stricter typescript compilation`] = {
       [52, 57, 3, "Parameter \'sdf\' implicitly has an \'any\' type.", "193433428"],
       [56, 62, 3, "Parameter \'sdf\' implicitly has an \'any\' type.", "193433428"]
     ],
-    "src/some-file-2223456789.ts:2489432998": [
+    "src/some-file-2223456789.ts:3917484988": [
       [0, 9, 9, "Duplicate function implementation.", "3987640659"],
       [0, 19, 3, "Parameter \'sdf\' implicitly has an \'any\' type.", "193433428"],
       [4, 32, 3, "Parameter \'sdf\' implicitly has an \'any\' type.", "193433428"],
       [8, 29, 3, "Parameter \'sdf\' implicitly has an \'any\' type.", "193433428"],
       [12, 37, 3, "Parameter \'sdf\' implicitly has an \'any\' type.", "193433428"],
-      [16, 31, 3, "Parameter \'sdf\' implicitly has an \'any\' type.", "193433428"],
-      [20, 9, 15, "Duplicate function implementation.", "2598784115"],
-      [20, 25, 3, "Parameter \'sdf\' implicitly has an \'any\' type.", "193433428"],
-      [24, 9, 25, "Duplicate function implementation.", "1388341541"],
-      [24, 35, 3, "Parameter \'sdf\' implicitly has an \'any\' type.", "193433428"],
-      [28, 9, 15, "Duplicate function implementation.", "1539036179"],
-      [28, 25, 3, "Parameter \'sdf\' implicitly has an \'any\' type.", "193433428"],
-      [32, 9, 24, "Duplicate function implementation.", "97913409"],
-      [32, 34, 3, "Parameter \'sdf\' implicitly has an \'any\' type.", "193433428"],
-      [35, 34, 3, "Parameter \'sdf\' implicitly has an \'any\' type.", "193433428"],
-      [39, 29, 3, "Parameter \'sdf\' implicitly has an \'any\' type.", "193433428"],
-      [43, 40, 3, "Parameter \'sdf\' implicitly has an \'any\' type.", "193433428"],
-      [47, 30, 3, "Parameter \'sdf\' implicitly has an \'any\' type.", "193433428"],
-      [51, 43, 3, "Parameter \'sdf\' implicitly has an \'any\' type.", "193433428"]
+      [16, 49, 3, "Parameter \'sdf\' implicitly has an \'any\' type.", "193433428"],
+      [20, 31, 3, "Parameter \'sdf\' implicitly has an \'any\' type.", "193433428"],
+      [24, 9, 15, "Duplicate function implementation.", "2598784115"],
+      [24, 25, 3, "Parameter \'sdf\' implicitly has an \'any\' type.", "193433428"],
+      [28, 9, 25, "Duplicate function implementation.", "1388341541"],
+      [28, 35, 3, "Parameter \'sdf\' implicitly has an \'any\' type.", "193433428"],
+      [32, 9, 15, "Duplicate function implementation.", "1539036179"],
+      [32, 25, 3, "Parameter \'sdf\' implicitly has an \'any\' type.", "193433428"],
+      [36, 9, 24, "Duplicate function implementation.", "97913409"],
+      [36, 34, 3, "Parameter \'sdf\' implicitly has an \'any\' type.", "193433428"],
+      [39, 34, 3, "Parameter \'sdf\' implicitly has an \'any\' type.", "193433428"],
+      [43, 29, 3, "Parameter \'sdf\' implicitly has an \'any\' type.", "193433428"],
+      [47, 40, 3, "Parameter \'sdf\' implicitly has an \'any\' type.", "193433428"],
+      [51, 30, 3, "Parameter \'sdf\' implicitly has an \'any\' type.", "193433428"],
+      [55, 43, 3, "Parameter \'sdf\' implicitly has an \'any\' type.", "193433428"]
     ]
   }`
 };
