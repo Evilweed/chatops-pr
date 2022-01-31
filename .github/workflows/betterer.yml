@@ -23,7 +23,7 @@ jobs:
       - name: Incremental code quality check
         uses: Evilweed/betterer-github-action@v1.0.0
         with:
-          chatops_results_file_update_command: env.CHATOPS_RESULTS_FILE_UPDATE_COMMAND
-          betterer_results_file_name: env.BETTERER_RESULTS_FILE_NAME
+          chatops_results_file_update_command: ${{ env.CHATOPS_RESULTS_FILE_UPDATE_COMMAND }}
+          betterer_results_file_name: ${{ env.BETTERER_RESULTS_FILE_NAME }}
           args: --config "/github/workspace/${{ env.BETTERER_CONFIG_FILE_PATH }}" --results "/github/workspace/${{ env.BETTERER_RESULTS_FILE_PATH }}" --reporter /build/custom-simple-reporter.js
 
