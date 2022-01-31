@@ -10,5 +10,5 @@
     "moduleResolution": "node",
   },
   "exclude": ["node_modules", "build", ".betterer.ts"],
-  "include": ["./**/*.ts"],
+  "include": ["./src/*/*.ts"],
 }

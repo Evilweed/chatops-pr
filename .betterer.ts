@@ -1,23 +1,22 @@
+const path = require('path');
 import { typescript } from '@betterer/typescript'
-import { tsquery } from '@betterer/tsquery'
-import { regexp } from '@betterer/regexp'
+
+const pathToTypescriptFiles = 'src/**/*.ts'
+const pathToTypescriptConfigFile = 'tsconfig.json'
+
+const resolvedPathToTypescriptFiles = path.resolve(__dirname, pathToTypescriptFiles)
+const resolvedPathToTypescriptConfigFile = path.resolve(__dirname, pathToTypescriptConfigFile)
+
+console.log(resolvedPathToTypescriptFiles)
 
 export default {
     'stricter typescript compilation': () =>
-        typescript('tsconfig.json', {
+        typescript(resolvedPathToTypescriptConfigFile, {
             strict: true,
             noImplicitAny: true,
             strictNullChecks: true,
             strictFunctionTypes: true,
             strictPropertyInitialization: false,
             useDefineForClassFields: false,
-        }).include('./some-file-*.ts'),
-    // 'no raw console.log': () =>
-    //     tsquery('CallExpression > PropertyAccessExpression[expression.name="console"][name.name="log"]').include(
-    //         './**/*.ts'
-    //     ),
-    // 'no +2 params > pass object to function instead > function({email: "asd"}: SomeType)': () =>
-    //     tsquery('FunctionDeclaration:has(Parameter + Parameter + Parameter)').include('./**/*.ts'),
-    // 'no TODO without owner > please use //TODO(marcin) do something': () =>
-    //     regexp(new RegExp('//TODO([^(][a-z]+[^)]|())', 'i')).include('./**/*.ts'),
+        }).include(resolvedPathToTypescriptFiles),
 }

@@ -3,18 +3,6 @@ function asaadsdsd(sdf) {
     console.log(sdf)
 }
 
-function asaadsdasdsadasdasdssd(sdf) {
-    console.log(sdf)
-}
-
-function asaadsfdsfsdfdssdsd(sdf) {
-    console.log(sdf)
-}
-
-function asaadsddfgdfasdasdssd(sdf) {
-    console.log(sdf)
-}
-
 function asaadsdfghfghsd(sdf) {
     console.log(sdf)
 }
@@ -63,5 +51,9 @@ function asaadhasdasdsasddsaasdasdasaadskjkhjsdsd(sdf) {
 }
 
 function asaadsdajsdfdsfsdffsdfssasadasddlkjkjklsdasdssd(sdf) {
+    console.log(sdf)
+}
+
+function asaadsdajsdfdsfsdffsdfssasdasasadasddlkjkjklsdasdssd(sdf) {
     console.log(sdf)
 }

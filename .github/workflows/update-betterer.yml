@@ -5,13 +5,17 @@ on:
     types:
       - created
 
+env:
+  FORCE_COLOR: '1'
+  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+  CHATOPS_RESULTS_FILE_UPDATE_COMMAND: "betterer:update"
+  BETTERER_CONFIG_FILE_PATH: ".betterer"
+  BETTERER_RESULTS_FILE_PATH: ".betterer.results"
+
 jobs:
   update-betterer-aa:
     runs-on: ubuntu-latest
-    if: ${{ github.event.comment.body == 'betterer:update' }}
-    env:
-      FORCE_COLOR: '1'
-      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    if: ${{ github.event.comment.body == env.CHATOPS_RESULTS_FILE_UPDATE_COMMAND }}
     steps:
       - name: Add reaction to comment
         uses: actions/github-script@v4
@@ -38,16 +42,18 @@ jobs:
         id: run_betterer_update
         run: |
           set -o pipefail
-          CI=0 yarn run betterer --update --reporter ./custom-betterer-reporter.js | sed -r "s/\x1B\[(([0-9]{1,2})?(;)?([0-9]{1,2})?)?[m,K,H,f,J]//g" | tee betterer-log.txt
+          CI=0 yarn run betterer --update \
+            --config $BETTERER_CONFIG_FILE_PATH \
+            --results $BETTERER_RESULTS_FILE_PATH \
+            --reporter ./custom-betterer-reporter.js \
+            | sed -r "s/\x1B\[(([0-9]{1,2})?(;)?([0-9]{1,2})?)?[m,K,H,f,J]//g" \
+            | tee betterer-log.txt
           result=$?
           output="$(cat betterer-log.txt)"
           output="${output//$'\n'/\\n}"
-          output_diff="$(git diff HEAD^:./ -- .betterer.results)"
-          output_diff="${output_diff//$'\n'/\\n}"
           echo "::set-output name=betterer-output::$output"
-          echo "::set-output name=betterer-output-diff::$output_diff"
           echo "::set-output name=betterer-result::$result"
-          git diff HEAD^:./ -- .betterer.results
+          git diff HEAD^:./ -- $BETTERER_RESULTS_FILE_PATH
       - name: Setup git config
         run: |
           # setup the username and email. I tend to use 'GitHub Actions Bot' with no email by default
@@ -63,7 +69,6 @@ jobs:
         uses: actions/github-script@v4
         env:
           BETTERER_OUTPUT: ${{ steps.run_betterer_update.outputs.betterer-output }}
-          BETTERER_DIFF: ${{ steps.run_betterer_update.outputs.betterer-output-diff }}
         with:
           script: |
             let fixedIssuesCount
