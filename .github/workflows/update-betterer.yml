@@ -5,15 +5,17 @@ on:
     types:
       - created
 
+env:
+  FORCE_COLOR: '1'
+  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+  CHATOPS_RESULTS_FILE_UPDATE_COMMAND: "betterer:update"
+  BETTERER_CONFIG_FILE_PATH: ".betterer"
+  BETTERER_RESULTS_FILE_PATH: ".betterer.results"
+
 jobs:
   update-betterer-aa:
     runs-on: ubuntu-latest
-    if: ${{ github.event.comment.body == 'betterer:update' }}
-    env:
-      FORCE_COLOR: '1'
-      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      BETTERER_CONFIG_FILE_PATH: ".betterer"
-      BETTERER_RESULTS_FILE_PATH: ".betterer.results"
+    if: ${{ github.event.comment.body == env.CHATOPS_RESULTS_FILE_UPDATE_COMMAND }}
     steps:
       - name: Add reaction to comment
         uses: actions/github-script@v4
