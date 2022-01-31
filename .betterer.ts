@@ -6,6 +6,7 @@ const pathToTypescriptConfigFile = 'tsconfig.json'
 
 const resolvedPathToTypescriptFiles = path.resolve(__dirname, pathToTypescriptFiles)
 const resolvedPathToTypescriptConfigFile = path.resolve(__dirname, pathToTypescriptConfigFile)
+
 console.log(resolvedPathToTypescriptFiles)
 
 export default {

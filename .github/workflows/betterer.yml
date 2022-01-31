@@ -6,6 +6,7 @@ env:
   FORCE_COLOR: '1'
   CHATOPS_RESULTS_FILE_UPDATE_COMMAND: "betterer:update"
   BETTERER_CONFIG_FILE_PATH: ".betterer"
+  BETTERER_RESULTS_FILE_NAME: ".betterer.results"
   BETTERER_RESULTS_FILE_PATH: ".betterer.results"
 
 jobs:
@@ -22,7 +23,7 @@ jobs:
       - name: Incremental code quality check
         uses: Evilweed/betterer-github-action@v1.0.0
         with:
-          chatops_results_file_update_command: "betterer:update"
-          betterer_results_file_name: ".betterer.results"
-          args: --config /github/workspace/.betterer --results /github/workspace/.betterer.results --reporter /build/custom-simple-reporter.js
+          chatops_results_file_update_command: env.CHATOPS_RESULTS_FILE_UPDATE_COMMAND
+          betterer_results_file_name: env.BETTERER_RESULTS_FILE_NAME
+          args: --config "/github/workspace/${BETTERER_CONFIG_FILE_PATH}" --results "/github/workspace/${BETTERER_RESULTS_FILE_PATH}" --reporter /build/custom-simple-reporter.js
 
