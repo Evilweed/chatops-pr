@@ -121,11 +121,11 @@ jobs:
             // ![avatar](${context.payload.comment.user.avatar_url})
             const gifMessage = `\n\n![Gif!](${fixedIssuesCount > newIssuesCount ? randomPositiveGif : randomNegativeGif})`
             const quickSummary = fixedIssuesCount > newIssuesCount ? 
-              `@${context.payload.comment.user.login} is improving our codebase! 🙌` : 
-              `@${context.payload.comment.user.login} adds issues to our codebase! 🤕`
-            const summaryMessage = `| ![Thank you!](https://avatars.githubusercontent.com/u/${context.payload.comment.user.id}?s=40&v=4) | ${quickSummary} |\n| ------------- | ------------- |\n| **CHANGE TYPE** | **AMOUNT** |\n| ✅ Fixed issues | \`${fixedIssuesCount}\` |\n| 🔥 New issues | \`${newIssuesCount}\` |`
+              `❤️ Our codebase gets **BETTER**!` : 
+              `💩️ Our codebase gets **WORSE**!`
+            const summaryMessage = `| ![Avatar](https://avatars.githubusercontent.com/u/${context.payload.comment.user.id}?s=40&v=4) | @${context.payload.comment.user.login} |\n| ------------- | ------------- |\n| **CHANGE TYPE** | **AMOUNT** |\n| ✅ Fixed issues | \`${fixedIssuesCount}\` |\n| ⛔️ New issues | \`${newIssuesCount}\` |\n Result | ${quickSummary} |`
             const botMessage = `**🤖 BOT:** Betterer results file was updated as requested by @${context.payload.comment.user.login}\n\n`
-            const nothingToReportMessage = `Seems like there are no changes, sooo... Carry on!`
+            const nothingToReportMessage = `Seems like there are no changes, sooo... Carry on! 😇`
             const fullMessage = fixedIssuesCount || newIssuesCount ? 
               `${botMessage}${summaryMessage}${gifMessage}` :
               `${botMessage}${nothingToReportMessage}`
