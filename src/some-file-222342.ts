@@ -57,3 +57,11 @@ function asaadsdajsdfdsfsdffsdfssasadasddlkjkjklsdasdssd(sdf) {
 function asaadsdajsdfdsfsdffsdfssasdasasadasddlkjkjklsdasdssd(sdf) {
     console.log(sdf)
 }
+
+function asaadsdajsdfdsfasadssdffsdfssasadasddlkjkjklsdasdssd(sdf) {
+    console.log(sdf)
+}
+
+function asaadsdajsdfdsfsasdasdffsdfssasdasasadasddlkjkjklsdasdssd(sdf) {
+    console.log(sdf)
+}
