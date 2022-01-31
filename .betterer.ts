@@ -9,6 +9,5 @@ export default {
             strictFunctionTypes: true,
             strictPropertyInitialization: false,
             useDefineForClassFields: false,
-        }),
+        }).include('./src/**/*.ts'),
 }
-//.include('./src/some-file-*.ts')
