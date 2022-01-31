@@ -8,14 +8,13 @@ on:
 env:
   FORCE_COLOR: '1'
   GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-  CHATOPS_RESULTS_FILE_UPDATE_COMMAND: "betterer:update"
   BETTERER_CONFIG_FILE_PATH: ".betterer"
   BETTERER_RESULTS_FILE_PATH: ".betterer.results"
 
 jobs:
   update-betterer-aa:
     runs-on: ubuntu-latest
-    if: ${{ github.event.comment.body == env.CHATOPS_RESULTS_FILE_UPDATE_COMMAND }}
+    if: ${{ github.event.comment.body == "betterer:update" }}
     steps:
       - name: Add reaction to comment
         uses: actions/github-script@v4
@@ -71,8 +70,8 @@ jobs:
           BETTERER_OUTPUT: ${{ steps.run_betterer_update.outputs.betterer-output }}
         with:
           script: |
-            let fixedIssuesCount
-            let newIssuesCount
+            let fixedIssuesCount = 0
+            let newIssuesCount = 0
             function getNumber(text) {
               const numbers = text.match(/\d/g)
               const numberOrUndefined = Number(numbers.join(""))
