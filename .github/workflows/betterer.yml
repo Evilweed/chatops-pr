@@ -25,5 +25,5 @@ jobs:
         with:
           chatops_results_file_update_command: env.CHATOPS_RESULTS_FILE_UPDATE_COMMAND
           betterer_results_file_name: env.BETTERER_RESULTS_FILE_NAME
-          args: --config "/github/workspace/${BETTERER_CONFIG_FILE_PATH}" --results "/github/workspace/${BETTERER_RESULTS_FILE_PATH}" --reporter /build/custom-simple-reporter.js
+          args: --config "/github/workspace/${{ env.BETTERER_CONFIG_FILE_PATH }}" --results "/github/workspace/${{ env.BETTERER_RESULTS_FILE_PATH }}" --reporter /build/custom-simple-reporter.js
 
