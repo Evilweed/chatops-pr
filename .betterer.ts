@@ -1,3 +1,4 @@
+const path = require('path');
 import { typescript } from '@betterer/typescript'
 
 export default {
@@ -9,5 +10,5 @@ export default {
             strictFunctionTypes: true,
             strictPropertyInitialization: false,
             useDefineForClassFields: false,
-        }).include('./src/**/*.ts'),
+        }).include(path.resolve(__dirname, 'src/**/*.ts')),
 }
