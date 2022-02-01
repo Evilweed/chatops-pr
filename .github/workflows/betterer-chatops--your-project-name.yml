@@ -1,4 +1,4 @@
-name: Betterer YourProjectName TS ChatOps
+name: Betterer YourProjectName TS ChatOps  # <--- Adapt to your project needs
 
 on:
   issue_comment:
@@ -6,16 +6,16 @@ on:
       - created
 
 env:
-  FORCE_COLOR: '1'
-  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
   PROJECT_NODE_VERSION: 16.3                         # <--- Adapt to your project needs
   BETTERER_CONFIG_FILE_PATH: ".betterer"             # <--- Adapt to your project needs
   BETTERER_RESULTS_FILE_PATH: ".betterer.results"    # <--- Adapt to your project needs
+  FORCE_COLOR: '1'
+  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
 jobs:
   update-betterer-aa:
     runs-on: ubuntu-latest
-    if: ${{ github.event.comment.body == 'betterer:update' }}
+    if: ${{ github.event.comment.body == 'platform:betterer:update' }}  # <--- Adapt to your project needs
     steps:
       - name: Add reaction to comment
         uses: actions/github-script@v4
