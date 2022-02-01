@@ -14,7 +14,7 @@ env:
 jobs:
   update-betterer-aa:
     runs-on: ubuntu-latest
-    if: ${{ github.event.comment.body == "betterer:update" }}
+    if: ${{ github.event.comment.body == 'betterer:update' }}
     steps:
       - name: Add reaction to comment
         uses: actions/github-script@v4
