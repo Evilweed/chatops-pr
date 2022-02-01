@@ -6,9 +6,10 @@ on:
       - created
 
 env:
-  PROJECT_NODE_VERSION: 16.3                         # <--- Adapt to your project needs
-  BETTERER_CONFIG_FILE_PATH: ".betterer"             # <--- Adapt to your project needs
-  BETTERER_RESULTS_FILE_PATH: ".betterer.results"    # <--- Adapt to your project needs
+  PROJECT_NODE_VERSION: 16.3                          # <--- Adapt to your project needs
+  BETTERER_CONFIG_FILE_PATH: ".betterer"              # <--- Adapt to your project needs
+  BETTERER_RESULTS_FILE_PATH: ".betterer.results"     # <--- Adapt to your project needs
+  BETTER_CUSTOM_REPORTER_PATH: "./custom-betterer-reporter.js"    # <--- Adapt to your project needs
   FORCE_COLOR: '1'
   GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
@@ -37,7 +38,7 @@ jobs:
         with:
           node-version: 16.3
       - name: Install dependencies
-        run: yarn --frozen-lockfile --non-interactive --no-progress
+        run: yarn --frozen-lockfile --non-interactive --no-progress # <--- Adapt to your project needs (here you need to cd into your project's directory and install packages)
       - name: Update Betterer results file
         id: run_betterer_update
         run: |
@@ -45,7 +46,7 @@ jobs:
           CI=0 yarn run betterer --update \
             --config $BETTERER_CONFIG_FILE_PATH \
             --results $BETTERER_RESULTS_FILE_PATH \
-            --reporter ./custom-betterer-reporter.js \
+            --reporter $BETTER_CUSTOM_REPORTER_PATH \
             | sed -r "s/\x1B\[(([0-9]{1,2})?(;)?([0-9]{1,2})?)?[m,K,H,f,J]//g" \
             | tee betterer-log.txt
           result=$?
