@@ -15,15 +15,11 @@ function asaadhkjkhjsdsd(sdf) {
 function asaadhkjkhjasdasdsdsd(sdf: any) {
     console.log(sdf)
 }
+function asaadhkjkhjasasdadsdasssasdasdsdsd(sdf: any) {
+    console.log(sdf)
+}
 
 function asaadhkjkhjaaaaaasasddasadsasdasddsd(sdf) {
-    console.log(sdf)
-}
-function asaadhkjkhjaaaaasdaasdasdasdasddasasdaasasdasddsd(sdf) {
-    console.log(sdf)
-}
-
-function asaadhkjkhjaaaaaasdasddddsd(sdf) {
     console.log(sdf)
 }
 

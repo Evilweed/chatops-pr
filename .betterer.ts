@@ -15,5 +15,5 @@ export default {
             strict: true,
             strictPropertyInitialization: false,
             useDefineForClassFields: false,
-        }).include(resolvedPathsToTypescriptFiles),
+        }).include(["./src/**/*.ts"]),
 }
