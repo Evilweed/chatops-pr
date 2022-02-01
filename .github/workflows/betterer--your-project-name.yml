@@ -6,12 +6,12 @@ on:
       - 'src/**/*.tsx?'  # <--- Adapt to your project needs
 
 env:
-  PROJECT_NODE_VERSION: 16.3                                              # <--- Adapt to your project needs
-  PROJECT_NAME: "platform"                                                # <--- Adapt to your project needs
-  CHATOPS_RESULTS_FILE_UPDATE_COMMAND: 'betterer:update'                  # <--- Adapt to your project needs
-  BETTERER_CONFIG_FILE_PATH: ".betterer"                                  # <--- Adapt to your project needs
-  BETTERER_RESULTS_FILE_NAME: ".betterer.results"                         # <--- Adapt to your project needs
-  BETTERER_RESULTS_FILE_PATH: ".betterer.results"                         # <--- Adapt to your project needs
+  PROJECT_NODE_VERSION: 16.3                                 # <--- Adapt to your project needs
+  PROJECT_NAME: "platform"                                   # <--- Adapt to your project needs
+  CHATOPS_RESULTS_FILE_UPDATE_COMMAND: 'betterer:update'     # <--- Adapt to your project needs
+  BETTERER_CONFIG_FILE_PATH: ".betterer"                     # <--- Adapt to your project needs
+  BETTERER_RESULTS_FILE_NAME: ".betterer.results"            # <--- Adapt to your project needs
+  BETTERER_RESULTS_FILE_PATH: ".betterer.results"            # <--- Adapt to your project needs
   FORCE_COLOR: '1'
 
 jobs:
@@ -28,7 +28,7 @@ jobs:
       - name: Incremental code quality check
         uses: Evilweed/betterer-github-action@v1.0.0
         with:
-          chatops_results_file_update_command: ${{ format('{0}:{1}.{2}', env.PROJECT_NAME, env.CHATOPS_RESULTS_FILE_UPDATE_COMMAND) }}
+          chatops_results_file_update_command: ${{ format('{0}:{1}', env.PROJECT_NAME, env.CHATOPS_RESULTS_FILE_UPDATE_COMMAND) }}
           betterer_results_file_name: ${{ env.BETTERER_RESULTS_FILE_NAME }}
           args: --config "/github/workspace/${{ env.BETTERER_CONFIG_FILE_PATH }}" --results "/github/workspace/${{ env.BETTERER_RESULTS_FILE_PATH }}" --reporter /build/custom-simple-reporter.js
 
