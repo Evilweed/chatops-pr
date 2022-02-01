@@ -1,7 +1,7 @@
 const path = require('path');
 import { typescript } from '@betterer/typescript'
 
-const pathsToTypescriptFilesUsedByTsConfig = ["./src/*/*.ts"]  // <--- Adapt to your project needs
+const pathsToTypescriptFilesUsedByTsConfig = ["./src/**/*.ts"]  // <--- Adapt to your project needs
 const pathToTypescriptConfigFile = 'tsconfig.json'            // <--- Adapt to your project needs
 
 const resolvedPathsToTypescriptFiles = pathsToTypescriptFilesUsedByTsConfig.map((globPath) => path.resolve(__dirname, globPath))
