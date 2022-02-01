@@ -3,17 +3,6 @@ function asaadsdsd(sdf) {
     console.log(sdf)
 }
 
-function asaadsdfghfghsd(sdf) {
-    console.log(sdf)
-}
-
-function asaadsdaghjghjjghsdasdssd(sdf) {
-    console.log(sdf)
-}
-
-function asaadsdfgasdasddasasdhfghsd(sdf) {
-    console.log(sdf)
-}
 
 function asaadsdaghjghjjghsfdfdgfgfgsdasdssd(sdf) {
     console.log(sdf)
