@@ -1,4 +1,4 @@
-name: Update betterer
+name: Betterer YourProjectName TS ChatOps
 
 on:
   issue_comment:
@@ -8,6 +8,7 @@ on:
 env:
   FORCE_COLOR: '1'
   GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+  PROJECT_NODE_VERSION: 16.3                         # <--- Adapt to your project needs
   BETTERER_CONFIG_FILE_PATH: ".betterer"             # <--- Adapt to your project needs
   BETTERER_RESULTS_FILE_PATH: ".betterer.results"    # <--- Adapt to your project needs
 
