@@ -1,8 +1,8 @@
 const path = require('path');
 import { typescript } from '@betterer/typescript'
 
-const pathToTypescriptFiles = 'src/**/*.ts'
-const pathToTypescriptConfigFile = 'tsconfig.json'
+const pathToTypescriptFiles = 'src/**/*.ts'         // <--- Adapt to your project needs
+const pathToTypescriptConfigFile = 'tsconfig.json'  // <--- Adapt to your project needs
 
 const resolvedPathToTypescriptFiles = path.resolve(__dirname, pathToTypescriptFiles)
 const resolvedPathToTypescriptConfigFile = path.resolve(__dirname, pathToTypescriptConfigFile)
@@ -13,9 +13,6 @@ export default {
     'stricter typescript compilation': () =>
         typescript(resolvedPathToTypescriptConfigFile, {
             strict: true,
-            noImplicitAny: true,
-            strictNullChecks: true,
-            strictFunctionTypes: true,
             strictPropertyInitialization: false,
             useDefineForClassFields: false,
         }).include(resolvedPathToTypescriptFiles),
