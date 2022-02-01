@@ -17,8 +17,6 @@ env:
 jobs:
   code-quality-check:
     runs-on: ubuntu-18.04  # <--- Adapt to your project needs
-    env:
-      CHATOPS_PROJECT_RESULTS_FILE_UPDATE_COMMAND: ${{ format('{0}:{1}.{2}', env.PROJECT_NAME, env.CHATOPS_RESULTS_FILE_UPDATE_COMMAND) }}"
     steps:
       - uses: actions/checkout@v2
       - name: Use Node.js
@@ -30,7 +28,7 @@ jobs:
       - name: Incremental code quality check
         uses: Evilweed/betterer-github-action@v1.0.0
         with:
-          chatops_results_file_update_command: ${{ env.CHATOPS_RESULTS_FILE_UPDATE_COMMAND }}
+          chatops_results_file_update_command: ${{ format('{0}:{1}.{2}', env.PROJECT_NAME, env.CHATOPS_RESULTS_FILE_UPDATE_COMMAND) }}
           betterer_results_file_name: ${{ env.BETTERER_RESULTS_FILE_NAME }}
           args: --config "/github/workspace/${{ env.BETTERER_CONFIG_FILE_PATH }}" --results "/github/workspace/${{ env.BETTERER_RESULTS_FILE_PATH }}" --reporter /build/custom-simple-reporter.js
 
