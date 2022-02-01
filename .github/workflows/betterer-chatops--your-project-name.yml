@@ -6,16 +6,16 @@ on:
       - created
 
 env:
-  PROJECT_NODE_VERSION: 16.3                          # <--- Adapt to your project needs
-  BETTERER_CONFIG_FILE_PATH: ".betterer"              # <--- Adapt to your project needs
-  BETTERER_RESULTS_FILE_PATH: ".betterer.results"     # <--- Adapt to your project needs
-  BETTER_CUSTOM_REPORTER_PATH: "./custom-betterer-reporter.js"    # <--- Adapt to your project needs
+  PROJECT_NODE_VERSION: 16.3                                    # <--- Adapt to your project needs
+  BETTERER_CONFIG_FILE_PATH: ".betterer"                        # <--- Adapt to your project needs
+  BETTERER_RESULTS_FILE_PATH: ".betterer.results"               # <--- Adapt to your project needs
+  BETTER_CUSTOM_REPORTER_PATH: "./custom-betterer-reporter.js"  # <--- Adapt to your project needs
   FORCE_COLOR: '1'
   GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
 jobs:
   update-betterer-aa:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-latest  # <--- Adapt to your project needs
     if: ${{ github.event.comment.body == 'platform:betterer:update' }}  # <--- Adapt to your project needs
     steps:
       - name: Add reaction to comment
