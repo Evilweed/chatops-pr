@@ -26,22 +26,24 @@ This repository is a Demo that shows how to use Betterer Github Action in a way 
 
 # How to set it up in your project
 1. Create new branch in repository of your project
-2. Copy **`.betterer.results`** file to repository/directory of your project
-3. Copy **`.betterer.ts`** file to repository of your project
-4. Search for **`<--- Adapt to your project needs`** text in it and update those places to your project needs
-5. Copy **`.github/workflows/betterer--your-project-name.yml`** file to repository/directory of your project
-6. Rename file name to use your project name in it
-7. Search for **`<--- Adapt to your project needs`** text in it and update those places to your project needs
-8. Copy **`.github/workflows/betterer-chatops--your-project-name.yml`** file to repository/directory of your project
-9. Rename file name to use your project name in it
-10. Search for **`<--- Adapt to your project needs`** text in it and update those places to your project needs
-11. Copy **`.betterer.results`** file to repository/directory of your project
-12. Merge those changes to master/main branch (only then all Github Actions will work)
-13. Create new branch in repository of your project
-14. Edit any TS or TSX file
-15. Commit this change
-16. Create PR out of this branch
-17. Wait for Betterer CI job to fail
-18. Add comment into this PR with text **`yourprojectname:betterer:update`** (in this demo the command is **`platform:betterer:update`**)
-19. Wait for BOT message in PR that shows that **`.betterer.results`** file was updated
-20. Thats it :)
+2. Run `yarn add @betterer/cli@5.1.5 --dev` in your project directory
+3. Run `yarn add @betterer/typescript@5.1.5 --dev` in your project directory
+4. Copy **`.betterer.results`** file to repository/directory of your project
+5. Copy **`.betterer.ts`** file to repository of your project
+6. Search for **`<--- Adapt to your project needs`** text in it and update those places to your project needs
+7. Copy **`.github/workflows/betterer--your-project-name.yml`** file to repository/directory of your project
+8. Rename file name to use your project name in it
+9. Search for **`<--- Adapt to your project needs`** text in it and update those places to your project needs
+10. Copy **`.github/workflows/betterer-chatops--your-project-name.yml`** file to repository/directory of your project
+11. Rename file name to use your project name in it
+12. Search for **`<--- Adapt to your project needs`** text in it and update those places to your project needs
+13. Copy **`.betterer.results`** file to repository/directory of your project
+14. Merge those changes to master/main branch (only then all Github Actions will work)
+15. Create new branch in repository of your project
+16. Edit any TS or TSX file
+17. Commit this change
+18. Create PR out of this branch
+19. Wait for Betterer CI job to fail
+20. Add comment into this PR with text **`yourprojectname:betterer:update`** (in this demo the command is **`platform:betterer:update`**)
+21. Wait for BOT message in PR that shows that **`.betterer.results`** file was updated
+22. Thats it :)
