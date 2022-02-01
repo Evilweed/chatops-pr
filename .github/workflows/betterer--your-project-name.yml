@@ -13,11 +13,12 @@ env:
   BETTERER_RESULTS_FILE_NAME: ".betterer.results"                         # <--- Adapt to your project needs
   BETTERER_RESULTS_FILE_PATH: ".betterer.results"                         # <--- Adapt to your project needs
   FORCE_COLOR: '1'
-  CHATOPS_PROJECT_RESULTS_FILE_UPDATE_COMMAND: ${{ format('{0}:{1}.{2}', env.PROJECT_NAME, env.CHATOPS_RESULTS_FILE_UPDATE_COMMAND) }}"
 
 jobs:
   code-quality-check:
     runs-on: ubuntu-18.04  # <--- Adapt to your project needs
+    env:
+      CHATOPS_PROJECT_RESULTS_FILE_UPDATE_COMMAND: ${{ format('{0}:{1}.{2}', env.PROJECT_NAME, env.CHATOPS_RESULTS_FILE_UPDATE_COMMAND) }}"
     steps:
       - uses: actions/checkout@v2
       - name: Use Node.js
