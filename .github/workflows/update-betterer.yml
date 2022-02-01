@@ -8,13 +8,13 @@ on:
 env:
   FORCE_COLOR: '1'
   GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-  BETTERER_CONFIG_FILE_PATH: ".betterer"
-  BETTERER_RESULTS_FILE_PATH: ".betterer.results"
+  BETTERER_CONFIG_FILE_PATH: ".betterer"             # <--- Adapt to your project needs
+  BETTERER_RESULTS_FILE_PATH: ".betterer.results"    # <--- Adapt to your project needs
 
 jobs:
   update-betterer-aa:
     runs-on: ubuntu-latest
-    if: ${{ github.event.comment.body == "betterer:update" }}
+    if: ${{ github.event.comment.body == 'betterer:update' }}
     steps:
       - name: Add reaction to comment
         uses: actions/github-script@v4

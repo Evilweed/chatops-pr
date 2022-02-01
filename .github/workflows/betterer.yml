@@ -1,13 +1,16 @@
 name: Code Quality Betterer
 
-on: [push]
+on:
+  push:
+    paths:
+      - 'src/**/*.tsx?' # <--- Adapt to your project needs
 
 env:
   FORCE_COLOR: '1'
-  CHATOPS_RESULTS_FILE_UPDATE_COMMAND: "betterer:update"
-  BETTERER_CONFIG_FILE_PATH: ".betterer"
-  BETTERER_RESULTS_FILE_NAME: ".betterer.results"
-  BETTERER_RESULTS_FILE_PATH: ".betterer.results"
+  CHATOPS_RESULTS_FILE_UPDATE_COMMAND: "betterer:update"  # <--- Adapt to your project needs
+  BETTERER_CONFIG_FILE_PATH: ".betterer"                  # <--- Adapt to your project needs
+  BETTERER_RESULTS_FILE_NAME: ".betterer.results"         # <--- Adapt to your project needs
+  BETTERER_RESULTS_FILE_PATH: ".betterer.results"         # <--- Adapt to your project needs
 
 jobs:
   code-quality-check:
