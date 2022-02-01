@@ -26,8 +26,8 @@ This repository is a Demo that shows how to use Betterer Github Action in a way 
 
 # How to set it up in your project
 1. Create new branch in repository of your project
-2. Run `yarn add @betterer/cli@5.1.5 --dev` in your project directory
-3. Run `yarn add @betterer/typescript@5.1.5 --dev` in your project directory
+2. Run **`yarn add @betterer/cli@5.1.5 --dev`** in your project directory
+3. Run **`yarn add @betterer/typescript@5.1.5 --dev`** in your project directory
 4. Copy **`.betterer.results`** file to repository/directory of your project
 5. Copy **`.betterer.ts`** file to repository of your project
 6. Search for **`<--- Adapt to your project needs`** text in it and update those places to your project needs
