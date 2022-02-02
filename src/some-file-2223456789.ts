@@ -52,15 +52,3 @@ function asaadsdaafgteghjghjjghsdasdssd(sdf) {
 function asaadhfghwekjkhjsdsd(sdf) {
     console.log(sdf)
 }
-
-function asaadsdfghewewedajlkjkjklsdasdssd(sdf) {
-    console.log(sdf)
-}
-
-function asaadssdfgddfgdfasdasasddssd(sdf) {
-    console.log(sdf)
-}
-
-function asaadsdfghfgdgfdfsghsd(sdf) {
-    console.log(sdf)
-}
