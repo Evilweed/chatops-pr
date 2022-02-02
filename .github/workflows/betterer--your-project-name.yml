@@ -13,7 +13,6 @@ env:
   BETTERER_RESULTS_FILE_NAME: ".betterer.results"            # <--- Adapt to your project needs
   BETTERER_RESULTS_FILE_PATH: ".betterer.results"            # <--- Adapt to your project needs
   FORCE_COLOR: '1'
-  PULL_REQUEST_NUMBER: ${{ github.event.number }}
   GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
 jobs:
@@ -22,12 +21,15 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - run: touch "pr-request-msg.txt"
+      - name: Get Pull Request Number
+        id: pr
+        run: echo "::set-output name=pull_request_number::$(gh pr view --json number -q .number || echo "")"
       - run: |
           token=${{ secrets.GITHUB_TOKEN }}
           base64AuthInfo="$token | base64 -e"
           
           response=$(curl --request GET \
-          --url https://api.github.com/repos/${{ github.repository }}/pulls/${{ env.PULL_REQUEST_NUMBER }}/reviews \
+          --url https://api.github.com/repos/${{ github.repository }}/pulls/${{ steps.pr.outputs.pull_request_number }}/reviews \
           --header "Authorization: $base64AuthInfo" \
           --header "Content-Type: application/json")
 
