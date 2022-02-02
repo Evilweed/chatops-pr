@@ -39,7 +39,8 @@ jobs:
           echo $response
           echo "✅✅✅✅✅✅✅✅✅✅✅✅✅"
           echo $response | jq '.[] | select((.state=="CHANGES_REQUESTED") and (.user.login=="github-actions[bot]"))' >> already-requested-changes-by-bot.txt
-          if [[ "$(cat already-requested-changes-by-bot.txt)" == "" ]] then
+          if [[ "$(cat already-requested-changes-by-bot.txt)" == "" ]]
+          then
             echo "⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️"
             echo "⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️"
             echo "⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️"
@@ -48,7 +49,8 @@ jobs:
           fi
           echo "⛔️⛔️⛔️⛔️⛔️⛔️⛔️⛔️⛔️⛔️⛔️⛔️"
           echo $response | jq '.[] | select((.state=="CHANGES_REQUESTED") and (.user.login=="aaagithub-actions[bot]"))' >> already-requested-changes-by-bot.txt
-          if [[ "$(cat already-requested-changes-by-bot.txt)" == "" ]] then
+          if [[ "$(cat already-requested-changes-by-bot.txt)" == "" ]]
+          then
             echo "⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️"
             echo "⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️"
             echo "⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️"
