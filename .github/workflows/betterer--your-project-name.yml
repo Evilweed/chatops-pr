@@ -40,9 +40,9 @@ jobs:
           # echo $response
           
           echo "⛔️ $(cat already-requested-changes-by-bot.txt)"
-          
+          last_review=$(cat already-requested-changes-by-bot.txt)
           response=$(curl --request PUT \
-          --url "https://api.github.com/repos/${{ github.repository }}/pulls/${{ steps.pr.outputs.pull_request_number }}/reviews/$(cat already-requested-changes-by-bot.txt)" \
+          --url "https://api.github.com/repos/${{ github.repository }}/pulls/${{ steps.pr.outputs.pull_request_number }}/reviews/$last_review" \
           --header "Authorization: $base64AuthInfo" \
           --header "Content-Type: application/json" \
           --header "Accept: application/vnd.github.v3+json" \
