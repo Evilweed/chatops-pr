@@ -33,6 +33,7 @@ jobs:
           --header "Authorization: $base64AuthInfo" \
           --header "Content-Type: application/json")
 
+          echo "✅✅✅✅✅✅✅✅✅✅✅✅✅"
           echo $response | jq ".[]"
       - run: |
           echo '${{ toJson(github) }}'
