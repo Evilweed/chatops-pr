@@ -39,7 +39,7 @@ jobs:
           --data '{ per_page: 100 }')
 
           echo $response | jq 'last(.[] | select((.state=="CHANGES_REQUESTED") and (.user.login=="github-actions[bot]"))) | .id' >> already-requested-changes-by-bot.txt
-          echo $response | jq 'last(.[] | select((.state=="CHANGES_REQUESTED") and (.user.login=="github-actions[bot]")))' | | echo $(</dev/stdin)
+          echo $response | jq 'last(.[] | select((.state=="CHANGES_REQUESTED") and (.user.login=="github-actions[bot]")))' | echo $(</dev/stdin)
 
           # echo $response
 
