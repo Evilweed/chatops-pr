@@ -20,7 +20,9 @@ jobs:
     runs-on: ubuntu-18.04  # <--- Adapt to your project needs
     steps:
       - uses: actions/checkout@v2
-      - run: touch "pr-request-msg.txt"
+      - run: |
+          touch "pr-request-msg.txt"
+          touch "already-requested-changes-by-bot.txt"
       - name: Get Pull Request Number
         id: pr
         run: echo "::set-output name=pull_request_number::$(gh pr view --json number -q .number || echo "")"
@@ -36,10 +38,23 @@ jobs:
           echo "✅✅✅✅✅✅✅✅✅✅✅✅✅"
           echo $response
           echo "✅✅✅✅✅✅✅✅✅✅✅✅✅"
-          echo $response | jq '.[] | select((.state=="CHANGES_REQUESTED") and (.user.login=="github-actions[bot]"))'
-          echo "✅✅✅✅✅✅✅⛔️⛔️⛔️⛔️⛔️"
-          echo "$(cat pr-request-msg.txt)" | jq '.[] | select((.state=="CHANGES_REQUESTED") and (.user.login=="github-actions[bot]"))'
-          echo "✅✅✅✅✅✅✅⛔️⛔️⛔️⛔️⛔️"
+          echo $response | jq '.[] | select((.state=="CHANGES_REQUESTED") and (.user.login=="github-actions[bot]"))' >> already-requested-changes-by-bot.txt
+          if [[ "$(cat already-requested-changes-by-bot.txt)" == "" ]] then
+            echo "⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️"
+            echo "⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️"
+            echo "⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️"
+            echo "⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️"
+            echo "⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️"
+          fi
+          echo "⛔️⛔️⛔️⛔️⛔️⛔️⛔️⛔️⛔️⛔️⛔️⛔️"
+          echo $response | jq '.[] | select((.state=="CHANGES_REQUESTED") and (.user.login=="aaagithub-actions[bot]"))' >> already-requested-changes-by-bot.txt
+          if [[ "$(cat already-requested-changes-by-bot.txt)" == "" ]] then
+            echo "⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️"
+            echo "⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️"
+            echo "⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️"
+            echo "⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️"
+            echo "⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️"
+          fi
       - run: |
           echo '${{ toJson(github) }}'
           echo "### 🤖 BOT: I\'ve detected TypeScript quality changes!" >> pr-request-msg.txt
