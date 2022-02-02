@@ -22,6 +22,13 @@ function asaadhkjkhjasasdadsdasssasdasdsdsd(sdf: any) {
 function asaadsdajlkjkjklsdasdssd(sdf) {
     console.log(sdf)
 }
+function asaadhkjkasddashjasasdadsdasssasdasdsdsd(sdf: any) {
+    console.log(sdf)
+}
+
+function asaadsdajlkjsdfsdffsdkjklsdasdssd(sdf) {
+    console.log(sdf)
+}
 
 function asaadhasdasdsaadskjkhjsdsd(sdf) {
     console.log(sdf)
