@@ -21,11 +21,12 @@ jobs:
     runs-on: ubuntu-18.04  # <--- Adapt to your project needs
     steps:
       - uses: actions/checkout@v2
+      - run: touch "pr-request-msg.txt"
       - run: |
-          touch "pr-request-msg.txt"
           echo "🤖 BOT: I've detected TypeScript changes not stored in **${{ env.BETTERER_RESULTS_FILE_NAME }}** (project: **${{ env.PROJECT_NAME }}**)\n" >> pr-request-msg.txt
           echo "Here are instructions on how to proceed: https://github.com/${{ github.repository }}/runs/${{ github.job }}?check_suite_focus=true" >> pr-request-msg.txt
-          gh pr review $PULL_REQUEST_NUMBER --request-changes --body $(cat pr-request-msg.txt)
+          echo "📝 Sending pr review"
+          gh pr review $PULL_REQUEST_NUMBER --request-changes --body "$(cat pr-request-msg.txt)"
       - name: Use Node.js
         uses: actions/setup-node@v1
         with:
