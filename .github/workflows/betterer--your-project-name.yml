@@ -23,14 +23,14 @@ jobs:
       - uses: actions/checkout@v2
       - run: touch "pr-request-msg.txt"
       - run: |
-          ### 🤖 BOT: I've detected TypeScript quality changes!
+          echo "### 🤖 BOT: I've detected TypeScript quality changes!" >> pr-request-msg.txt
           echo "CI job that compiles this project with "strict'er" compilation detected changes. You have either fixed some TypeScript issues, or added new. You need to review those changes and either fix new TS issues, or accept new changes as "ok" which will store this state in file in repo." >> pr-request-msg.txt
           echo " " >> pr-request-msg.txt
           echo "| Project |" >> pr-request-msg.txt
           echo "| ---- |" >> pr-request-msg.txt
           echo "| ${{ env.PROJECT_NAME }} |" >> pr-request-msg.txt
           echo " " >> pr-request-msg.txt
-          echo "| Action  | When to do it  | What, or details |" >> pr-request-msg.txt
+          echo "| Action  | When to do it | What, or details |" >> pr-request-msg.txt
           echo "| ---- | ----- | ----- |" >> pr-request-msg.txt
           echo "| 1. See detailed report | Now | Open this [🔗 link to ci job](https://github.com/${{ github.repository }}/runs/${{ env.GITHUB_RUN_ID }}?check_suite_focus=true) and check if there are some new TS errors you can fix. You can decide not to fix those issues - but keep in mind that we are trying to improve TS practices. |" >> pr-request-msg.txt
           echo "| 2. Fix detected issues | The sooner the better :) | Use information from previous step to find TS errors and commit fixes. |" >> pr-request-msg.txt
