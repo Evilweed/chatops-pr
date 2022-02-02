@@ -54,7 +54,7 @@ jobs:
           --header "Accept: application/vnd.github.v3+json" \
           --data '{ "body": "✅✅✅✅✅✅✅✅✅✅✅✅✅✅✅ asdasdassad", event: "APPROVE" }')
 
-
+          echo "$response"
 
 
 
