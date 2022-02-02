@@ -62,15 +62,51 @@ function createReporter() {
         },
         suiteEnd(suiteSummary) {
             // console.log(JSON.stringify(suiteSummary, null, 2))
+            // for (const [key, value] of Object.entries(suiteSummary)) {
+            //     console.log(`${key}: ${JSON.stringify(value, null, 2)}`);
+            //     try {
+            //         // for (const [key2, value2] of Object.entries(value)) {
+            //         //     console.log(`    ${key2}: ${JSON.stringify(value, null, 2)}`);
+            //         //     // try {
+            //         //     //     for (const [key3, value3] of Object.entries(value2)) {
+            //         //     //         console.log(`         ${key3}: ${value3}`);
+            //         //     //     }
+            //         //     // } catch (e) {}
+            //         // }
+            //     } catch (e) {}
+            // }
             let currentProblemTestName
+            let isOnlyBetter
+            let deltaDiff
             const changesSummaryList = {
                 fixed: [],
                 new: [],
                 existing: [],
             }
+
             if (suiteSummary) {
                 if (suiteSummary.runSummaries && suiteSummary.runSummaries.length > 0) {
                     suiteSummary.runSummaries.forEach((run) => {
+                        //     "isBetter": false,
+                        //     "isFailed": false,
+                        //     "isNew": false,
+                        //     "isSame": false,
+                        //     "isSkipped": false,
+                        //     "isUpdated": false,
+                        //     "isWorse": true
+                        try {
+                            deltaDiff = run.delta.diff
+                        } catch (e) {}
+
+                        const shouldReportItIsOnlyBetter =
+                            run.isBetter &&
+                            !run.isWorse &&
+                            !run.isNew
+
+                        if (shouldReportItIsOnlyBetter) {
+                            isOnlyBetter = true
+                        }
+
                         if (run.diff) {
                             const {diff} = run.diff
                             for (const [filePath, changeSummary] of Object.entries(diff)) {
@@ -94,10 +130,16 @@ function createReporter() {
                     })
                 }
             }
-            const hasFixed = changesSummaryList.fixed.length
-            const hasNew = changesSummaryList.new.length
+            let fixedIssuesCount = changesSummaryList.fixed.length || 0
+            const newIssuesCount = changesSummaryList.new.length || 0
 
-            const fixedIssuesCount = changesSummaryList.fixed.length || '0'
+            if (isOnlyBetter && deltaDiff < 0) {
+                fixedIssuesCount = Math.abs(deltaDiff)
+            }
+
+            const hasFixed = fixedIssuesCount
+            const hasNew = newIssuesCount
+
             log(" ")
             log(bright(`✅ Fixed issues ( ${fixedIssuesCount} )`))
             log("")
@@ -113,7 +155,6 @@ function createReporter() {
 
             currentProblemTestName = null
 
-            const newIssuesCount = changesSummaryList.new.length || '0'
             log(bright(`🔥 New issues ( ${newIssuesCount} )`))
             log("")
 
@@ -130,10 +171,10 @@ function createReporter() {
             if( hasFixed || hasNew )
                 log(bright(`RESULTS`))
 
-            hasFixed && log(good(brightGreen(`✅ You have fixed \`${fixedIssuesCount}\` issues!`)))
+            log(good(brightGreen(`✅ You have fixed \`${fixedIssuesCount}\` issues!`)))
+            log(bad(brightRed(`🔥 You have added \`${newIssuesCount}\` issues!\n\n`)))
 
             if (hasNew) {
-                log(bad(brightRed(`🔥 You have added \`${newIssuesCount}\` issues!\n\n`)))
                 log(bright(`READ THIS CAREFULLY `))
                 log(red(
                     `We are trying to migrate to strict TypeScript to dramatically reduce amount of issues we ship with our code. To achieve this goal we need to keep our better every day. Please take this into account and try to fix the TypeScript issues you have added now.`
@@ -144,6 +185,15 @@ function createReporter() {
                 log(brightRed(`\nCase: You don't have time to fix issues`))
                 log(red(
                     `If however you do not have time right now to fix those issues, you can regenerate "betterer.results" file to include your newly introduced errors, and make Betterer check green.`
+                ))
+                log(red(
+                    `To do that, add "betterer:update" comment in your Pull Request, and CI bot will update the results file, commit it to your PR, and notify you. \n`
+                ))
+            }
+            if (hasFixed && !hasNew) {
+                log(brightRed(`\nCase: Please update the "betterer.results" file to save state of good changes`))
+                log(red(
+                    `Every time there are good or bad changes detected, it is necessary to update "betterer.results" file so that this new state is .`
                 ))
                 log(red(
                     `To do that, add "betterer:update" comment in your Pull Request, and CI bot will update the results file, commit it to your PR, and notify you. \n`
