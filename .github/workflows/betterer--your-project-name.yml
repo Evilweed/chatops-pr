@@ -26,7 +26,8 @@ jobs:
       - name: Get Pull Request Number
         id: pr
         run: echo "::set-output name=pull_request_number::$(gh pr view --json number -q .number || echo "")"
-      - id: cos
+      - name: Get last review
+        id: last_review
         run: |
           token=${{ secrets.GITHUB_TOKEN }}
           base64AuthInfo="$token | base64 -e"
@@ -36,7 +37,7 @@ jobs:
           --header "Authorization: $base64AuthInfo" \
           --header "Content-Type: application/json")
 
-          echo $response | jq 'last(.[] | select((.state=="CHANGES_REQUESTED") and (.user.login=="github-actions[bot]")))' >> already-requested-changes-by-bot.txt
+          echo $response | jq 'last(.[] | select((.state=="CHANGES_REQUESTED") and (.user.login=="github-actions[bot]"))) | .id' >> already-requested-changes-by-bot.txt
           
           # echo $response
           
@@ -44,8 +45,10 @@ jobs:
           export LAST_REVIEW_ID=$(cat already-requested-changes-by-bot.txt)
           echo "❤️ $LAST_REVIEW_ID"
           echo "::set-output name=last_review_id::$(cat already-requested-changes-by-bot.txt)"
+      - id: coscos
+        run: |
           response=$(curl --request PUT \
-          --url https://api.github.com/repos/${{ github.repository }}/pulls/${{ steps.pr.outputs.pull_request_number }}/reviews/${{ steps.cos.outputs.last_review_id }} \
+          --url https://api.github.com/repos/${{ github.repository }}/pulls/${{ steps.pr.outputs.pull_request_number }}/reviews/${{ steps.cos.outputs.last_review.last_review_id }} \
           --header "Authorization: $base64AuthInfo" \
           --header "Content-Type: application/json" \
           --header "Accept: application/vnd.github.v3+json" \
