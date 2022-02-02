@@ -20,7 +20,7 @@ function asaadsdajasdaasadjhgjhasdsdfdsfsdffsdfssasadasddlkjkjklsdasdssd(sdf) {
     console.log(sdf)
 }
 
-function asaadsdajsdfdsfasadssdffsdfssasadasddlkjkjklsdasdssd(sdf) {
+function asaadsdajsdfadsfasadssdffsdfssasadasddlkjkjklsdasdssd(sdf) {
     console.log(sdf)
 }
 
