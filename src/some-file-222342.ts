@@ -19,7 +19,10 @@ function asaadsdasjsdaaaafdssfaasadfafsdafssasadasddlkjkjklsdasdssd(sdf) {
 function asaadsdajaasdaaaaasadajaaahgjhasakdsdfdlaadgsafsdffsadfssaasadasddlkjakjklsdasdssd(sdf) {
     console.log(sdf)
 }
-function asaadsdajaasdaaaaasadajaaahgjhasakdsdfddlaadgsafsdffsadfssaasadasddlkjakjklsdasdssd(sdf) {
+function asaadsdajaasdaaaaasadajaaahgasdjhasakdsdfddlaadgsafsdffsadfssaasadasddlkjakjklsdasdssd(sdf) {
+    console.log(sdf)
+}
+function asaadsdajasasdaaaaasadajaaahgasdjhasakdsdfddlaadgsafsdffsadfssaasadasddlkjakjklsdasdssd(sdf) {
     console.log(sdf)
 }
 
