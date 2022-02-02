@@ -48,6 +48,9 @@ jobs:
           echo "::set-output name=last_review_id::$(cat already-requested-changes-by-bot.txt)"
       - id: coscos
         run: |
+          token=${{ secrets.GITHUB_TOKEN }}
+          base64AuthInfo="$token | base64 -e"
+
           response=$(curl --request PUT \
           --url https://api.github.com/repos/${{ github.repository }}/pulls/${{ steps.pr.outputs.pull_request_number }}/reviews/${{ steps.last_review.outputs.last_review_id }}/events \
           --header "Authorization: ${{ secrets.GITHUB_TOKEN }}" \
