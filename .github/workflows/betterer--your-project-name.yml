@@ -37,15 +37,15 @@ jobs:
 
           echo $response | jq 'last(.[] | select((.state=="CHANGES_REQUESTED") and (.user.login=="github-actions[bot]")))' >> already-requested-changes-by-bot.txt
           
-          echo $response
+          # echo $response
           
           echo "⛔️ $(cat already-requested-changes-by-bot.txt)"
           
           response=$(curl --request PUT \
           --url "https://api.github.com/repos/${{ github.repository }}/pulls/${{ steps.pr.outputs.pull_request_number }}/reviews/$(cat already-requested-changes-by-bot.txt)" \
           --header "Authorization: $base64AuthInfo" \
-          --header "Content-Type: application/json") \
-          --data '{"body":"✅✅✅✅✅✅✅✅✅✅✅✅✅✅✅"}'
+          --header "Content-Type: application/json" \
+          --data '{"body":"✅✅✅✅✅✅✅✅✅✅✅✅✅✅✅"})'
           
           
           
