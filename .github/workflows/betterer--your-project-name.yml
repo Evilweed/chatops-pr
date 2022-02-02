@@ -37,6 +37,9 @@ jobs:
           echo $response
           echo "✅✅✅✅✅✅✅✅✅✅✅✅✅"
           echo $response | jq ".[] | select((.state=="CHANGES_REQUESTED") and (.user.login=="github-actions[bot]"))"
+          echo "✅✅✅✅✅✅✅⛔️⛔️⛔️⛔️⛔️"
+          echo "$(cat pr-request-msg.txt)" | jq '.[] | select((.state=="CHANGES_REQUESTED") and (.user.login=="github-actions[bot]"))"
+          echo "✅✅✅✅✅✅✅⛔️⛔️⛔️⛔️⛔️"
       - run: |
           echo '${{ toJson(github) }}'
           echo "### 🤖 BOT: I\'ve detected TypeScript quality changes!" >> pr-request-msg.txt
