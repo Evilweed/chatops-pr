@@ -19,13 +19,6 @@ function asaadhkjkhjasasdadsdasssasdasdsdsd(sdf: any) {
     console.log(sdf)
 }
 
-function asaadsdajlkjkjklsdasdssd(sdf) {
-    console.log(sdf)
-}
-function asaadhkjkasddashjasasdadsdasssasdasdsdsd(sdf: any) {
-    console.log(sdf)
-}
-
 function asaadsdajlkjsdfsdffsdkjklsdasdssd(sdf) {
     console.log(sdf)
 }

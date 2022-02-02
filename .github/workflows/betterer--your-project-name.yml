@@ -14,12 +14,14 @@ env:
   BETTERER_RESULTS_FILE_PATH: ".betterer.results"            # <--- Adapt to your project needs
   FORCE_COLOR: '1'
   PULL_REQUEST_NUMBER: ${{ github.event.number }}
+  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
 jobs:
   code-quality-check:
     runs-on: ubuntu-18.04  # <--- Adapt to your project needs
     steps:
-      - run: gh auth login && gh pr review $PULL_REQUEST_NUMBER --request-changes --body "Please update ${{ env.BETTERER_RESULTS_FILE_NAME }}"
+      - run: gh auth login --with-token $GITHUB_TOKEN
+      - run: gh pr review $PULL_REQUEST_NUMBER --request-changes --body "Please update ${{ env.BETTERER_RESULTS_FILE_NAME }}"
       - uses: actions/checkout@v2
       - name: Use Node.js
         uses: actions/setup-node@v1
