@@ -48,7 +48,3 @@ function asaadsdfghfgdfsghsd(sdf) {
 function asaadsdaafgteghjghjjghsdasdssd(sdf) {
     console.log(sdf)
 }
-
-function asaadhfghwekjkhjsdsd(sdf) {
-    console.log(sdf)
-}
