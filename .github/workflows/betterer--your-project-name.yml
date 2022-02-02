@@ -22,9 +22,9 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - run: |
-          pr_request_message = "🤖 BOT: I've detected TypeScript changes not stored in **${{ env.BETTERER_RESULTS_FILE_NAME }}** (project: **${{ env.PROJECT_NAME }}**)\n"
-          pr_request_message = "$pr_request_message Here are instructions on how to proceed: https://github.com/${{ github.repository }}/runs/${{ github.job }}?check_suite_focus=true"
-          gh pr review $PULL_REQUEST_NUMBER --request-changes --body $pr_request_message
+          export PR_REQUEST_MSG = "🤖 BOT: I've detected TypeScript changes not stored in **${{ env.BETTERER_RESULTS_FILE_NAME }}** (project: **${{ env.PROJECT_NAME }}**)\n"
+          export PR_REQUEST_MSG = "$PR_REQUEST_MSG Here are instructions on how to proceed: https://github.com/${{ github.repository }}/runs/${{ github.job }}?check_suite_focus=true"
+          gh pr review $PULL_REQUEST_NUMBER --request-changes --body $PR_REQUEST_MSG
       - name: Use Node.js
         uses: actions/setup-node@v1
         with:
