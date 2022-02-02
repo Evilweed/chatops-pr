@@ -35,7 +35,21 @@ jobs:
           --header "Authorization: $base64AuthInfo" \
           --header "Content-Type: application/json")
 
-          echo $response | jq '.[] | select((.state=="CHANGES_REQUESTED") and (.user.login=="github-actions[bot]"))' >> already-requested-changes-by-bot.txt
+          echo $response | jq 'last(.[] | select((.state=="CHANGES_REQUESTED") and (.user.login=="github-actions[bot]")))' >> already-requested-changes-by-bot.txt
+          
+          echo $response
+          
+          response=$(curl --request PUT \
+          --url https://api.github.com/repos/${{ github.repository }}/pulls/${{ steps.pr.outputs.pull_request_number }}/reviews/$(cat already-requested-changes-by-bot.txt) \
+          --header "Authorization: $base64AuthInfo" \
+          --header "Content-Type: application/json") \
+          -d '{"body":"✅✅✅✅✅✅✅✅✅✅✅✅✅✅✅"}'
+          
+          
+          
+          
+          
+          
           if [[ "$(cat already-requested-changes-by-bot.txt)" == "" ]]
           then
             echo "### 🤖 BOT: I\'ve detected TypeScript quality changes!" >> pr-request-msg.txt
