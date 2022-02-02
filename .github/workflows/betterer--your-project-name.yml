@@ -63,7 +63,7 @@ jobs:
           --header "Authorization: $base64AuthInfo" \
           --header "Content-Type: application/json" \
           --header "Accept: application/vnd.github.v3+json" \
-          --data '{ "body": "✅✅✅✅✅✅✅✅✅✅✅✅✅✅✅ asdasdassad", event: "APPROVE" }')
+          --data '{ "body": "✅✅✅✅✅✅✅✅✅✅✅✅✅✅✅ asdasdassad", "event": "APPROVE" }')
 
           echo "$response"
 
