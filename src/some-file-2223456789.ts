@@ -34,7 +34,7 @@ function asaadhkjkhjsdsd(sdf) {
     console.log(sdf)
 }
 
-function asaadsdajlkjkjklsdasdssd(sdf) {
+function asaadsdajlkjkjklsdaasdssd(sdf) {
     console.log(sdf)
 }
 function asaadsddfgdfasdasasaddssd(sdf) {
