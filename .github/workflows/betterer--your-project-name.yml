@@ -27,13 +27,13 @@ jobs:
           base64AuthInfo="$token | base64 -e"
           
           response=$(curl --request GET \
-          --url https://api.github.com/repos/${{ github.repository }}/pulls/${{ github.event.pull_request.number }}/reviews \
+          --url https://api.github.com/repos/${{ github.repository }}/pulls/${{ env.PULL_REQUEST_NUMBER }}/reviews \
           --header "Authorization: $base64AuthInfo" \
           --header "Content-Type: application/json")
 
           echo $response | jq ".[]"
       - run: |
-          echo '${{ toJson(github.event) }}'
+          echo '${{ toJson(github) }}'
           echo "### 🤖 BOT: I\'ve detected TypeScript quality changes!" >> pr-request-msg.txt
           echo "CI job that compiles this project with "strict\'er" compilation detected changes. You have either fixed some TypeScript issues, or added new. You need to review those changes and either fix new TS issues, or accept new changes as "ok" which will store this state in file in repo." >> pr-request-msg.txt
           echo " " >> pr-request-msg.txt
