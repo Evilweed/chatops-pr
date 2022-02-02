@@ -34,7 +34,7 @@ jobs:
           --header "Content-Type: application/json")
 
           echo "✅✅✅✅✅✅✅✅✅✅✅✅✅"
-          echo $response | jq ".[]"
+          echo $response | jq ".[] | select((.state=="CHANGES_REQUESTED") and (.user.login=="github-actions[bot]"))"
       - run: |
           echo '${{ toJson(github) }}'
           echo "### 🤖 BOT: I\'ve detected TypeScript quality changes!" >> pr-request-msg.txt
