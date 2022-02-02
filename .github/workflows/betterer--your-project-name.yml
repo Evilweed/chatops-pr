@@ -22,7 +22,7 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - run: |
-          touch pr-request-msg.txt
+          touch "pr-request-msg.txt"
           echo "🤖 BOT: I've detected TypeScript changes not stored in **${{ env.BETTERER_RESULTS_FILE_NAME }}** (project: **${{ env.PROJECT_NAME }}**)\n" >> pr-request-msg.txt
           echo "Here are instructions on how to proceed: https://github.com/${{ github.repository }}/runs/${{ github.job }}?check_suite_focus=true" >> pr-request-msg.txt
           gh pr review $PULL_REQUEST_NUMBER --request-changes --body $(cat pr-request-msg.txt)
