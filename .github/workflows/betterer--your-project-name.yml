@@ -48,7 +48,7 @@ jobs:
       - id: coscos
         run: |
           response=$(curl --request PUT \
-          --url https://api.github.com/repos/${{ github.repository }}/pulls/${{ steps.pr.outputs.pull_request_number }}/reviews/${{ steps.cos.outputs.last_review.last_review_id }}/events \
+          --url https://api.github.com/repos/${{ github.repository }}/pulls/${{ steps.pr.outputs.pull_request_number }}/reviews/${{ steps.last_review.outputs.last_review_id }}/events \
           --header "Authorization: $base64AuthInfo" \
           --header "Content-Type: application/json" \
           --header "Accept: application/vnd.github.v3+json" \
