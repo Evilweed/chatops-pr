@@ -41,8 +41,10 @@ jobs:
           
           echo "⛔️ $(cat already-requested-changes-by-bot.txt)"
           export LAST_REVIEW_ID=$(cat already-requested-changes-by-bot.txt)
+          echo "❤️ $LAST_REVIEW_ID"
+          echo "::set-output name=last_review_id::$(cat already-requested-changes-by-bot.txt)"
           response=$(curl --request PUT \
-          --url "https://api.github.com/repos/${{ github.repository }}/pulls/${{ steps.pr.outputs.pull_request_number }}/reviews/${{ env.LAST_REVIEW_ID }}" \
+          --url "https://api.github.com/repos/${{ github.repository }}/pulls/${{ steps.pr.outputs.pull_request_number }}/reviews/$LAST_REVIEW_ID" \
           --header "Authorization: $base64AuthInfo" \
           --header "Content-Type: application/json" \
           --header "Accept: application/vnd.github.v3+json" \
