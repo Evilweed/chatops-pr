@@ -22,7 +22,7 @@ function asaadsdajaasdaaaaaaasadajaaahgjhasakdsdfdlaadgsafsdffsadfssaasadasddlkj
 function asaadsdajaasdaaaaasadajaaahgasdjhasakdsdfddlaadgsafsdffsadfssaasadasddlkjakjklsdasdssd(sdf) {
     console.log(sdf)
 }
-function asaadsdajasasdaaaaasadajaaahgasdjhasakdsdfddlaadgsafsdffsadfssaasadasddlkjakjklsdasdssd(sdf) {
+function asaadsdajasasdaaaaasadajaaahgaasdjhasakdsdfddlaadgsafsdffsadfssaasadasddlkjakjklsdasdssd(sdf) {
     console.log(sdf)
 }
 
