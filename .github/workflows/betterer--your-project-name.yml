@@ -20,8 +20,8 @@ jobs:
   code-quality-check:
     runs-on: ubuntu-18.04  # <--- Adapt to your project needs
     steps:
-      - run: gh pr review $PULL_REQUEST_NUMBER --request-changes --body "Please update ${{ env.BETTERER_RESULTS_FILE_NAME }}"
       - uses: actions/checkout@v2
+      - run: gh pr review $PULL_REQUEST_NUMBER --request-changes --body "Please update ${{ env.BETTERER_RESULTS_FILE_NAME }}"
       - name: Use Node.js
         uses: actions/setup-node@v1
         with:
