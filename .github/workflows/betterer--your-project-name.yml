@@ -36,9 +36,9 @@ jobs:
           echo "✅✅✅✅✅✅✅✅✅✅✅✅✅"
           echo $response
           echo "✅✅✅✅✅✅✅✅✅✅✅✅✅"
-          echo $response | jq ".[] | select((.state=="CHANGES_REQUESTED") and (.user.login=="github-actions[bot]"))"
+          echo $response | jq '.[] | select((.state=="CHANGES_REQUESTED") and (.user.login=="github-actions[bot]"))'
           echo "✅✅✅✅✅✅✅⛔️⛔️⛔️⛔️⛔️"
-          echo "$(cat pr-request-msg.txt)" | jq '.[] | select((.state=="CHANGES_REQUESTED") and (.user.login=="github-actions[bot]"))"
+          echo "$(cat pr-request-msg.txt)" | jq '.[] | select((.state=="CHANGES_REQUESTED") and (.user.login=="github-actions[bot]"))'
           echo "✅✅✅✅✅✅✅⛔️⛔️⛔️⛔️⛔️"
       - run: |
           echo '${{ toJson(github) }}'
