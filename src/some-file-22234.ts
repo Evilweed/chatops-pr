@@ -3,6 +3,6 @@ function asaaasddasadsasdsasddsd(sdf) {
     console.log(sdf)
 }
 
-function asaaaasdasdsasddasadsasdsasddsd(sdf) {
+function asaaaasdasdsasddasadasasdsasddsd(sdf) {
     console.log(sdf)
 }
