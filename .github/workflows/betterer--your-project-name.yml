@@ -78,12 +78,18 @@ jobs:
             
             if (bettererFailed && containsBotReview(reviews, "CHANGES_REQUESTED")) {
               console.log("🚨 2 => Started: Update last comment")
-              const review = containsBotReview(reviews, "CHANGES_REQUESTED")
-              const updateResult = await github.graphql(updatePullRequestReviewMutation, { 
-                pullRequestReviewId: review.id, 
-                body: "🚨 2 => Update last comment" 
-              })
+              try {
+                const review = containsBotReview(reviews, "CHANGES_REQUESTED")
+                console.log("⭐️")
+                const updateResult = await github.graphql(updatePullRequestReviewMutation, { 
+                  pullRequestReviewId: review.id, 
+                  body: "🚨 2 => Update last comment" 
+                })
+              console.log("🌎")
               console.log(JSON.stringify(updateResult, null, 2))
+              } catch (e) {
+                console.log(e)
+              }
               console.log("🚨 2 => End")
             }
             
