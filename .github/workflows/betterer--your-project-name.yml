@@ -101,7 +101,7 @@ jobs:
             
             const requestChangesResult = await github.graphql(addPullRequestReviewMutation, { 
                 event: "DISMISS",
-                body: "❌ 1 => Request changes", 
+                body: "❌ 1 => Request changessa", 
                 pullRequestId: pullRequestId, 
               })
             console.log(JSON.stringify(requestChangesResult, null, 2))
