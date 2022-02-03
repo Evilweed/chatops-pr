@@ -8,7 +8,7 @@ function asaadsdaghjghjjghsfdfdgfgfgsdasdssd(sdf) {
     console.log(sdf)
 }
 
-function asaadhkjkhjsdsd(sdf) {
+function asaadhkjkahjsdsd(sdf) {
     console.log(sdf)
 }
 
