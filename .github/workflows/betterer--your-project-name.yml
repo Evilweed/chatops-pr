@@ -98,13 +98,13 @@ jobs:
             console.log(JSON.stringify(reviews, null, 2))
             
             
-            const requestChangesResult = await github.graphql(addPullRequestReviewMutation, {
+            const requestChangesResult2 = await github.graphql(addPullRequestReviewMutation, {
               event: "REQUEST_CHANGES",
               body: "❌ 1 => Request changesasa",
               pullRequestId: pullRequestId,
             })
             
-            console.log(JSON.stringify(updateResult, null, 2))
+            console.log(JSON.stringify(updateResult2, null, 2))
             return "asd"
             
             const requestChangesResult = await github.graphql(addPullRequestReviewMutation, {
