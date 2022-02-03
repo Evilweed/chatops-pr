@@ -37,7 +37,8 @@ jobs:
             const bettererFailed = Number(process.env.BETTERER_EXIT_CODE) > 0
             const bettererPassed = !bettererFailed
             const notEmptyArray = (reviews) => reviews && reviews.length
-            const containsBotReview = (reviews, state) => notEmptyArray(reviews) && reviews.find((review) => review.state === state && review.user.login === "github-actions"))
+            const containsBotReview = (reviews, state) => 
+              notEmptyArray(reviews) && reviews.find((review) => review.state === state && review.user.login === "github-actions")
             const queryVariables = {
               owner: process.env.OWNER,
               repository: process.env.REPOSITORY,
@@ -69,9 +70,7 @@ jobs:
             }`;
             const result = await github.graphql(findLatestReviewsQuery, queryVariables)
             const { edges: reviews } = result.repository.pullRequest.latestReviews
-            console.log(JSON.stringify(reviews, null, 2))
-            console.log("containsBotReview(reviews, "CHANGES_REQUESTED")")
-            console.log(containsBotReview(reviews, "CHANGES_REQUESTED"))
+            console.log(JSON.stringify(result, null, 2))
 
             if (bettererFailed && !containsBotReview(reviews, "CHANGES_REQUESTED") && !containsBotReview(reviews, "APPROVED")) {
               console.log("🚨 1 => Started: Request changes")
@@ -86,8 +85,8 @@ jobs:
                   pullRequestReviewId: review.id, 
                   body: "🚨 2 => Update last comment" 
                 })
-              console.log("🌎")
-              console.log(JSON.stringify(updateResult, null, 2))
+                console.log("🌎")
+                console.log(JSON.stringify(updateResult, null, 2))
               } catch (e) {
                 console.log(e)
               }
