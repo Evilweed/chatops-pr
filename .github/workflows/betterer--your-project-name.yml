@@ -32,7 +32,7 @@ jobs:
           query: |
             query release($owner:String!,$repository:String!) {
               repository(owner:$owner,name:$repository) {
-                pullRequest(number: $prNumber)
+                pullRequest(number: $prNumber) {
                   latestReviews(last: 100) {
                     edges {
                       node {
