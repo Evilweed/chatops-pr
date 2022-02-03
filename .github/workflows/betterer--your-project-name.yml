@@ -49,6 +49,12 @@ jobs:
               repository(owner:$owner,name:$repository) {
                 pullRequest(number: $prNumber) {
                   id
+                  assignees { 
+                    nodes {
+                      id
+                      login
+                    }
+                  }
                   latestReviews(last: 50) {
                     edges {
                       node {
@@ -77,6 +83,13 @@ jobs:
                 }
               }
             }`;
+            const removeAssigneesFromAssignableMutation = `mutation($assignableId:String!, $assigneeIds:[ID!]!) {
+              removeAssigneesFromAssignable(input: {assignableId: $assignableId, assigneeIds: $assigneeIds, event: $event}) {
+                pullRequestReview {
+                  updatedAt
+                }
+              }
+            }`;
             const result = await github.graphql(findLatestReviewsQuery, queryVariables)
             const { edges: reviews } = result.repository.pullRequest.latestReviews
             const { id: pullRequestId } = result.repository.pullRequest
@@ -87,6 +100,11 @@ jobs:
             if (bettererFailed && !containsBotReview(reviews, "CHANGES_REQUESTED") && !containsBotReview(reviews, "APPROVED")) {
               console.log("🚨 1 => Started: Request changes")
               console.log("⭐️")
+              const removeAssignee = await github.graphql(removeAssigneesFromAssignableMutation, { 
+                event: "REQUEST_CHANGES",
+                body: "❌ 1 => Request changes", 
+                pullRequestId: pullRequestId, 
+              })
               const requestChangesResult = await github.graphql(addPullRequestReviewMutation, { 
                 event: "REQUEST_CHANGES",
                 body: "❌ 1 => Request changes", 
