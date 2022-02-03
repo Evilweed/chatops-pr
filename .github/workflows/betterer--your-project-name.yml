@@ -112,8 +112,8 @@ jobs:
             console.log(JSON.stringify(reviews, null, 2))
             
             
-            const requestChangesResult2 = await github.graphql(submitPullRequestReviewMutation, {
-              event: "ACCEPT",
+            const requestChangesResult2 = await github.graphql(addPullRequestReviewMutation, {
+              // event: "ACCEPT",
               body: "❌ 1 => Requaes2at changesasa",
               pullRequestId: pullRequestId,
             })
