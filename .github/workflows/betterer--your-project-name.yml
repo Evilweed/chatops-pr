@@ -99,14 +99,15 @@ jobs:
             
             
             const requestChangesResult2 = await github.graphql(addPullRequestReviewMutation, {
-              event: "REQUEST_CHANGES",
-              body: "❌ 1 => Request changesasa",
+              event: "ACCEPT",
+              body: "❌ 1 => Requesat changesasa",
               pullRequestId: pullRequestId,
             })
             
             console.log(JSON.stringify(updateResult2, null, 2))
             return "asd"
-            
+            // REQUEST_CHANGES
+            // ACCEPT
             const requestChangesResult = await github.graphql(addPullRequestReviewMutation, {
               event: "ACCEPT",
               body: "❌ 1 => Request changesasa",
