@@ -31,12 +31,23 @@ jobs:
           OWNER: ${{ github.event.repository.owner.name }}
           REPOSITORY: ${{ github.event.repository.name }}
           PR_NUMBER: ${{ steps.pr.outputs.pull_request_number }}
+          BETTERER_EXIT_CODE: "1"
         with:
           script: |
-            const query = `query release($owner:String!,$repository:String!,$prNumber:Int!) {
+            const bettererFailed = Number(process.env.BETTERER_EXIT_CODE) > 0
+            const bettererPassed = !bettererFailed
+            const notEmptyArray = (reviews) => reviews && reviews.length
+            const containsBotReview = (reviews, state) => 
+              notEmptyArray(reviews) && reviews.find((review) => review.state === state && review.user.login === "github-actions")
+            const queryVariables = {
+              owner: process.env.OWNER,
+              repository: process.env.REPOSITORY,
+              prNumber: Number(process.env.PR_NUMBER),
+            }
+            const findLatestReviewsQuery = `query latestReviews($owner:String!,$repository:String!,$prNumber:Int!) {
               repository(owner:$owner,name:$repository) {
                 pullRequest(number: $prNumber) {
-                  latestReviews(last: 100) {
+                  latestReviews(last: 50) {
                     edges {
                       node {
                         id
@@ -50,13 +61,40 @@ jobs:
                 }
               }
             }`;
-            const variables = {
-              owner: process.env.OWNER,
-              repository: process.env.REPOSITORY,
-              prNumber: Number(process.env.PR_NUMBER),
-            }
-            const result = await github.graphql(query, variables)
+            const updatePullRequestReviewMutation = `mutation updatePullRequestReview($pullRequestReviewId:String!,$body:String!) {
+              updatePullRequestReview(input: {pullRequestReviewId: $pullRequestReviewId, body: $body}) {
+                pullRequestReview {
+                  updatedAt
+                }
+              }
+            }`;
+            const result = await github.graphql(findLatestReviewsQuery, queryVariables)
+            const { edges: reviews } = result.repository.pullRequest.latestReviews
             console.log(JSON.stringify(result, null, 2))
+
+            if (bettererFailed && !containsBotReview(reviews, "CHANGES_REQUESTED") && !containsBotReview(reviews, "APPROVED")) {
+              console.log("🚨 1 => Started: Request changes")
+            }
+            
+            if (bettererFailed && containsBotReview(reviews, "CHANGES_REQUESTED")) {
+              console.log("🚨 2 => Started: Update last comment")
+              const review = containsBotReview(reviews, "CHANGES_REQUESTED")
+              const updateResult = await github.graphql(updatePullRequestReviewMutation, { 
+                pullRequestReviewId: review.id, 
+                body: "🚨 2 => Update last comment" 
+              })
+              console.log(JSON.stringify(updateResult, null, 2))
+              console.log("🚨 2 => End")
+            }
+            
+            if (bettererFailed && containsBotReview(reviews, "APPROVED")) {
+              console.log("🚨 3 => Started: Request changes")
+            }
+            
+            if (bettererPassed && containsBotReview(reviews, "CHANGES_REQUESTED")) {
+              console.log("🚨 4 => Started: Approve")
+            }
+            
 #      - uses: octokit/graphql-action@v2.x
 #        id: get_bot_reviews
 #        with:
