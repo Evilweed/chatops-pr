@@ -60,7 +60,7 @@ jobs:
         with:
           query: |
             mutation updatePullRequestReview($pullRequestReviewId:String!,$body:String!) {
-              updatePullRequestReview(input: {pullRequestReviewId: $review_id, body: $body}) {
+              updatePullRequestReview(input: {pullRequestReviewId: $pullRequestReviewId, body: $body}) {
                 pullRequestReview { 
                   updatedAt 
                 }
