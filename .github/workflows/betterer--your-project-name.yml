@@ -49,7 +49,7 @@ jobs:
             }
           owner: ${{ github.event.repository.owner.name }}
           repository: ${{ github.event.repository.name }}
-          prNumber: ${{ fromJSON(steps.pr.outputs.pull_request_number.number) }}
+          prNumber: ${{ fromJSON(toJSON(steps.pr.outputs.pull_request_number).number) }}
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - run: |
