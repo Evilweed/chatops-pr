@@ -25,12 +25,12 @@ jobs:
           touch "already-requested-changes-by-bot.txt"
       - name: Get Pull Request Number
         id: pr
-        run: echo "::set-output name=pull_request_number::$(gh pr view --json -q . || echo "")"
+        run: echo "::set-output name=pull_request_number::$(gh pr view --json number -q .number || echo "")"
       - uses: octokit/graphql-action@v2.x
         id: get_bot_reviews
         with:
           query: |
-            query release($owner:String!,$repository:String!,$prNumber:Int!) {
+            query release($owner:String!,$repository:String!,$prNumber) {
               repository(owner:$owner,name:$repository) {
                 pullRequest(number: $prNumber) {
                   latestReviews(last: 100) {
@@ -49,7 +49,7 @@ jobs:
             }
           owner: ${{ github.event.repository.owner.name }}
           repository: ${{ github.event.repository.name }}
-          prNumber: ${{ fromJSON(toJSON(steps.pr.outputs.pull_request_number).number) }}
+          prNumber: ${{ steps.pr.outputs.pull_request_number }}
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - run: |
