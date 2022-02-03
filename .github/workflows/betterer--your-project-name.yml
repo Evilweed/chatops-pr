@@ -98,11 +98,11 @@ jobs:
             console.log(JSON.stringify(reviews, null, 2))
             
             
-            const review = containsBotReview(reviews, "APPROVED")
-            const updateResult = await github.graphql(updatePullRequestReviewMutation, { 
-                pullRequestReviewId: review.node.id, 
-                body: "📝 2 => Update last comment" 
-              })
+            const requestChangesResult = await github.graphql(addPullRequestReviewMutation, {
+              event: "REQUEST_CHANGES",
+              body: "❌ 1 => Request changesasa",
+              pullRequestId: pullRequestId,
+            })
             
             console.log(JSON.stringify(updateResult, null, 2))
             return "asd"
@@ -112,7 +112,11 @@ jobs:
               body: "❌ 1 => Request changesasa",
               pullRequestId: pullRequestId,
             })
-            
+                        const review = containsBotReview(reviews, "APPROVED")
+            const updateResult = await github.graphql(updatePullRequestReviewMutation, { 
+                pullRequestReviewId: review.node.id, 
+                body: "📝 2 => Update last comment" 
+              })
             return "asd"
             const remo = await github.graphql(deletePullRequestReviewMutation, { 
               pullRequestReviewId: containsBotReview(reviews, "CHANGES_REQUESTED").node.id, 
