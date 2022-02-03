@@ -33,7 +33,6 @@ jobs:
           PR_NUMBER: ${{ steps.pr.outputs.pull_request_number }}
         with:
           script: |
-            const pullRequestNumber = Number($prNumber)
             const query = `query release($owner:String!,$repository:String!,$prNumber:Int!) {
               repository(owner:$owner,name:$repository) {
                 pullRequest(number: $prNumber) {
