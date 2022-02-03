@@ -106,7 +106,7 @@ jobs:
             
             return "asd"
             const remo = await github.graphql(deletePullRequestReviewMutation, { 
-              pullRequestReviewId: containsBotReview(reviews, "DISMISSED").node.id, 
+              pullRequestReviewId: containsBotReview(reviews, "CHANGES_REQUESTED").node.id, 
             })
             console.log(JSON.stringify(remo, null, 2))
             
