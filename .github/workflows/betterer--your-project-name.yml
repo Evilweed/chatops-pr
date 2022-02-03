@@ -25,7 +25,7 @@ jobs:
           touch "already-requested-changes-by-bot.txt"
       - name: Get Pull Request Number
         id: pr
-        run: echo "::set-output name=pull_request_number::$(gh pr view --json || echo "")"
+        run: echo "::set-output name=pull_request_number::$(gh pr view --json -q . || echo "")"
       - uses: octokit/graphql-action@v2.x
         id: get_bot_reviews
         with:
