@@ -37,7 +37,7 @@ jobs:
             const bettererFailed = Number(process.env.BETTERER_EXIT_CODE) > 0
             const bettererPassed = !bettererFailed
             const notEmptyArray = (reviews) => reviews && reviews.length
-            const containsBotReview = (reviews, state) => notEmptyArray(reviews) && reviews.find((review) => review.state === state && review.user.login === "github-actions")
+            const containsBotReview = (reviews, state) => notEmptyArray(reviews) && reviews.find((review) => review.state === state && review.user.login === "github-actions"))
             const queryVariables = {
               owner: process.env.OWNER,
               repository: process.env.REPOSITORY,

@@ -26,7 +26,7 @@ function asaadsdfghfghsd(sdf) {
     console.log(sdf)
 }
 
-function asaadsdaghjghjjghsdasdssd(sdf) {
+function asaadsdaghjghjjghasdasdssd(sdf) {
     console.log(sdf)
 }
 
