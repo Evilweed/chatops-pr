@@ -82,7 +82,7 @@ jobs:
               }
             }`;
             const submitPullRequestReviewMutation = `mutation($pullRequestId:String!,$body:String!, $event:String) {
-              submitPullRequestReview(input: {pullRequestId: $pullRequestId, body: $body, event: $event}) {
+              submitPullRequestReview(input: {pullRequestReviewId: $pullRequestId, body: $body, event: $event}) {
                 pullRequestReview {
                   state
                   updatedAt
@@ -112,10 +112,10 @@ jobs:
             console.log(JSON.stringify(reviews, null, 2))
             
             
-            const requestChangesResult2 = await github.graphql(addPullRequestReviewMutation, {
+            const requestChangesResult2 = await github.graphql(submitPullRequestReviewMutation, {
               // event: "ACCEPT",
               body: "❌ 1 => Requaes2at changesasa",
-              pullRequestId: pullRequestId,
+              pullRequestId: "PRR_kwDOGhRBJM4z_93K",
             })
             
             console.log(JSON.stringify(requestChangesResult2, null, 2))
