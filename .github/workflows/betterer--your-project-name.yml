@@ -38,7 +38,7 @@ jobs:
             const bettererPassed = !bettererFailed
             const notEmptyArray = (reviews) => reviews && reviews.length
             const containsBotReview = (reviews, state) => 
-              notEmptyArray(reviews) && reviews.find((review) => review.state === state && review.user.login === "github-actions")
+              notEmptyArray(reviews) && reviews.find((review) => review.node.state === state && review.node.user.login === "github-actions")
             const queryVariables = {
               owner: process.env.OWNER,
               repository: process.env.REPOSITORY,
@@ -61,7 +61,7 @@ jobs:
                 }
               }
             }`;
-            const updatePullRequestReviewMutation = `mutation updatePullRequestReview($pullRequestReviewId:String!,$body:String!) {
+            const updatePullRequestReviewMutation = `mutation($pullRequestReviewId:String!,$body:String!) {
               updatePullRequestReview(input: {pullRequestReviewId: $pullRequestReviewId, body: $body}) {
                 pullRequestReview {
                   updatedAt
@@ -71,6 +71,8 @@ jobs:
             const result = await github.graphql(findLatestReviewsQuery, queryVariables)
             const { edges: reviews } = result.repository.pullRequest.latestReviews
             console.log(JSON.stringify(result, null, 2))
+            console.log(JSON.stringify(reviews, null, 2))
+            console.log(JSON.stringify(reviews, null, 2))
 
             if (bettererFailed && !containsBotReview(reviews, "CHANGES_REQUESTED") && !containsBotReview(reviews, "APPROVED")) {
               console.log("🚨 1 => Started: Request changes")
@@ -82,7 +84,7 @@ jobs:
                 const review = containsBotReview(reviews, "CHANGES_REQUESTED")
                 console.log("⭐️")
                 const updateResult = await github.graphql(updatePullRequestReviewMutation, { 
-                  pullRequestReviewId: review.id, 
+                  pullRequestReviewId: review.node.id, 
                   body: "🚨 2 => Update last comment" 
                 })
                 console.log("🌎")
