@@ -26,6 +26,38 @@ jobs:
       - name: Get Pull Request Number
         id: pr
         run: echo "::set-output name=pull_request_number::$(gh pr view --json number -q .number || echo "")"
+      - uses: actions/github-script@v5
+        env:
+          OWNER: ${{ github.event.repository.owner.name }}
+          REPOSITORY: ${{ github.event.repository.name }}
+          PR_NUMBER: ${{ steps.pr.outputs.pull_request_number }}
+        with:
+          script: |
+            const pullRequestNumber = Number($prNumber)
+            const query = `query release($owner:String!,$repository:String!,$prNumber:Int!) {
+              repository(owner:$owner,name:$repository) {
+                pullRequest(number: $prNumber) {
+                  latestReviews(last: 100) {
+                    edges {
+                      node {
+                        id
+                        state
+                        author {
+                          login
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }`;
+            const variables = {
+              owner: process.env.OWNER,
+              repository: process.env.REPOSITORY,
+              prNumber: Number(process.env.PR_NUMBER),
+            }
+            const result = await github.graphql(query, variables)
+            console.log(result)
       - uses: octokit/graphql-action@v2.x
         id: get_bot_reviews
         with:
