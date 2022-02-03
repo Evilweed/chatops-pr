@@ -1,9 +1,11 @@
 name: Betterer YourProjectName TS Code Quality  # <--- Adapt to your project needs
 
 on:
-  push:
-    paths:
-      - 'src/**/*.tsx?'  # <--- Adapt to your project needs
+  - push
+#on:
+#  push:
+#    paths:
+#      - 'src/**/*.tsx?'  # <--- Adapt to your project needs
 
 env:
   PROJECT_NODE_VERSION: 16.3                                 # <--- Adapt to your project needs
@@ -70,7 +72,7 @@ jobs:
                 }
               }
             }`;
-            const addPullRequestReviewMutation = `mutation($pullRequestId:String!,$body:String!, $event:String!) {
+            const addPullRequestReviewMutation = `mutation($pullRequestId:String!,$body:String!, $event:String) {
               addPullRequestReview(input: {pullRequestId: $pullRequestId, body: $body, event: $event}) {
                 pullRequestReview {
                   updatedAt
