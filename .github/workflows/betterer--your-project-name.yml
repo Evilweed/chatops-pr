@@ -70,7 +70,7 @@ jobs:
                 }
               }
             }`;
-            const addPullRequestReviewMutation = `mutation($pullRequestId:Int!,$body:String!, $event:String!) {
+            const addPullRequestReviewMutation = `mutation($pullRequestId:String!,$body:String!, $event:String!) {
               addPullRequestReview(input: {pullRequestId: $pullRequestId, body: $body, event: $event}) {
                 pullRequestReview {
                   updatedAt
