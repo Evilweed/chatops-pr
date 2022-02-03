@@ -87,8 +87,8 @@ jobs:
               const review = containsBotReview(reviews, "CHANGES_REQUESTED")
               console.log("⭐️")
               const updateResult = await github.graphql(addPullRequestReviewMutation, { 
-                event: "CHANGES_REQUESTED" 
-                body: "❌ 1 => Request changes" 
+                event: "CHANGES_REQUESTED",
+                body: "❌ 1 => Request changes", 
                 pullRequestId: pullRequestId, 
               })
               console.log("🌎")

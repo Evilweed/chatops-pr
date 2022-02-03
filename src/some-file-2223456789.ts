@@ -18,7 +18,7 @@ function asaaasdsadsadaasdsasdasadsfdsfsdfdssdsd(sdf) {
     console.log(sdf)
 }
 
-function asaadsddfgdfasdasadssd(sdf) {
+function asaadsddfgdfasadasadssd(sdf) {
     console.log(sdf)
 }
 
