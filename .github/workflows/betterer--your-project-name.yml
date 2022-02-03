@@ -30,7 +30,7 @@ jobs:
         id: get_bot_reviews
         with:
           query: |
-            query release($owner:String!,$repository:String!) {
+            query release($owner:String!,$repository:String!,$prNumber:String!) {
               repository(owner:$owner,name:$repository) {
                 pullRequest(number: $prNumber) {
                   latestReviews(last: 100) {
