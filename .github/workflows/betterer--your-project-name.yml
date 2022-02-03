@@ -39,11 +39,11 @@ jobs:
             const notEmptyArray = (reviews) => reviews && reviews.length
             const containsBotReview = (reviews, state) => 
               notEmptyArray(reviews) && reviews.find((review) => review.node.state === state && review.node.author.login === "github-actions")
-            const pullRequestId = Number(process.env.PR_NUMBER)
+            const pullRequestNumber = Number(process.env.PR_NUMBER)
             const queryVariables = {
               owner: process.env.OWNER,
               repository: process.env.REPOSITORY,
-              prNumber: pullRequestId,
+              prNumber: pullRequestNumber,
             }
             const findLatestReviewsQuery = `query latestReviews($owner:String!,$repository:String!,$prNumber:Int!) {
               repository(owner:$owner,name:$repository) {
@@ -79,6 +79,7 @@ jobs:
             }`;
             const result = await github.graphql(findLatestReviewsQuery, queryVariables)
             const { edges: reviews } = result.repository.pullRequest.latestReviews
+            const { id: pullRequestId } = result.repository.pullRequest
             console.log(JSON.stringify(result, null, 2))
             console.log(JSON.stringify(reviews, null, 2))
             console.log(JSON.stringify(reviews, null, 2))
