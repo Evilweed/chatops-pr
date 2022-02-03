@@ -68,6 +68,7 @@ jobs:
             const updatePullRequestReviewMutation = `mutation($pullRequestReviewId:String!,$body:String!) {
               updatePullRequestReview(input: {pullRequestReviewId: $pullRequestReviewId, body: $body}) {
                 pullRequestReview {
+                  state
                   updatedAt
                 }
               }
@@ -75,6 +76,7 @@ jobs:
             const addPullRequestReviewMutation = `mutation($pullRequestId:String!,$body:String!, $event:String, $comments:[DraftPullRequestReviewComment]) {
               addPullRequestReview(input: {pullRequestId: $pullRequestId, body: $body, event: $event, comments: $comments}) {
                 pullRequestReview {
+                  state
                   updatedAt
                 }
               }
@@ -82,6 +84,7 @@ jobs:
             const deletePullRequestReviewMutation = `mutation($pullRequestReviewId:String!) {
               deletePullRequestReview(input: {pullRequestReviewId: $pullRequestReviewId}) {
                 pullRequestReview {
+                  state
                   updatedAt
                 }
               }
@@ -89,6 +92,7 @@ jobs:
             const removeAssigneesFromAssignableMutation = `mutation($assignableId:String!, $assigneeIds:[ID!]!) {
               removeAssigneesFromAssignable(input: {assignableId: $assignableId, assigneeIds: $assigneeIds, event: $event}) {
                 pullRequestReview {
+                  state
                   updatedAt
                 }
               }
