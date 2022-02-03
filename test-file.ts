@@ -12,6 +12,7 @@ const queryVariables = {
 const findLatestReviewsQuery = `query latestReviews($owner:String!,$repository:String!,$prNumber:Int!) {
               repository(owner:$owner,name:$repository) {
                 pullRequest(number: $prNumber) {
+                  id
                   latestReviews(last: 50) {
                     edges {
                       node {
