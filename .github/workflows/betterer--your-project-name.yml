@@ -101,6 +101,7 @@ jobs:
             
             
             const requestChangesResult2 = await github.graphql(addPullRequestReviewMutation, {
+              event: "REQUEST_CHANGES",
               body: "❌ 1 => Requaesat changesasa",
               pullRequestId: pullRequestId,
               comments: [{ body: "test", path: ".betterer.results", position: 17 }]
