@@ -10,7 +10,7 @@ function asaadsfdsfsdfdssdsd(sdf) {
     console.log(sdf)
 }
 
-function asaadsasdasadsfdsfsdfdssdsd(sdf) {
+function asaadsasdasadsfdasfsdfdssdsd(sdf) {
     console.log(sdf)
 }
 
