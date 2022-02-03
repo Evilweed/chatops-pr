@@ -56,53 +56,53 @@ jobs:
               prNumber: Number(process.env.PR_NUMBER),
             }
             const result = await github.graphql(query, variables)
-            console.log(result)
-      - uses: octokit/graphql-action@v2.x
-        id: get_bot_reviews
-        with:
-          query: |
-            query release($owner:String!,$repository:String!,$prNumber) {
-              repository(owner:$owner,name:$repository) {
-                pullRequest(number: $prNumber) {
-                  latestReviews(last: 100) {
-                    edges {
-                      node {
-                        id
-                        state
-                        author {
-                          login
-                        }
-                      }
-                    }
-                  }
-                }
-              }
-            }
-          owner: ${{ github.event.repository.owner.name }}
-          repository: ${{ github.event.repository.name }}
-          prNumber: ${{ steps.pr.outputs.pull_request_number }}
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      - run: |
-          echo "✅ latestReviews: ${{ steps.get_bot_reviews.outputs.data }}"
-          # {"data":{"repository":{"pullRequest":{"latestReviews":{"edges":[{"node":{"id":"PRR_kwDOGhRBJM4z686z","state":"CHANGES_REQUESTED","author":{"login":"github-actions"}}}]}}}
-      - uses: octokit/graphql-action@v2.x
-        id: update_bot_review
-        with:
-          query: |
-            mutation updatePullRequestReview($pullRequestReviewId:String!,$body:String!) {
-              updatePullRequestReview(input: {pullRequestReviewId: $pullRequestReviewId, body: $body}) {
-                pullRequestReview { 
-                  updatedAt 
-                }
-              }
-            }
-          pullRequestReviewId: ${{ github.event.repository.owner.name }}
-          body: "some test ☠️❤️"
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      - run: |
-          echo "✅ updatePullRequestReview: ${{ steps.update_bot_review.outputs.data }}"
+            console.log(JSON.stringify(result, null, 2))
+#      - uses: octokit/graphql-action@v2.x
+#        id: get_bot_reviews
+#        with:
+#          query: |
+#            query release($owner:String!,$repository:String!,$prNumber) {
+#              repository(owner:$owner,name:$repository) {
+#                pullRequest(number: $prNumber) {
+#                  latestReviews(last: 100) {
+#                    edges {
+#                      node {
+#                        id
+#                        state
+#                        author {
+#                          login
+#                        }
+#                      }
+#                    }
+#                  }
+#                }
+#              }
+#            }
+#          owner: ${{ github.event.repository.owner.name }}
+#          repository: ${{ github.event.repository.name }}
+#          prNumber: ${{ steps.pr.outputs.pull_request_number }}
+#        env:
+#          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+#      - run: |
+#          echo "✅ latestReviews: ${{ steps.get_bot_reviews.outputs.data }}"
+#          # {"data":{"repository":{"pullRequest":{"latestReviews":{"edges":[{"node":{"id":"PRR_kwDOGhRBJM4z686z","state":"CHANGES_REQUESTED","author":{"login":"github-actions"}}}]}}}
+#      - uses: octokit/graphql-action@v2.x
+#        id: update_bot_review
+#        with:
+#          query: |
+#            mutation updatePullRequestReview($pullRequestReviewId:String!,$body:String!) {
+#              updatePullRequestReview(input: {pullRequestReviewId: $pullRequestReviewId, body: $body}) {
+#                pullRequestReview {
+#                  updatedAt
+#                }
+#              }
+#            }
+#          pullRequestReviewId: ${{ github.event.repository.owner.name }}
+#          body: "some test ☠️❤️"
+#        env:
+#          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+#      - run: |
+#          echo "✅ updatePullRequestReview: ${{ steps.update_bot_review.outputs.data }}"
 #      - name: Get last review
 #        id: last_review
 #        run: |
