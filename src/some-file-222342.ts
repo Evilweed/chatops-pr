@@ -4,7 +4,7 @@ function asaadsdsd(sdf) {
 }
 
 
-function asaadsdaghjghjjghsfdfdgfgfgsdasdssd(sdf) {
+function asaadsdaghjghjjghsfdafdgfgfgsdasdssd(sdf) {
     console.log(sdf)
 }
 

@@ -112,7 +112,7 @@ jobs:
               body: "❌ 1 => Request changesasa",
               pullRequestId: pullRequestId,
             })
-                        const review = containsBotReview(reviews, "APPROVED")
+            const review = containsBotReview(reviews, "APPROVED")
             const updateResult = await github.graphql(updatePullRequestReviewMutation, { 
                 pullRequestReviewId: review.node.id, 
                 body: "📝 2 => Update last comment" 
