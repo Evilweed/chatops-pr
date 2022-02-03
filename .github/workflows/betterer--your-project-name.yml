@@ -98,16 +98,20 @@ jobs:
             console.log(JSON.stringify(reviews, null, 2))
             
             
-            
-            const requestChangesResult = await github.graphql(addPullRequestReviewMutation, { 
-                event: "ACCEPT",
-                body: "❌ 1 => Request changesasa", 
-                pullRequestId: pullRequestId, 
+            const review = containsBotReview(reviews, "APPROVED")
+            const updateResult = await github.graphql(updatePullRequestReviewMutation, { 
+                pullRequestReviewId: review.node.id, 
+                body: "📝 2 => Update last comment" 
               })
-            console.log(JSON.stringify(requestChangesResult, null, 2))
+            
+            console.log(JSON.stringify(updateResult, null, 2))
             return "asd"
             
-
+            const requestChangesResult = await github.graphql(addPullRequestReviewMutation, {
+              event: "ACCEPT",
+              body: "❌ 1 => Request changesasa",
+              pullRequestId: pullRequestId,
+            })
             
             return "asd"
             const remo = await github.graphql(deletePullRequestReviewMutation, { 

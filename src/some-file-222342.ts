@@ -12,7 +12,7 @@ function asaadhkjkahjsdsd(sdf) {
     console.log(sdf)
 }
 
-function asaadsdasjsaaaaddaaaaaaaaaaaaafadsaaasfaasadfafsdafssasadasddlkjkjklsdasdssd(sdf) {
+function asaadsdasjsaaaaddaaaaaaaaaaaaaafadsaaasfaasadfafsdafssasadasddlkjkjklsdasdssd(sdf) {
     console.log(sdf)
 }
 
