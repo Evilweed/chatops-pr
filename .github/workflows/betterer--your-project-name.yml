@@ -77,8 +77,8 @@ jobs:
                 }
               }
             }`;
-            const deletePullRequestReviewMutation = `mutation($pullRequestId:String!,$body:String!, $event:String!) {
-              deletePullRequestReview(input: {pullRequestId: $pullRequestId, body: $body, event: $event}) {
+            const deletePullRequestReviewMutation = `mutation($pullRequestReviewId:String!) {
+              deletePullRequestReview(input: {pullRequestReviewId: $pullRequestReviewId}) {
                 pullRequestReview {
                   updatedAt
                 }
