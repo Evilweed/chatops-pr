@@ -43,7 +43,7 @@ jobs:
             const queryVariables = {
               owner: process.env.OWNER,
               repository: process.env.REPOSITORY,
-              prNumber: pullRequestNumber,
+              prNumber: pullRequestId,
             }
             const findLatestReviewsQuery = `query latestReviews($owner:String!,$repository:String!,$prNumber:Int!) {
               repository(owner:$owner,name:$repository) {
