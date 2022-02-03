@@ -99,18 +99,15 @@ jobs:
             
             
             
-            const remo2 = await github.graphql(deletePullRequestReviewMutation, { 
-              pullRequestReviewId: containsBotReview(reviews, "CHANGES_REQUESTED").node.id, 
-            })
-            console.log(JSON.stringify(remo2, null, 2))
-            return "asd"
-            
             const requestChangesResult = await github.graphql(addPullRequestReviewMutation, { 
-                event: "REQUEST_CHANGES",
+                event: "APPROVE",
                 body: "❌ 1 => Request changes", 
                 pullRequestId: pullRequestId, 
               })
             console.log(JSON.stringify(requestChangesResult, null, 2))
+            return "asd"
+            
+
             
             return "asd"
             const remo = await github.graphql(deletePullRequestReviewMutation, { 
