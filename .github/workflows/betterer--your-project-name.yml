@@ -26,77 +26,123 @@ jobs:
       - name: Get Pull Request Number
         id: pr
         run: echo "::set-output name=pull_request_number::$(gh pr view --json number -q .number || echo "")"
-      - name: Get last review
-        id: last_review
-        run: |
-          token=${{ secrets.GITHUB_TOKEN }}
-          base64AuthInfo="$token | base64 -e"
-
-          response=$(curl --request GET \
-          --url https://api.github.com/repos/${{ github.repository }}/pulls/${{ steps.pr.outputs.pull_request_number }}/reviews \
-          --header "Authorization: $base64AuthInfo" \
-          --header "Content-Type: application/json" \
-          --data '{ per_page: 100 }')
-
-          echo $response | jq 'last(.[] | select((.state=="CHANGES_REQUESTED") and (.user.login=="github-actions[bot]"))) | .id' >> already-requested-changes-by-bot.txt
-          echo $response | jq 'last(.[] | select((.state=="CHANGES_REQUESTED") and (.user.login=="github-actions[bot]")))' | echo $(</dev/stdin)
-
-          # echo $response
-
-          echo "⛔️ $(cat already-requested-changes-by-bot.txt)"
-          export LAST_REVIEW_ID=$(cat already-requested-changes-by-bot.txt)
-          echo "❤️ $LAST_REVIEW_ID"
-          echo "::set-output name=last_review_id::$(cat already-requested-changes-by-bot.txt)"
-      - id: coscos
-        run: |
-          token=${{ secrets.GITHUB_TOKEN }}
-          base64AuthInfo="$token | base64 -e"
-
-          response=$(curl --request PUT \
-          --url https://api.github.com/repos/${{ github.repository }}/pulls/${{ steps.pr.outputs.pull_request_number }}/reviews/${{ steps.last_review.outputs.last_review_id }}/events \
-          --header "Authorization: $base64AuthInfo" \
-          --header "Content-Type: application/json" \
-          --header "Accept: application/vnd.github.v3+json" \
-          --data '{ "body": "✅✅✅✅✅✅✅✅✅✅✅✅✅✅✅ asdasdassad" }')
-
-          response=$(curl --request PUT \
-          --url https://api.github.com/repos/${{ github.repository }}/pulls/${{ steps.pr.outputs.pull_request_number }}/reviews/${{ steps.last_review.outputs.last_review_id }}/events \
-          --header "Authorization: $base64AuthInfo" \
-          --header "Content-Type: application/json" \
-          --header "Accept: application/vnd.github.v3+json" \
-          --data '{ "body": "✅✅✅✅✅✅✅✅✅✅✅✅✅✅✅ asdasdassad", "event": "APPROVE" }')
-
-          echo "$response"
-
-
-
-          if [[ "$(cat already-requested-changes-by-bot.txt)" == "" ]]
-          then
-            echo "### 🤖 BOT: I\'ve detected TypeScript quality changes!" >> pr-request-msg.txt
-            echo "CI job that compiles this project with "strict\'er" compilation detected changes. You have either fixed some TypeScript issues, or added new. You need to review those changes and either fix new TS issues, or accept new changes as "ok" which will store this state in file in repo." >> pr-request-msg.txt
-            echo " " >> pr-request-msg.txt
-            echo "| Project |" >> pr-request-msg.txt
-            echo "| ---- |" >> pr-request-msg.txt
-            echo "| ${{ env.PROJECT_NAME }} |" >> pr-request-msg.txt
-            echo " " >> pr-request-msg.txt
-            echo "| Action  | When to do it | What, or details |" >> pr-request-msg.txt
-            echo "| ---- | ----- | ----- |" >> pr-request-msg.txt
-            echo "| 1. See detailed report | Now | Open this [🔗 link to ci job](https://github.com/${{ github.repository }}/runs/${{ env.GITHUB_RUN_ID }}?check_suite_focus=true) and check if there are some new TS errors you can fix. You can decide not to fix those issues - but keep in mind that we are trying to improve TS practices. |" >> pr-request-msg.txt
-            echo "| 2. Fix detected issues | The sooner the better :) | Use information from previous step to find TS errors and commit fixes. |" >> pr-request-msg.txt
-            echo "| 3. Update \`${{ env.BETTERER_RESULTS_FILE_NAME }}\` file | Before merge at most | Open this [🔗 link to ci job](https://github.com/${{ github.repository }}/runs/${{ env.GITHUB_RUN_ID }}?check_suite_focus=true) and read instruction on how to update \`${{ env.BETTERER_RESULTS_FILE_NAME }}\` file |" >> pr-request-msg.txt
-            echo "📫 Sending PR code review (request changes)"
-            gh pr review $PULL_REQUEST_NUMBER --request-changes --body "$(cat pr-request-msg.txt)"
-            echo "📫 Sent!"
-          fi
-      - name: Use Node.js
-        uses: actions/setup-node@v1
+      - uses: octokit/graphql-action@v2.x
+        id: get_bot_reviews
         with:
-          node-version: ${{ env.PROJECT_NODE_VERSION }}
-      - name: Install dependencies
-        run: yarn --frozen-lockfile --non-interactive --no-progress
-      - name: Incremental code quality check
-        uses: Evilweed/betterer-github-action@v1.0.0
+          query: |
+            query release($owner:String!,$repository:String!) {
+              repository(owner:$owner,name:$repository) {
+                pullRequest(number: '$prNumber')
+                  latestReviews(last: 100) {
+                    edges {
+                      node {
+                        id
+                        state
+                        author {
+                          login
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          owner: ${{ github.event.repository.owner.name }}
+          repository: ${{ github.event.repository.name }}
+          prNumber: ${{ steps.pr.outputs.pull_request_number }}
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - run: |
+          echo "✅ latestReviews: ${{ steps.get_bot_reviews.outputs.data }}"
+          # {"data":{"repository":{"pullRequest":{"latestReviews":{"edges":[{"node":{"id":"PRR_kwDOGhRBJM4z686z","state":"CHANGES_REQUESTED","author":{"login":"github-actions"}}}]}}}
+      - uses: octokit/graphql-action@v2.x
+        id: update_bot_review
         with:
-          chatops_results_file_update_command: ${{ format('{0}:{1}', env.PROJECT_NAME, env.CHATOPS_RESULTS_FILE_UPDATE_COMMAND) }}
-          betterer_results_file_name: ${{ env.BETTERER_RESULTS_FILE_NAME }}
-          args: --config "/github/workspace/${{ env.BETTERER_CONFIG_FILE_PATH }}" --results "/github/workspace/${{ env.BETTERER_RESULTS_FILE_PATH }}" --reporter /build/custom-simple-reporter.js
+          query: |
+            mutation updatePullRequestReview($pullRequestReviewId:String!,$body:String!) {
+              updatePullRequestReview(input: {pullRequestReviewId: '$review_id', body: '$body'}) {
+                pullRequestReview { 
+                  updatedAt 
+                }
+              }
+            }
+          pullRequestReviewId: ${{ github.event.repository.owner.name }}
+          body: "some test ☠️❤️"
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - run: |
+          echo "✅ updatePullRequestReview: ${{ steps.update_bot_review.outputs.data }}"
+#      - name: Get last review
+#        id: last_review
+#        run: |
+#          token=${{ secrets.GITHUB_TOKEN }}
+#          base64AuthInfo="$token | base64 -e"
+#
+#          response=$(curl --request GET \
+#          --url https://api.github.com/repos/${{ github.repository }}/pulls/${{ steps.pr.outputs.pull_request_number }}/reviews \
+#          --header "Authorization: $base64AuthInfo" \
+#          --header "Content-Type: application/json" \
+#          --data '{ per_page: 100 }')
+#
+#          echo $response | jq 'last(.[] | select((.state=="CHANGES_REQUESTED") and (.user.login=="github-actions[bot]"))) | .id' >> already-requested-changes-by-bot.txt
+#          echo $response | jq 'last(.[] | select((.state=="CHANGES_REQUESTED") and (.user.login=="github-actions[bot]")))' | echo $(</dev/stdin)
+#
+#          # echo $response
+#
+#          echo "⛔️ $(cat already-requested-changes-by-bot.txt)"
+#          export LAST_REVIEW_ID=$(cat already-requested-changes-by-bot.txt)
+#          echo "❤️ $LAST_REVIEW_ID"
+#          echo "::set-output name=last_review_id::$(cat already-requested-changes-by-bot.txt)"
+#      - id: coscos
+#        run: |
+#          token=${{ secrets.GITHUB_TOKEN }}
+#          base64AuthInfo="$token | base64 -e"
+#
+#          response=$(curl --request PUT \
+#          --url https://api.github.com/repos/${{ github.repository }}/pulls/${{ steps.pr.outputs.pull_request_number }}/reviews/${{ steps.last_review.outputs.last_review_id }}/events \
+#          --header "Authorization: $base64AuthInfo" \
+#          --header "Content-Type: application/json" \
+#          --header "Accept: application/vnd.github.v3+json" \
+#          --data '{ "body": "✅✅✅✅✅✅✅✅✅✅✅✅✅✅✅ asdasdassad" }')
+#
+#          response=$(curl --request PUT \
+#          --url https://api.github.com/repos/${{ github.repository }}/pulls/${{ steps.pr.outputs.pull_request_number }}/reviews/${{ steps.last_review.outputs.last_review_id }}/events \
+#          --header "Authorization: $base64AuthInfo" \
+#          --header "Content-Type: application/json" \
+#          --header "Accept: application/vnd.github.v3+json" \
+#          --data '{ "body": "✅✅✅✅✅✅✅✅✅✅✅✅✅✅✅ asdasdassad", "event": "APPROVE" }')
+#
+#          echo "$response"
+#
+#
+#
+#          if [[ "$(cat already-requested-changes-by-bot.txt)" == "" ]]
+#          then
+#            echo "### 🤖 BOT: I\'ve detected TypeScript quality changes!" >> pr-request-msg.txt
+#            echo "CI job that compiles this project with "strict\'er" compilation detected changes. You have either fixed some TypeScript issues, or added new. You need to review those changes and either fix new TS issues, or accept new changes as "ok" which will store this state in file in repo." >> pr-request-msg.txt
+#            echo " " >> pr-request-msg.txt
+#            echo "| Project |" >> pr-request-msg.txt
+#            echo "| ---- |" >> pr-request-msg.txt
+#            echo "| ${{ env.PROJECT_NAME }} |" >> pr-request-msg.txt
+#            echo " " >> pr-request-msg.txt
+#            echo "| Action  | When to do it | What, or details |" >> pr-request-msg.txt
+#            echo "| ---- | ----- | ----- |" >> pr-request-msg.txt
+#            echo "| 1. See detailed report | Now | Open this [🔗 link to ci job](https://github.com/${{ github.repository }}/runs/${{ env.GITHUB_RUN_ID }}?check_suite_focus=true) and check if there are some new TS errors you can fix. You can decide not to fix those issues - but keep in mind that we are trying to improve TS practices. |" >> pr-request-msg.txt
+#            echo "| 2. Fix detected issues | The sooner the better :) | Use information from previous step to find TS errors and commit fixes. |" >> pr-request-msg.txt
+#            echo "| 3. Update \`${{ env.BETTERER_RESULTS_FILE_NAME }}\` file | Before merge at most | Open this [🔗 link to ci job](https://github.com/${{ github.repository }}/runs/${{ env.GITHUB_RUN_ID }}?check_suite_focus=true) and read instruction on how to update \`${{ env.BETTERER_RESULTS_FILE_NAME }}\` file |" >> pr-request-msg.txt
+#            echo "📫 Sending PR code review (request changes)"
+#            gh pr review $PULL_REQUEST_NUMBER --request-changes --body "$(cat pr-request-msg.txt)"
+#            echo "📫 Sent!"
+#          fi
+#      - name: Use Node.js
+#        uses: actions/setup-node@v1
+#        with:
+#          node-version: ${{ env.PROJECT_NODE_VERSION }}
+#      - name: Install dependencies
+#        run: yarn --frozen-lockfile --non-interactive --no-progress
+#      - name: Incremental code quality check
+#        uses: Evilweed/betterer-github-action@v1.0.0
+#        with:
+#          chatops_results_file_update_command: ${{ format('{0}:{1}', env.PROJECT_NAME, env.CHATOPS_RESULTS_FILE_UPDATE_COMMAND) }}
+#          betterer_results_file_name: ${{ env.BETTERER_RESULTS_FILE_NAME }}
+#          args: --config "/github/workspace/${{ env.BETTERER_CONFIG_FILE_PATH }}" --results "/github/workspace/${{ env.BETTERER_RESULTS_FILE_PATH }}" --reporter /build/custom-simple-reporter.js
