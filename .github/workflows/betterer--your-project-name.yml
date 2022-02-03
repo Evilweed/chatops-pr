@@ -49,7 +49,7 @@ jobs:
               repository(owner:$owner,name:$repository) {
                 pullRequest(number: $prNumber) {
                   id
-                  assignees(last: 50) { 
+                  reviewers(last: 50) { 
                     nodes {
                       id
                       login
