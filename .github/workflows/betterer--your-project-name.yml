@@ -49,12 +49,6 @@ jobs:
               repository(owner:$owner,name:$repository) {
                 pullRequest(number: $prNumber) {
                   id
-                  reviewers(last: 50) { 
-                    nodes {
-                      id
-                      login
-                    }
-                  }
                   latestReviews(last: 50) {
                     edges {
                       node {
