@@ -100,8 +100,8 @@ const asd = async () => {
 
             const pullRequestNumber = Number(process.env.PR_NUMBER)
             const githubRunId = process.env.GITHUB_RUN_ID
-            const repository = process.env.REPOSITORY
-            const owner = process.env.OWNER
+            const repository = process.env.OWNER_AND_REPOSITORY.split("/")[1]
+            const owner = process.env.OWNER_AND_REPOSITORY.split("/")[0]
             const bettererFailed = process.env.BETTERER_RUN_STATUS !== 'success'
             const bettererPassed = !bettererFailed
 
