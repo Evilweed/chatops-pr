@@ -37,8 +37,6 @@ jobs:
           betterer_results_file_name: ${{ env.BETTERER_RESULTS_FILE_NAME }}
           args: ci --config "/github/workspace/${{ env.BETTERER_CONFIG_FILE_PATH }}" --results "/github/workspace/${{ env.BETTERER_RESULTS_FILE_PATH }}" --reporter /build/custom-simple-reporter.js
       - run: |
-          echo ${{ steps.betterer-run.status }}
-      - run: |
           touch "pr-request-msg.txt"
           touch "already-requested-changes-by-bot.txt"
       - name: Get Pull Request Number
@@ -49,7 +47,7 @@ jobs:
           OWNER: ${{ github.event.repository.owner.name }}
           REPOSITORY: ${{ github.event.repository.name }}
           PR_NUMBER: ${{ steps.pr.outputs.pull_request_number }}
-          BETTERER_EXIT_CODE: "0"
+          BETTERER_RUN_STATUS: ${{ steps.betterer-run.outcome }}
         with:
           script: |
             const projectName = process.env.PROJECT_NAME
@@ -59,7 +57,7 @@ jobs:
             const githubRunId = process.env.GITHUB_RUN_ID
             const repository = process.env.REPOSITORY
             const owner = process.env.OWNER
-            const bettererFailed = Number(process.env.BETTERER_EXIT_CODE) > 0
+            const bettererFailed = process.env.BETTERER_RUN_STATUS !== 'success'
             const bettererPassed = !bettererFailed
 
             const pleaseReviewBettererResultsMessage = `| ⚠️ Typescript code quality changes detected |\n| - |\n| Project: \`${projectName}\` |\n| I've detected changes in \`${bettererResultsFileName}\` please review them, and either **[ fix the issues ]** or **[ accept new issues as new baseline ]** |\n| [🔗 Click here to review changes and read instructions](https://github.com/${ repository }/runs/${ githubRunId }?check_suite_focus=true)`

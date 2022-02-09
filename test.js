@@ -11,7 +11,7 @@ const githubWithGraphql = graphql.defaults({
         authorization: `Basic ${btoa(process.env.AUTH_TOKEN)}`,
     },
 });
-process.env.BETTERER_EXIT_CODE = '1'
+process.env.BETTERER_RUN_STATUS = 'success'
 process.env.PROJECT_NAME = 'platform'
 process.env.OWNER = 'packhelp'
 process.env.REPOSITORY = 'e2e-tests'
@@ -19,7 +19,7 @@ process.env.BETTERER_RESULTS_FILE_NAME = '.betterer.results'
 process.env.GITHUB_RUN_ID = `${Math.random()*1000}`
 
 console.log(`process.env.AUTH_TOKEN = ${process.env.AUTH_TOKEN}`)
-console.log(`process.env.BETTERER_EXIT_CODE = ${process.env.BETTERER_EXIT_CODE}`)
+console.log(`process.env.BETTERER_RUN_STATUS = ${process.env.BETTERER_RUN_STATUS}`)
 console.log(`process.env.OWNER = ${process.env.OWNER}`)
 console.log(`process.env.REPOSITORY = ${process.env.REPOSITORY}`)
 
@@ -40,7 +40,7 @@ const asd = async () => {
             const githubRunId = process.env.GITHUB_RUN_ID
             const repository = process.env.REPOSITORY
             const owner = process.env.OWNER
-            const bettererFailed = Number(process.env.BETTERER_EXIT_CODE) > 0
+            const bettererFailed = process.env.BETTERER_RUN_STATUS !== 'success'
             const bettererPassed = !bettererFailed
 
             const pleaseReviewBettererResultsMessage = `| ⚠️ Typescript code quality changes detected |\n| - |\n| Project: \`${projectName}\` |\n| I've detected changes in \`${bettererResultsFileName}\` please review them, and either **[ fix the issues ]** or **[ accept new issues as new baseline ]** |\n| [🔗 Click here to review changes and read instructions](https://github.com/${ repository }/runs/${ githubRunId }?check_suite_focus=true)`
