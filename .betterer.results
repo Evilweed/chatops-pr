@@ -17,13 +17,11 @@ exports[`stricter typescript compilation`] = {
       [12, 30, 3, "Parameter \'sdf\' implicitly has an \'any\' type.", "193433428"],
       [18, 43, 3, "Parameter \'sdf\' implicitly has an \'any\' type.", "193433428"]
     ],
-    "src/some-file-2223456789.ts:1089182208": [
+    "src/some-file-2223456789.ts:2359193600": [
       [0, 9, 9, "Duplicate function implementation.", "3987640659"],
       [0, 19, 3, "Parameter \'sdf\' implicitly has an \'any\' type.", "193433428"],
       [4, 32, 3, "Parameter \'sdf\' implicitly has an \'any\' type.", "193433428"],
-      [8, 38, 3, "Parameter \'sdf\' implicitly has an \'any\' type.", "193433428"],
-      [12, 38, 3, "Parameter \'sdf\' implicitly has an \'any\' type.", "193433428"],
-      [16, 44, 3, "Parameter \'sdf\' implicitly has an \'any\' type.", "193433428"]
+      [8, 38, 3, "Parameter \'sdf\' implicitly has an \'any\' type.", "193433428"]
     ]
   }`
 };
