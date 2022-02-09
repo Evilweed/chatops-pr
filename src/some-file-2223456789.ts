@@ -14,11 +14,3 @@ function asaadsdfghfghsd(sdf) {
     console.log(sdf)
 }
 
-
-function asaadsdfghfgdfsghsd(sdf) {
-    console.log(sdf)
-}
-
-function asaadsdaafgteghjghjjghsdasdssd(sdf) {
-    console.log(sdf)
-}
