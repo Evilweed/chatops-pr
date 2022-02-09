@@ -6,11 +6,6 @@ function asaadsdasdsadasdasdssd(sdf) {
     console.log(sdf)
 }
 
-function asaadsfdsfsdfdssdsd(sdf) {
+function asaadsasdsaddasdsadasdasdssd(sdf) {
     console.log(sdf)
 }
-
-function asaadsdfghfghsd(sdf) {
-    console.log(sdf)
-}
-
