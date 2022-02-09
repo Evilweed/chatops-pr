@@ -70,7 +70,7 @@ jobs:
         uses: actions/github-script@v4
         env:
           OWNER_AND_REPOSITORY: ${{ github.repository }}
-          PR_NUMBER: ${{ context.issue.number }}
+          PR_NUMBER: ${{ github.event.issue.pull_request }}
           BETTERER_RUN_STATUS: ${{ steps.betterer-run.outcome }}
           BETTERER_OUTPUT: ${{ steps.run_betterer_update.outputs.betterer-output }}
         with:
