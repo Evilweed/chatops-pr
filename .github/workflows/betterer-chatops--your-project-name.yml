@@ -71,7 +71,7 @@ jobs:
         env:
           OWNER: ${{ github.owner }}
           REPOSITORY: ${{ github.repository }}
-          PR_NUMBER: ${{ steps.pr.outputs.pull_request_number }}
+          PR_NUMBER: ${{ context.issue.number }}
           BETTERER_RUN_STATUS: ${{ steps.betterer-run.outcome }}
           BETTERER_OUTPUT: ${{ steps.run_betterer_update.outputs.betterer-output }}
         with:
