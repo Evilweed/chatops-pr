@@ -29,6 +29,7 @@ jobs:
       - name: Install dependencies
         run: yarn --frozen-lockfile --non-interactive --no-progress
       - name: Incremental code quality check
+        id: betterer-run
         uses: Evilweed/betterer-github-action@v1.0.0
         continue-on-error: true
         with:
@@ -36,7 +37,7 @@ jobs:
           betterer_results_file_name: ${{ env.BETTERER_RESULTS_FILE_NAME }}
           args: ci --config "/github/workspace/${{ env.BETTERER_CONFIG_FILE_PATH }}" --results "/github/workspace/${{ env.BETTERER_RESULTS_FILE_PATH }}" --reporter /build/custom-simple-reporter.js
       - run: |
-          echo ${{ steps.pr.outputs }}
+          echo ${{ steps.betterer-run.outputs }}
       - run: |
           touch "pr-request-msg.txt"
           touch "already-requested-changes-by-bot.txt"
