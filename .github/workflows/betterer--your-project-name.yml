@@ -40,7 +40,7 @@ jobs:
             const bettererPassed = !bettererFailed
             const notEmptyArray = (reviews) => reviews && reviews.length
             const containsBotReview = (reviews, state) =>
-                notEmptyArray(reviews) && reviews.find((review) => review.node.state === state && review.node.author.login === "github-actions")
+                notEmptyArray(reviews) && reviews.find((review) => review.node.state === state && review.node.author.login === "github-actions)
             const pullRequestNumber = Number(process.env.PR_NUMBER)
             const queryVariables = {
                 owner: process.env.OWNER,
@@ -100,7 +100,7 @@ jobs:
               }
             }`;
 
-            const result = await graphqlWithAuth(findLatestReviewsQuery, queryVariables)
+            const result = await github.graphql(findLatestReviewsQuery, queryVariables)
             const { edges: reviews } = result.repository.pullRequest.latestReviews
             const { id: pullRequestId } = result.repository.pullRequest
             console.log(JSON.stringify(result, null, 2))
@@ -110,7 +110,7 @@ jobs:
             if (bettererFailed && !containsBotReview(reviews, "CHANGES_REQUESTED") && !containsBotReview(reviews, "APPROVED")) {
                 console.log("🚨 1 => Started: Request changes")
                 console.log("⭐️")
-                const requestChangesResult = await graphqlWithAuth(addPullRequestReviewMutation, {
+                const requestChangesResult = await github.graphql(addPullRequestReviewMutation, {
                     event: "REQUEST_CHANGES",
                     body: "❌ 1 => Request changes",
                     pullRequestId: pullRequestId,
@@ -124,7 +124,7 @@ jobs:
                 console.log("🚨 2 => Started: Update last comment")
                 const review = containsBotReview(reviews, "CHANGES_REQUESTED")
                 console.log("⭐️")
-                const updateResult = await graphqlWithAuth(updatePullRequestReviewMutation, {
+                const updateResult = await github.graphql(updatePullRequestReviewMutation, {
                     pullRequestReviewId: review.node.id,
                     body: "📝 2 => Update last comment"
                 })
@@ -136,7 +136,7 @@ jobs:
             if (bettererFailed && containsBotReview(reviews, "APPROVED")) {
                 console.log("🚨 3 => Started: Request changes")
                 console.log("⭐️")
-                const requestChangesResult = await graphqlWithAuth(addPullRequestReviewMutation, {
+                const requestChangesResult = await github.graphql(addPullRequestReviewMutation, {
                     event: "REQUEST_CHANGES",
                     body: "❌ 3 => Request changes",
                     pullRequestId: pullRequestId,
@@ -149,7 +149,7 @@ jobs:
             if (bettererPassed && containsBotReview(reviews, "CHANGES_REQUESTED")) {
                 console.log("🚨 4 => Started: Approve")
                 console.log("⭐️")
-                const requestChangesResult = await graphqlWithAuth(addPullRequestReviewMutation, {
+                const requestChangesResult = await github.graphql(addPullRequestReviewMutation, {
                     event: "APPROVE",
                     body: "✅ 4 => Approved",
                     pullRequestId: pullRequestId,
