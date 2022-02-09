@@ -33,9 +33,12 @@ jobs:
         uses: Evilweed/betterer-github-action@v1.0.0
         continue-on-error: true
         with:
-          chatops_results_file_update_command: ${{ format('{0}:{1}', env.PROJECT_NAME, env.CHATOPS_RESULTS_FILE_UPDATE_COMMAND) }}
-          betterer_results_file_name: ${{ env.BETTERER_RESULTS_FILE_NAME }}
           args: ci --config "/github/workspace/${{ env.BETTERER_CONFIG_FILE_PATH }}" --results "/github/workspace/${{ env.BETTERER_RESULTS_FILE_PATH }}" --reporter /build/custom-simple-reporter.js
+          PROJECT_NAME: ${{ env.PROJECT_NAME }}
+          CHATOPS_RESULTS_FILE_UPDATE_COMMAND: ${{ format('{0}:{1}', env.PROJECT_NAME, env.CHATOPS_RESULTS_FILE_UPDATE_COMMAND) }}
+          BETTERER_CONFIG_FILE_PATH: ${{ env.BETTERER_CONFIG_FILE_PATH }}
+          BETTERER_RESULTS_FILE_NAME: ${{ env.BETTERER_RESULTS_FILE_NAME }}
+          BETTERER_RESULTS_FILE_PATH: ${{ env.BETTERER_RESULTS_FILE_PATH }}
       - run: |
           touch "pr-request-msg.txt"
           touch "already-requested-changes-by-bot.txt"
