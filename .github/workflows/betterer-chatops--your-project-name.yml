@@ -69,7 +69,8 @@ jobs:
       - name: Add summary comment
         uses: actions/github-script@v4
         env:
-          OWNER_AND_REPOSITORY: ${{ env.GITHUB_REPOSITORY }}
+          OWNER: ${{ github.owner }}
+          REPOSITORY: ${{ github.repository }}
           PR_NUMBER: ${{ steps.pr.outputs.pull_request_number }}
           BETTERER_RUN_STATUS: ${{ steps.betterer-run.outcome }}
           BETTERER_OUTPUT: ${{ steps.run_betterer_update.outputs.betterer-output }}
@@ -143,8 +144,8 @@ jobs:
 
             const pullRequestNumber = Number(process.env.PR_NUMBER)
             const githubRunId = process.env.GITHUB_RUN_ID
-            const repository = process.env.OWNER_AND_REPOSITORY.split("/")[1]
-            const owner = process.env.OWNER_AND_REPOSITORY.split("/")[0]
+            const repository = process.env.REPOSITORY
+            const owner = process.env.OWNER
             const bettererFailed = process.env.BETTERER_RUN_STATUS !== 'success'
             const bettererPassed = !bettererFailed
 
