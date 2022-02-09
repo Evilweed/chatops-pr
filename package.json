@@ -5,7 +5,8 @@
     "license": "CLOSED SOURCE",
     "private": true,
     "scripts": {
-        "betterer": "betterer"
+        "betterer": "betterer",
+        "build": "rm -rf build && tsc --project tsconfig.json"
     },
     "engines": {
         "node": "16"
