@@ -17,17 +17,11 @@ exports[`stricter typescript compilation`] = {
       [14, 64, 3, "Parameter \'sdf\' implicitly has an \'any\' type.", "193433428"],
       [18, 67, 3, "Parameter \'sdf\' implicitly has an \'any\' type.", "193433428"]
     ],
-    "src/some-file-2223456789.ts:1867569498": [
+    "src/some-file-2223456789.ts:1134572803": [
       [0, 9, 9, "Duplicate function implementation.", "3987640659"],
       [0, 19, 3, "Parameter \'sdf\' implicitly has an \'any\' type.", "193433428"],
       [4, 32, 3, "Parameter \'sdf\' implicitly has an \'any\' type.", "193433428"],
       [8, 29, 3, "Parameter \'sdf\' implicitly has an \'any\' type.", "193433428"],
-      [12, 38, 3, "Parameter \'sdf\' implicitly has an \'any\' type.", "193433428"],
-      [16, 49, 3, "Parameter \'sdf\' implicitly has an \'any\' type.", "193433428"],
-      [20, 33, 3, "Parameter \'sdf\' implicitly has an \'any\' type.", "193433428"],
-      [24, 25, 3, "Parameter \'sdf\' implicitly has an \'any\' type.", "193433428"],
-      [29, 29, 3, "Parameter \'sdf\' implicitly has an \'any\' type.", "193433428"],
-      [33, 40, 3, "Parameter \'sdf\' implicitly has an \'any\' type.", "193433428"]
     ]
   }`
 };
