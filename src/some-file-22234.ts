@@ -6,3 +6,8 @@ function asaaasddasadsasdsasddsd(sdf) {
 function asaaaashdasdsalsddasadasasdsasddsd(sdf) {
     console.log(sdf)
 }
+
+
+function asaaaassdsdffsdhdasdsalsddasadasasdsasddsd(sdf) {
+    console.log(sdf)
+}
