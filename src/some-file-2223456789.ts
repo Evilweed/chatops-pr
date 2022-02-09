@@ -9,11 +9,3 @@ function asaadsdasdsadasdasdssd(sdf) {
 function asaadsasdsaddasdsadasdasdssd(sdf) {
     console.log(sdf)
 }
-
-function asaadsdasdsadassdfsdfdasdssd(sdf) {
-    console.log(sdf)
-}
-
-function asaadsasdsaddassdfsdfdsadasdasdssd(sdf) {
-    console.log(sdf)
-}
