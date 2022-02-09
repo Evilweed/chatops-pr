@@ -37,7 +37,7 @@ jobs:
           betterer_results_file_name: ${{ env.BETTERER_RESULTS_FILE_NAME }}
           args: ci --config "/github/workspace/${{ env.BETTERER_CONFIG_FILE_PATH }}" --results "/github/workspace/${{ env.BETTERER_RESULTS_FILE_PATH }}" --reporter /build/custom-simple-reporter.js
       - run: |
-          echo ${{ steps.betterer-run.outputs }}
+          echo ${{ toJSON(steps.betterer-run.outputs) }}
       - run: |
           touch "pr-request-msg.txt"
           touch "already-requested-changes-by-bot.txt"
