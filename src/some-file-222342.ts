@@ -8,21 +8,7 @@ function asaadsdaghjghjjghsfdafdgfgfgsdasdssd(sdf) {
     console.log(sdf)
 }
 
-function asaadhkjkahjsdsd(sdf) {
-    console.log(sdf)
-}
-
-function asaadsdasjsaaaaaaaddaaaaaaaaaaaaaaafadsaaasfaasadfafsdafssasadasddlkjkjklsdasdssd(sdf) {
-    console.log(sdf)
-}
-
 function asaadsdajadfadasaaaasajaaaaaaasddfgdhagajasahaaaaasakdsdfdlaadgsafsdffsadfssaasadasddlkjakjklsdasdssd(sdf) {
-    console.log(sdf)
-}
-function asaadsdajaasdaaaaasadajaaaahgasdjhasakdsdfddlaadgsafsdffsadfssaasadasddlkjakjklsdasdssd(sdf) {
-    console.log(sdf)
-}
-function asaadsdajasasdaaaaasaaadajaaahgaasaadjhasakdsdfddlaadgsafsdffsadfssaasadasddlkjakjklsdasdssd(sdf) {
     console.log(sdf)
 }
 
