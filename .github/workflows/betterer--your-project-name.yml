@@ -30,10 +30,13 @@ jobs:
         run: yarn --frozen-lockfile --non-interactive --no-progress
       - name: Incremental code quality check
         uses: Evilweed/betterer-github-action@v1.0.0
+        continue-on-error: true
         with:
           chatops_results_file_update_command: ${{ format('{0}:{1}', env.PROJECT_NAME, env.CHATOPS_RESULTS_FILE_UPDATE_COMMAND) }}
           betterer_results_file_name: ${{ env.BETTERER_RESULTS_FILE_NAME }}
-          args: --config "/github/workspace/${{ env.BETTERER_CONFIG_FILE_PATH }}" --results "/github/workspace/${{ env.BETTERER_RESULTS_FILE_PATH }}" --reporter /build/custom-simple-reporter.js
+          args: ci --config "/github/workspace/${{ env.BETTERER_CONFIG_FILE_PATH }}" --results "/github/workspace/${{ env.BETTERER_RESULTS_FILE_PATH }}" --reporter /build/custom-simple-reporter.js
+      - run: |
+          echo ${{ steps.pr.outputs }}
       - run: |
           touch "pr-request-msg.txt"
           touch "already-requested-changes-by-bot.txt"
