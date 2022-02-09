@@ -1,7 +1,11 @@
 'use strict';
 Object.defineProperty(exports, '__esModule', { value: true });
 exports.reporter = void 0;
-const githubCore = require("@actions/core");
+let githubCore;
+try {
+    githubCore = require("@actions/core");
+}
+catch (e) { }
 const projectName = process.env.INPUT_PROJECT_NAME || process.env.PROJECT_NAME;
 const chatopsResultsFileUpdateCommand = process.env.INPUT_CHATOPS_RESULTS_FILE_UPDATE_COMMAND || process.env.INPUT_CHATOPS_RESULTS_FILE_UPDATE_COMMAND;
 const bettererConfigFilePath = process.env.INPUT_BETTERER_CONFIG_FILE_PATH || process.env.INPUT_BETTERER_CONFIG_FILE_PATH;
@@ -119,8 +123,11 @@ function createReporter() {
             }
             const hasFixed = fixedIssuesCount;
             const hasNew = newIssuesCount;
-            githubCore.setOutput('fixed_issues_count', fixedIssuesCount);
-            githubCore.setOutput('new_issues_count', newIssuesCount);
+            try {
+                githubCore.setOutput('fixed_issues_count', fixedIssuesCount);
+                githubCore.setOutput('new_issues_count', newIssuesCount);
+            }
+            catch (e) { }
             log(" ");
             log(bright(`✅ Fixed issues ( ${fixedIssuesCount} )`));
             log("");
@@ -164,12 +171,14 @@ function createReporter() {
                     red(` comment in your Pull Request, and CI bot will update the results file, commit it to your PR, and notify you. \n`));
             }
             if (hasFixed && !hasNew) {
-                log(red(`\n🔷 Case: Please update the `) +
+                log(bright(`WHAT I HAVE TO DO NOW?`));
+                log(brightRed(`\n🔷 Case: Betterer results file needs to be updated`));
+                log(red(`Please update the `) +
                     brightYellow(`"${bettererResultsFilePath}"`) +
-                    red(` file to save state of good changes`));
+                    red(` file to save state of good changes\n`));
                 log(red(`Every time there are good or bad changes detected, it is necessary to update `) +
-                    brightGreen(`"${bettererResultsFilePath}"`) +
-                    red(` file so that this new state is .`));
+                    brightYellow(`"${bettererResultsFilePath}"`) +
+                    red(` file so that this new state is saved to repository.\n`));
                 log(red(`To do that, add `) +
                     brightYellow(`"${chatopsResultsFileUpdateCommand}"`) +
                     red(` comment in your Pull Request, and CI bot will update the results file, commit it to your PR, and notify you. \n`));
