@@ -11,6 +11,7 @@
         "node": "16"
     },
     "dependencies": {
+        "@octokit/graphql": "^4.8.0",
         "@types/node": "16.3",
         "nyc": "^15.1.0"
     },
