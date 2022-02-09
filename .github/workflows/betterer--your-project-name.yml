@@ -28,7 +28,7 @@ jobs:
           node-version: ${{ env.PROJECT_NODE_VERSION }}
       - name: Install dependencies
         run: yarn --frozen-lockfile --non-interactive --no-progress
-      - name: Incremental code quality check
+      - name: [ 🧤 CHECK THIS STEP ] TS check
         id: betterer-run
         uses: Evilweed/betterer-github-action@v1.0.0
         continue-on-error: true
