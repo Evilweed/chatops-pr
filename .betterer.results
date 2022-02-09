@@ -22,13 +22,6 @@ exports[`stricter typescript compilation`] = {
       [0, 19, 3, "Parameter \'sdf\' implicitly has an \'any\' type.", "193433428"],
       [4, 32, 3, "Parameter \'sdf\' implicitly has an \'any\' type.", "193433428"],
       [8, 29, 3, "Parameter \'sdf\' implicitly has an \'any\' type.", "193433428"],
-      [12, 25, 3, "Parameter \'sdf\' implicitly has an \'any\' type.", "193433428"],
-      [16, 36, 3, "Parameter \'sdf\' implicitly has an \'any\' type.", "193433428"],
-      [20, 25, 3, "Parameter \'sdf\' implicitly has an \'any\' type.", "193433428"],
-      [24, 36, 3, "Parameter \'sdf\' implicitly has an \'any\' type.", "193433428"],
-      [27, 35, 3, "Parameter \'sdf\' implicitly has an \'any\' type.", "193433428"],
-      [31, 29, 3, "Parameter \'sdf\' implicitly has an \'any\' type.", "193433428"],
-      [35, 40, 3, "Parameter \'sdf\' implicitly has an \'any\' type.", "193433428"]
     ]
   }`
 };
