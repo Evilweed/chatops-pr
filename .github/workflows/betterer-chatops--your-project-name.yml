@@ -69,6 +69,7 @@ jobs:
       - name: Add summary comment
         uses: actions/github-script@v4
         env:
+          TEST: ${{ github.event.repository }}
           OWNER: ${{ github.event.repository.owner.name }}
           REPOSITORY: ${{ github.event.repository.name }}
           PR_NUMBER: ${{ steps.pr.outputs.pull_request_number }}
@@ -76,6 +77,16 @@ jobs:
           BETTERER_OUTPUT: ${{ steps.run_betterer_update.outputs.betterer-output }}
         with:
           script: |
+            console.log("🔴🔴🔴🔴🔴🔴🔴🔴🔴🔴")
+            console.log("🔴🔴🔴🔴🔴🔴🔴🔴🔴🔴")
+            console.log("🔴🔴🔴🔴🔴🔴🔴🔴🔴🔴")
+            console.log("🔴🔴🔴🔴🔴🔴🔴🔴🔴🔴")
+            console.log("🔴🔴🔴🔴🔴🔴🔴🔴🔴🔴")
+            console.log("🔴🔴🔴🔴🔴🔴🔴🔴🔴🔴")
+            console.log("🔴🔴🔴🔴🔴🔴🔴🔴🔴🔴")
+            console.log(process.env.TEST)
+            
+            
             let fixedIssuesCount = 0
             let newIssuesCount = 0
             function getNumber(text) {
