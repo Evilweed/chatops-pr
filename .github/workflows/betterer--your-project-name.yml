@@ -22,6 +22,18 @@ jobs:
     runs-on: ubuntu-18.04  # <--- Adapt to your project needs
     steps:
       - uses: actions/checkout@v2
+      - name: Use Node.js
+        uses: actions/setup-node@v1
+        with:
+          node-version: ${{ env.PROJECT_NODE_VERSION }}
+      - name: Install dependencies
+        run: yarn --frozen-lockfile --non-interactive --no-progress
+      - name: Incremental code quality check
+        uses: Evilweed/betterer-github-action@v1.0.0
+        with:
+          chatops_results_file_update_command: ${{ format('{0}:{1}', env.PROJECT_NAME, env.CHATOPS_RESULTS_FILE_UPDATE_COMMAND) }}
+          betterer_results_file_name: ${{ env.BETTERER_RESULTS_FILE_NAME }}
+          args: --config "/github/workspace/${{ env.BETTERER_CONFIG_FILE_PATH }}" --results "/github/workspace/${{ env.BETTERER_RESULTS_FILE_PATH }}" --reporter /build/custom-simple-reporter.js
       - run: |
           touch "pr-request-msg.txt"
           touch "already-requested-changes-by-bot.txt"
@@ -33,7 +45,7 @@ jobs:
           OWNER: ${{ github.event.repository.owner.name }}
           REPOSITORY: ${{ github.event.repository.name }}
           PR_NUMBER: ${{ steps.pr.outputs.pull_request_number }}
-          BETTERER_EXIT_CODE: "1"
+          BETTERER_EXIT_CODE: "0"
         with:
           script: |
             const bettererFailed = Number(process.env.BETTERER_EXIT_CODE) > 0
