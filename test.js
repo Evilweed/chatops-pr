@@ -43,8 +43,8 @@ const asd = async () => {
             const bettererFailed = process.env.BETTERER_RUN_STATUS !== 'success'
             const bettererPassed = !bettererFailed
 
-            const pleaseReviewBettererResultsMessage = `| ⚠️ Typescript code quality changes detected |\n| - |\n| Project: \`${projectName}\` |\n| I've detected changes in \`${bettererResultsFileName}\` please review them, and either **[ fix the issues ]** or **[ accept new issues as new baseline ]** |\n| [🔗 Click here to review changes and read instructions](https://github.com/${ repository }/runs/${ githubRunId }?check_suite_focus=true)`
-            const acceptedBettererResultsMessage = `| ✅️ Typescript code quality fixed! |\n| - |\n| Project: \`${projectName}\` |\n| Thank you for fixing TypeScript issues ❤️, changing status to approved! |\n| [🔗 Link to CI job with more information](https://github.com/${ repository }/runs/${ githubRunId }?check_suite_focus=true)`
+            const pleaseReviewBettererResultsMessage = `| ⚠️ Typescript code quality changes detected |\n| - |\n| Project: \`${projectName}\` |\n| I've detected changes in \`${bettererResultsFileName}\` please review them, and either **[ fix the issues ]** or **[ accept new issues as new baseline ]** |\n| [🔗 Click here to review changes and read instructions](https://github.com/${owner}/${repository}/actions/runs/${githubRunId}?check_suite_focus=true)`
+            const acceptedBettererResultsMessage = `| ✅️ Typescript code quality fixed! |\n| - |\n| Project: \`${projectName}\` |\n| Thank you for fixing TypeScript issues ❤️, changing status to approved! |\n| [🔗 Link to CI job with more information](https://github.com/${owner}/${repository}/actions/runs/${githubRunId}?check_suite_focus=true)`
 
             const notEmptyArray = (reviews) => reviews && reviews.length
             const containsBotReview = (reviews, state) =>
