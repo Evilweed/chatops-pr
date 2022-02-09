@@ -10,7 +10,7 @@ function asaadsfdsfsdfdssdsd(sdf) {
     console.log(sdf)
 }
 
-function asaadsasdasadsfdsfsdfdssdsd(sdf) {
+function asaadsasdasadsfdasfsdfdssdsd(sdf) {
     console.log(sdf)
 }
 
@@ -18,7 +18,7 @@ function asaaasdsadsadaasdsasdasadsfdsfsdfdssdsd(sdf) {
     console.log(sdf)
 }
 
-function asaadsddfgdfasdasdssd(sdf) {
+function asaadsddfgdfasadasadssd(sdf) {
     console.log(sdf)
 }
 
@@ -26,7 +26,7 @@ function asaadsdfghfghsd(sdf) {
     console.log(sdf)
 }
 
-function asaadsdaghjghjjghsdasdssd(sdf) {
+function asaadsdaghjghjjghasdasdssd(sdf) {
     console.log(sdf)
 }
 
@@ -34,10 +34,10 @@ function asaadhkjkhjsdsd(sdf) {
     console.log(sdf)
 }
 
-function asaadsdajlkjkjklsdasdssd(sdf) {
+function asaadsdajlkjkjklsdaaasdssd(sdf) {
     console.log(sdf)
 }
-function asaadsddfgdfasdasasddssd(sdf) {
+function asaadsddfgdfasdasasaddssd(sdf) {
     console.log(sdf)
 }
 
@@ -46,33 +46,5 @@ function asaadsdfghfgdfsghsd(sdf) {
 }
 
 function asaadsdaafgteghjghjjghsdasdssd(sdf) {
-    console.log(sdf)
-}
-
-function asaadhfghwekjkhjsdsd(sdf) {
-    console.log(sdf)
-}
-
-function asaadsdfghewewedajlkjkjklsdasdssd(sdf) {
-    console.log(sdf)
-}
-
-function asaadssdfgddfgdfasdasasddssd(sdf) {
-    console.log(sdf)
-}
-
-function asaadsdfghfgdgfdfsghsd(sdf) {
-    console.log(sdf)
-}
-
-function asaadsdaafgteghjghjjgfghhsdasdssd(sdf) {
-    console.log(sdf)
-}
-
-function asaadhfghwekjkhhjkjsdsd(sdf) {
-    console.log(sdf)
-}
-
-function asaasdfhtdsdfghewewedajlkjkjklsdasdssd(sdf) {
     console.log(sdf)
 }
