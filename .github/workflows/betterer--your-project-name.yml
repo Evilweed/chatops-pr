@@ -40,7 +40,7 @@ jobs:
             const bettererPassed = !bettererFailed
             const notEmptyArray = (reviews) => reviews && reviews.length
             const containsBotReview = (reviews, state) =>
-                notEmptyArray(reviews) && reviews.find((review) => review.node.state === state && review.node.author.login === "github-actions)
+                notEmptyArray(reviews) && reviews.find((review) => review.node.state === state && review.node.author.login === "github-actions")
             const pullRequestNumber = Number(process.env.PR_NUMBER)
             const queryVariables = {
                 owner: process.env.OWNER,
