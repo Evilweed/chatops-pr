@@ -1,6 +1,9 @@
 # Betterer TypeScript Chatops
 This repository is a Demo that shows how to use Betterer Github Action in a way that improves Developer Experience. This means that you no longer need to run Betterer before commit.
 
+## Check how it looks in PullRequest
+https://github.com/Evilweed/chatops-pr/pull/64
+
 ## Example of PR messages
 <img width="939" alt="CleanShot 2022-01-31 at 19 31 33@2x" src="https://user-images.githubusercontent.com/5477821/151851970-3d636d09-1a17-4da6-a081-40b5400bae57.png">
 
