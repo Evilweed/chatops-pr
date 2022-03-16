@@ -14,6 +14,10 @@ function aasdasasdsdasdassdsa(sdf) {
     console.log(sdf)
 }
 
+function aasdasasdsdasdassdsa(sdf) {
+    console.log(sdf)
+}
+
 
 
 function aasdasasdssfsfsdfdsffsddasdassdsa(sdf) {
